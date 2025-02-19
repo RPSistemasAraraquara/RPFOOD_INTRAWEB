@@ -1,0 +1,606 @@
+
+E-mail  
+RPFood.Components;
+Responsavel por enviar e-mail
+
+
+
+
+RPFood.Service.Venda.ItemFracao
+
+criei essa unit pra calcular e salvar as frações
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+____________________________________________________________________________________________
+
+1-) Seleciona os produtos caso tenha Opcionais
+Segue o select abaixo:
+
+select o.descricao,o.valor,p.descricao as desc_produto,p.observacao,              
+po.id_opcional                                                                    
+from produtos_opcional po                                                         
+left join opcional o on o.codigo=po.id_opcional and o.id_empresa=po.id_empresa    
+left join produtos p on p.codigo=po.id_material and p.id_empresa=p.id_empresa     
+where po.id_material=24                                  
+and o.id_empresa=1                               
+group by  
+o.descricao,o.valor,p.descricao,p.observacao,po.id_opcional    
+order by o.descricao   
+
+-----------------------------------------------------------------------------------------------------------------------------
+2-) Select dos produtos   quando clica na categoria
+Obs: exemplo no carrossel tem as castegorias - quando clicar na categoria ele carrega esse select abaixo    
+
+select p.codigo, 
+p.descricao as produto , p.Observacao, p.valfinal , p.img                
+from produtos p                                                          
+left join grupos g  on g.codigo = p.codigrupo                            
+where p.b_venda_web=true and p.id_situacao=4 
+and p.id_empresa=:id_empresa and g.codigo=:id_grupo     
+Necessario informar o id da empresa e o codigo do da categoria selecionado    
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+3-) Select do Carrossel principal
+
+	select codigo,descricao,utiliza_combo,observacao,valfinal,               
+    img1 as img  from produtos                                        
+    where id_situacao=4 and b_destaque_web=true and b_venda_web=true
+    and id_empresa=1  
+	
+	Obs: Perceba que a imagem não é mais a img, mas sim a img1. Por causa do tamanho da imagem
+	quando for b_destaque_web=true iremos colocar ele no carrossel maior
+-----------------------------------------------------------------------------------------------------------------------------
+
+--Produtos com Tamanho  
+
+Usamos a seguinte regra no produto para verificar se este produto tem tamanhos, por exemplo Pizza M, Pizza G.
+se tiver marcado a falg na tabela produtos a coluna b_venda_tamanho=true ai verificamos os tamanhos, por  exemplo  
+ 
+tamanho_p, tamanho_m, tamanho_g , tamanho_gg, tamanho_extra.   -- estes são os tamanhos que estão na tabela produtos
+
+valor_tam_p,valor_tam_m,valor_tam_g,valor_tam_gg,valor_tam_extra.  -- Valores dos tamanhos
+
+
+
+Obs: Pode ser que o cliente use apenas um tamanho , se o campo tamanho_extra tiver vazio significa que não esta em uso,
+todos os tamanhos que tiver em uso sera preenchido 
+Exemplo tamanho_g estara preenchido 'GRANDE'.
+
+
+--Produtos Fracionados
+
+A regra do fraciona funciona da seguinte forma no nosso sistema.
+na tabela produtos a coluna b_permite_frac se ela for true, permitimos o cliente vender 1/2 pizza de mussarela e 1/2 Aliche.
+
+Existe uma regra no fracionado 
+
+Quando tem tamanho exemplo P se for vender outro produto , so deixa se esse outro produto tiver o tamanho P também.
+
+Quando for vender fracionado e se tiver tamanho , ja selecionar o tamanho do outro produto igual.
+Exemplo: Pizza Mussarela no produto esta marcado tamanho_p e tamanho_g , quando o cliente selecionar um tamanho,
+ele selecionou por exemplo o tamanho_p da Pizza de Mussarela caso ele opte por 1 pizza com dois sabores, quando ele selecionar o outro item
+Pizza de Aliche automaticamente ira seleciona o tamanho  tamanho_p.
+
+
+
+
+-- Mapeamento do Banco 
+
+Tabela Produtos
+
+codigo        = Chave primary  
+descricao     = Descrição do Produto 
+codigrupo     = ID do grupo - Faço referencia com a tabela grupos e coloco o CODIGO DA TABELA GRUPO   
+                left join grupos g  on g.codigo = p.codigrupo  
+select p.codigo, 
+p.descricao as produto , p.Observacao, p.valfinal , p.img                
+from produtos p                                                          
+left join grupos g  on g.codigo = p.codigrupo                            
+where p.b_venda_web=true and p.id_situacao=4 
+and p.id_empresa=1 and g.codigo=1			
+				
+				
+valfinal              : preço de venda
+valcompra             : Preco de compra 
+observacao            : Observação do Produto   
+img1 bytea            : Utilizamos quando a coluna b_destaque_web =true 
+img2 bytea            : Não estamos utilizando ainda
+img bytea             : Imagem padrão do produto 
+id_situacao           : Só mostramos os produtos quando id_situaca=4 
+id_empresa            : empresa  sempre fazemos um where com o filtro que deseja mais o id_EMPRESA
+b_venda_web           : Utilizamos para saber se este produto sera vendido no RPFOOD - se estiver false não ira mostrar no RP FOOD
+utiliza_combo         : Não estamos usando no momento 
+version_rec           : Para atualizar os cadastros do desktop para WEB
+b_destaque_web        : Caso seja true carregara no carrossel principal  
+b_permite_frac        : Caso seja True permitir vender produtos fracionados tipo 1/2 Mussarela e 1/2 Aliche
+tamanho_p             : só estara disponivel b_venda_tamanho=true
+tamanho_m             : só estara disponivel b_venda_tamanho=true
+tamanho_g             : só estara disponivel b_venda_tamanho=true
+tamanho_gg            : só estara disponivel b_venda_tamanho=true
+tamanho_extra         : só estara disponivel b_venda_tamanho=true
+tamanho_padrao        : Este é o tamanho padrao que ira mostrar na tela como padrao 
+valor_tam_p           : só estara disponivel b_venda_tamanho=true 
+valor_tam_m           : só estara disponivel b_venda_tamanho=true 
+valor_tam_g           : só estara disponivel b_venda_tamanho=true            
+valor_tam_gg          : só estara disponivel b_venda_tamanho=true  
+valor_tam_extra       : só estara disponivel b_venda_tamanho=true          
+b_venda_tamanho       : ele que determina se ira utilzar os tamanhos  tamanho_p,tamanho_m,tamanho_g,tamanho_gg
+
+
+
+Tabela opcional
+
+codigo        :  Chave Primary
+id_empresa    :  Empresa
+descricao     :  Descrição do Opcional 
+valor         :  Valor do Opcional caso não esteja marcado  preenchido   opc_p/opc_m/opc_g/opc_extra/opc_gg
+id_situacao   :  Em todos os cadastros verificamos se for 4 é porque esta ativo
+version_rec   : 
+opc_p         : A mesma regra do produtos - Posso selecionar um produto Tamanho P - e o opcional sera do mesmo tamanho 
+opc_m         :
+opc_g         : 
+opc_gg        :
+opc_extra     : 
+valor_opc_p   :  Valor do tamanho 
+valor_opc_g   : 
+valor_opc_m   :
+valor_opc_gg  : 
+valor_opc_extra: 
+tipo integer   :  padrao é 0
+
+
+
+
+--Tabela produtos_opcional
+
+id_empresa    :  empresa
+id_material   : Referencia o ID do produto    //  Tabela produtos campo  (codigo) 
+id_opcional   : Referencia o ID do Opcional  //   Tabela opcional  campo (codigo)
+
+Relacionamento da Tabela produtos_opcional
+FOREIGN KEY (id_opcional)  REFERENCES opcional (codigo)        
+FOREIGN KEY (id_material) REFERENCES produtos (codigo) 
+
+
+alter table vendaitemopcional add column quantidade_replicar numeric(15,4) not null default 0
+--Tabela Clientes
+
+cli_001         : ID do Cliente
+id_empresa      : ID da empresa 
+cli_002         : Nome do Cliente 
+cli_004         : CPF 
+cli_007         : Ponto de referencia
+cli_008         : Numero do endereço 
+cli_009         : Complemento   Exemplo Apartamento Samambaia Apartamento 5 B
+sit_001         : situacao do cliente - Só pode vender para o cliente caso seja sit_001=4 
+cep_004         : seria o endereço do cliente
+cep_003         : Descrição do Bairro
+cid_001         : ID da Cidade
+cep_002         : Cep do cliente    Exemplo: 14801-170 
+bai_001         : ID do Bairro
+observacao      : Observação  
+senha_email     : senha do e-mail
+pontos_atuais   : Não utilizaremos agora, só na versão 1.2
+cidade_desc     : Descrição da Cidade
+uf              : UF
+email           : E-mail
+tipo_pessoa     : Tipo de Pessoa  ( Fisica/J) por default já coloca F 
+celular1        : Celular  
+cli_012         : Telefone Fixo
+
+
+
+
+
+
+-- Tabela Venda
+
+	id_venda          : Numero da Venda
+	id_empresa        : ID da empresa
+	id_situacao       : 34
+	totals_products   : Valor totais de Produtos
+	sub_total         : Somatoria dos opcionais 
+	taxa_entrega      : Valor da Taxa de entrega
+	troco             : Valor do troco
+	valor_receber     : Valor a receber
+	sales             : Total da venda  - Seria Total do Produtos + total dos Opcionais +taxa de entega  
+	data_pedido       : Data do pedido 
+
+Obs: A-) id_situacao sera 34
+     B-) O Campo sales será a somatoria de todos os produtos, opcionais e taxa de entrega
+	 C-) O campo taxa_entrega buscar do select abaixo
+	 D-) O id_venda tanto no venda,vendaitem serão os mesmo	.	
+	 E-) Toda venda terá um vendaitem  e venda ,  utilizo vendaitem para informar os produtos desta venda, o venda para informar os totais da venda .
+	 F-) Valor receber sera usado somente quando tiver troco Exemplo. A conta deu R$ 40,00 e foi pedido troco para R$ 100,00, informar no campo troco:60,00 e valor_receber R$100.00
+	     mas só sera permitido troco caso a tabela formapgto o campo sfi_codigo=1, tem mais informações na tabela formapgto abaixo sobre esse detalhes
+		 
+	 G-) Taxa do bairro busca no select abaixo
+		select bc.cep,b.bai_001,b.bai_002,b.bai_003,c.cep_004
+		from bairro_ceps bc
+		left join bairro b on b.bai_001=bc.bai_001 and b.emp_001=bc.emp_001 
+		left join ceps c on c.cep_002=bc.cep
+		where bc.cep=:cep and b.sit_001=4 and b_restricao_entrega=false
+
+		Obs: bai_001  é o codigo do bairro.
+		bai_003  valor da taxa de entrega  
+		cep_004  endereço
+		cep      é o cep             
+
+Obs: 
+    
+-----------------------------------------------------------------------------------------------------------------------------------
+			Alteração 25/03/2023
+
+-- Tabela Vendaiten
+
+
+id_venda             : Numero da Venda   - OBS tem que pegar do id_venda da tabela venda 
+id_empresa           : ID empresa  
+id_product           : ID do produto
+numero_item          : Seria o numero do Item   
+quantidade           : Quantidade do produto
+valor_unit_product   : valor total deste produto   
+totals_products      : Total de Produtos   Obs: 
+id_situacao          : Informar 4   
+tamanho              : tamanho do produto
+b_venda_tamanho      : Informa se esta usando o tamanho ou não
+item_fracionado      : Informa se foi fracionado o produto
+
+Obs: A-)id_venda tanto no venda,vendaitem serão os mesmo
+	 B-)Caso tenha opcional este produto inserir na tabela vendaitemopcional
+	 C-)valor_unit_product seria o valor do produto que é informado para listar o produto
+	 D-)ID_venda numero_item não podem repetir Exemplo: Pode ter na mesma venda o mesmo id_product, mas não pode ser o mesmo 
+     E-)id_product e numero_item
+	 F-)O Campo totals_products seria a somatoria  valor_unitario X quantidade 
+	 G-)O campo tamanho buscar do produto, do mesmo jeito que é feito para listar o produto , caso não tenha o padrão é M
+	 H-)O campo b_venda_tamanho caso seja true, buscar do mesmo jeito que é feito para listar o produto
+     I-)O campo item_fracionado busca do mesmo jeito que é feito no listar produto, caso não tenha deixar  null 	 
+-----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+----------Tabela vendaitemopcional
+
+id_venda             : Numero da venda ;Obs: Informar igual o venda e vendaitem
+id_empresa           : id da empresa 
+id_numero_item       : Informe o numero do item   
+id_opcional          : Id do opcional 
+gratis               : Não utilizaremos agora 
+quantidade			 : 
+valorUnitario        : Valor desse opcional
+valorTotal
+
+
+
+Obs: A-) id_venda tanto no venda,vendaitem serão o mesmo 
+     B-) id_numero_item buscar na tabela vendaitem o campo  numero_item
+	 C-) id_opcional busca da tabela produtos_opcional o campo id_opcional- do mesmo jeito que é feito para listar os produtos
+	 
+-----------------------------------------------------------------------------------------------------------------------------------	 
+
+
+----------Tabela formapgto
+
+
+id                : id 
+id_empresa        : id empresa
+descricao         : descrição forma de pagamento 
+id_situacao       : sempre busca só quando for 4
+b_venda_web       : permite na WEB
+sfi_codigo        : uma referencia nossa
+Obs: A-) O campo b_venda_web se for true listar ou seja só listar caso ele seja true
+     B-) O campo id_situacao só listar o id_situacao=4  
+     C-) O campo sfi_codigo se for 1 permitir troco, ou seja no sistema quando for 1 é dinheiro
+	 
+-----------------------------------------------------------------------------------------------------------------------------------	 
+--------usuarios_empresa
+
+codigo_usuario   : codigo_usuario do usuario que busca na tabela usuarios o campo codigo  
+id_empresa       : 
+version_rec      :
+
+
+
+
+
+_______________________________________________________________
+Situação do Pedido
+
+100 - Enviado para o Le Cheff
+101 - Pedido Rejeitado
+102 - Pedido Aceito
+103 - Produto em Preparo
+104 - Saiu para Entrega
+105 - Pronto para Retirar
+106 - Pedido Finalizado
+107 - Pedido Cancelado Estabelecimento 
+108 - Pedido Cancelado Cliente 
+109 - Pedido Rejeitado Tempo de Espera (10 minutos apos o envio do pedido caso não seja aceito pelo estabelecimento ele é rejeitado)
+
+_______________________________________________________________
+
+
+Financeiro
+
+--Select Total Pedidos finalizados
+	select coalesce(sum(sales),0) as valor_total
+	from venda    
+	where id_situacao=106 and
+	data_pedido::date between '01-01-2022' and '01-01-2025' 
+	and id_empresa=1
+
+
+
+--Select Total de Pedidos finalizados DELIVERY
+	select coalesce(sum(sales),0) as valor_total_delivery
+	from venda    
+	where id_situacao=106
+	and tipo_entrega='D'
+	and data_pedido::date between '01-01-2022' and '01-01-2025' 
+	and id_empresa=1
+
+
+--Select Total de Pedidos finalizados Balcao
+	select coalesce(sum(sales),0) as valor_total
+	from venda    
+	where id_situacao=106
+	and tipo_entrega='B'
+	and data_pedido::date between '01-01-2022' and '01-01-2025' 
+	and id_empresa=1
+
+
+
+--Select Total de Pedidos Cancelados
+	Select Total de Pedidos Cancelados
+	select coalesce(sum(sales),0) as valor_total
+	from venda    
+	where id_situacao in(101,107,108,109) 
+	and data_pedido::date between '01-01-2022' and '01-01-2025' 
+	and id_empresa=1
+
+
+
+--Total de Pedidos em Aberto, talvez nesse poderia separar um relatorio so para a situacao 100 (Aguardando resposta restaurante)
+	select coalesce(sum(sales),0) as valor_total
+	from venda    
+	where id_situacao in(100,102,103,104,105) 
+	and data_pedido::date between '01-01-2022' and '01-01-2025' 
+	and id_empresa=1
+
+
+--Total de Pedidos em Aberto, talvez nesse poderia separar um relatorio so para a situacao 100 (Aguardando resposta restaurante)
+select coalesce(sum(sales),0) as valor_total
+from venda    
+where id_situacao in(100,102,103,104,105) 
+and data_pedido::date between '01-01-2022' and '01-01-2025' 
+and id_empresa=1
+
+
+--Select quantidade de clientes cadastrados
+	select count(1) as clientes_cadastrados from clientes where id_empresa = 1 and sit_001=4
+
+--select quantidade de produtos cadastrados
+	select count(1) as produtos_cadastrados from produtos where id_empresa = 1 and id_situacao=4 and b_venda_web=true
+
+--select quantidade de vendas (se precisar adicionar mais condições no where)
+	select count(1) as quantidade_vendas from venda where id_empresa = 1
+
+
+--select produtos mais vendidos mostrando descricao , valor e total
+	select mat.codigo, mat.descricao, sum(vi.totals_products) as total_produto
+	from vendaitem vi
+	join produtos mat on mat.id_empresa = vi.id_empresa and mat.codigo = vi.id_product  
+	join venda v on v.id_venda=vi.id_venda and v.id_empresa=vi.id_empresa  
+	where v.id_situacao not in (101,107,108,109) --Sem canceladas 
+	and vi.id_situacao = 4
+	and v.id_empresa=1 
+	and v.data_pedido::date between '01-01-2022' and '01-01-2025'  
+	group by mat.codigo, mat.descricao 
+	order by total_produto desc, mat.descricao
+
+
+
+	--select categorias mais vendidas   descricao valor e total
+	select cat.codigo, cat.descricao, sum(vi.totals_products) as total_categoria
+	from vendaitem vi
+	join produtos mat on mat.id_empresa = vi.id_empresa and mat.codigo = vi.id_product
+	join grupos cat on cat.id_empresa = vi.id_empresa and cat.codigo = mat.codigrupo
+	join venda v on v.id_venda=vi.id_venda and v.id_empresa=vi.id_empresa  
+	where v.id_situacao not in (101,107,108,109) --Sem canceladas 
+	and vi.id_situacao = 4
+	and v.id_empresa=1 
+	and v.data_pedido::date between '01-01-2022' and '01-01-2025'  
+	group by cat.codigo, cat.descricao 
+	order by total_categoria desc, cat.descricao
+
+
+
+--select top 10 bairros mais vendidos  - descricao e valor
+	select sub.descricao, sum(sub.total_bairro) as total_bairro from (
+	select b.bai_002 as descricao, 
+		sum(v.sales) as total_bairro
+		from venda v 
+		join clientes_endereco c on c.cli_001 = v.id_cliente and c.id_empresa = v.id_empresa 
+		join bairro b on b.bai_001 = c.bai_001 and b.emp_001 = c.id_empresa
+		where v.id_cliente > 0 
+		and v.id_empresa = 1
+		and v.data_pedido::date between '01-01-2022' and '01-01-2025'  
+		and v.id_situacao not in (101,107,108,109) --Sem canceladas 
+		and v.tipo_entrega = 'R' --retirada
+		group by b.bai_001, b.bai_002 
+
+		union
+
+		select b.bai_002 as descricao, 
+		sum(v.sales) as total_bairro
+		from venda v 
+		join venda_endereco e on e.id_venda = v.id_venda and e.id_empresa = v.id_empresa 
+		join bairro b on b.bai_001 = e.id_bairro and b.emp_001 = e.id_empresa
+		where v.id_cliente > 0 
+		and v.id_empresa = 1
+		and v.data_pedido::date between '01-01-2022' and '01-01-2025'  
+		and v.id_situacao not in (101,107,108,109) --Sem canceladas 
+		and v.tipo_entrega = 'D' --delivery
+		group by b.bai_001, b.bai_002) as sub
+		group by sub.descricao 
+		order by total_bairro desc, descricao
+		limit 10
+	
+	
+	
+	
+	
+--select Media de vendas Diaria   quantidade de vendas, o valor total de vendas e a media
+	select v.data_pedido::date as data,
+	count(1) as qtde,   
+	sum(v.sales) as valor_total, 
+	cast(avg(v.sales) as numeric(15,2)) as valor_media
+	from venda v
+	where v.id_empresa = 1
+	and v.data_pedido::date between '01-01-2022' and '01-01-2025' 
+	and v.id_situacao = 106 --pedidos finalizados
+	--and v.id_situacao not in (101,107,108,109) --sem canceladas
+	group by data
+
+
+
+
+
+--Select produtos vendaitem
+select vi.id_venda, vi.id_empresa, vi.numero_item,
+mat.codigo,
+cast(( 
+case when vi.b_venda_tamanho then
+  case vi.tamanho
+    when 'P' then  concat(mat.descricao,' (',mat.tamanho_p,')')
+    when 'M' then  concat(mat.descricao,' (',mat.tamanho_m,')') 
+    when 'G' then  concat(mat.descricao,' (',mat.tamanho_g,')') 
+    when 'GG' then concat(mat.descricao,' (',mat.tamanho_gg,')')  
+    when 'E' then  concat(mat.descricao,' (',mat.tamanho_extra,')') 
+  else mat.descricao end
+else 
+  mat.descricao end) as varchar(100)) as descricao,
+vi.quantidade, vi.valor_unit_product, vi.totals_products
+from vendaitem vi
+join produtos mat on mat.id_empresa = vi.id_empresa and mat.codigo = vi.id_product  
+join venda v on v.id_venda=vi.id_venda and v.id_empresa=vi.id_empresa  
+where vi.id_venda = 97
+and vi.id_empresa = 1
+and vi.id_situacao = 4
+order by vi.id_venda, vi.numero_item
+
+--Select Opcionais / Observação
+select id_venda, id_empresa, id_numero_item, id_opcional, descricao, valor, ord from 
+(select vio.id_venda, vio.id_empresa, vio.id_numero_item, vio.id_opcional, 
+
+case when (sum(vi.quantidade) - trunc(sum(vi.quantidade)) = 0) then
+(cast(concat('OPCIONAL: ', trim(to_char((sum(vi.quantidade)), '99999990d')), ' x ', o.descricao, ' (r$ ',trim(to_char((sum(vio.valor * vi.quantidade)) , '99999990d99')),')' ) as varchar(200)))
+else
+(cast(concat('OPCIONAL: ', trim(to_char((sum(vi.quantidade)), '99999990d999')), ' x ', o.descricao, ' (r$ ',trim(to_char((sum(vio.valor * vi.quantidade)) , '99999990d99')),')' ) as varchar(200))) end as descricao, 
+
+sum(vio.valor * vi.quantidade) as valor, 
+case o.tipo when 0 then 9 else o.tipo end as ord 
+from vendaitemopcional vio 
+join opcional o on o.codigo=vio.id_opcional and o.id_empresa=vio.id_empresa 
+join vendaitem vi on vio.id_venda=vi.id_venda and vio.id_empresa=vi.id_empresa and vio.id_numero_item=vi.numero_item 
+where vio.id_venda = 97 
+and vio.id_empresa = 1
+and vio.id_numero_item = 3
+group by vio.id_venda, vio.id_empresa, vio.id_numero_item, vio.id_opcional,o.descricao, o.tipo
+ 
+union all 
+ 
+select ite.id_venda, ite.id_empresa, ite.numero_item as id_numero_item, 0 as id_opcional, 
+cast(concat('OBSERVACAO: ', ite.observacao) as varchar(200)) as descricao, 
+0.00 as valor, 
+0 as ord
+from vendaitem ite 
+where ite.id_empresa = 1 
+and   ite.id_venda = 97 
+and ite.numero_item = 3
+and not ite.id_situacao in (0,1,2,3) and not (ite.observacao is null or ite.observacao='') 
+) sub 
+order by 3,7,5
+
+--Select produtos vendidos (vendas finalizadas por periodo)
+select v.data_pedido::date, vi.id_venda, vi.id_empresa, vi.numero_item,
+mat.codigo,
+cast(( 
+case when vi.b_venda_tamanho then
+  case vi.tamanho
+    when 'P' then  concat(mat.descricao,' (',mat.tamanho_p,')')
+    when 'M' then  concat(mat.descricao,' (',mat.tamanho_m,')') 
+    when 'G' then  concat(mat.descricao,' (',mat.tamanho_g,')') 
+    when 'GG' then concat(mat.descricao,' (',mat.tamanho_gg,')')  
+    when 'E' then  concat(mat.descricao,' (',mat.tamanho_extra,')') 
+  else mat.descricao end
+else 
+  mat.descricao end) as varchar(100)) as descricao,
+vi.quantidade, vi.valor_unit_product, vi.totals_products
+from vendaitem vi
+left join produtos mat on mat.id_empresa = vi.id_empresa and mat.codigo = vi.id_product  
+left join venda v on v.id_venda=vi.id_venda and v.id_empresa=vi.id_empresa  
+where v.id_situacao=106 -- Pedidos Finalizados
+and v.data_pedido::date between '01-01-2022' and '01-01-2025' 
+and vi.id_empresa = 1
+and vi.id_situacao = 4
+order by v.data_pedido, vi.id_venda, vi.numero_item
+
+--Select totalizador forma de pagamento (vendas finalizadas por periodo)
+--se quiser exibir a data, só colocar o campo v.data_pedido::date no select e no group by
+select fp.descricao, sum(v.sales) as total_forma
+from venda v
+join formapgto fp on fp.id_empresa=v.id_empresa and fp.id=v.id_formapgto
+where v.id_situacao=106 -- Pedidos Finalizados
+and v.data_pedido::date between '01-01-2022' and '01-01-2025' 
+and v.id_empresa = 1
+group by fp.descricao
+
+
+
+
+
+______________________________________________________________________________________________________________
+
+Select dos produtos que contem fração  ( lista apenas os produtos da mesma categoria e que esteja marcado 
+											produtos.b_permite_frac = true                               ) 
+
+
+
+ select produtos.id_empresa, produtos.codigo, grupos.codigo as id_grupo,
+     produtos.descricao, produtos.Observacao, produtos.valfinal,
+     tamanho_p, tamanho_m, tamanho_g, tamanho_gg, tamanho_extra, tamanho_padrao,
+     valor_tam_p, valor_tam_m, valor_tam_g, valor_tam_gg, valor_tam_extra,
+     b_venda_tamanho, b_destaque_web, b_permite_frac, b_carrossel
+    from produtos
+    left join grupos on grupos.codigo = produtos.codigrupo
+	where produtos.id_situacao = 4 and produtos.b_venda_web = true
+	
+	
+    and produtos.id_empresa = 1
+    and produtos.codigrupo = 8
+    and produtos.b_permite_frac = true 
+    and tamanho_padrao='M'
+    order by produtos.descricao
+
+
+

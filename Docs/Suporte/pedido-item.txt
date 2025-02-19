@@ -1,0 +1,71 @@
+Form pedido-item.html
+
+Este form é de lançamento do produto
+
+Quando ele inicia , temos os seguintes select
+
+
+PreencheTamanhos, PreencheOpcionais,PreencheFracoes.
+
+
+--PreencheTamanhos
+Caso não tenha tamanho o produto, não ira listar. Caso tenha segue o select abaixo
+
+
+	
+	
+
+Preencha a descricao com esses campos
+produto.tamanhoP
+produto.tamanhoM
+produto.tamanhoG
+produto.tamanhoGG
+produto.tamanhoExtra;
+
+
+Verifico se os campos produto.tamanho é diferente de vazio ou null
+
+---------------------------------------------------------------------------------------------------------
+PreencheOpcionais
+
+	select codigo, id_empresa, descricao, valor, opc_p, opc_m,
+	opc_g, opc_gg, opc_extra, valor_opc_p, valor_opc_m,
+	valor_opc_g, valor_opc_gg, valor_opc_extra
+	from opcional;
+	where id_empresa = COLOCAR CODIGO DA EMPRESA
+	and codigo = COLOCAR CODIGO DO PRODUTO	
+	
+---------------------------------------------------------------------------------------------------------
+PreencheFracoes
+
+select produtos.id_empresa, produtos.codigo, grupos.codigo as id_grupo,
+produtos.descricao, produtos.Observacao, produtos.valfinal,
+tamanho_p, tamanho_m, tamanho_g, tamanho_gg, tamanho_extra, tamanho_padrao,
+valor_tam_p, valor_tam_m, valor_tam_g, valor_tam_gg, valor_tam_extra,
+b_venda_tamanho, b_destaque_web, b_permite_frac, b_carrossel
+from produtos
+left join grupos on grupos.codigo = produtos.codigrupo	
+where produtos.id_situacao = 4 and produtos.b_venda_web = true
+and produtos.id_empresa = CODIGO DA EMPRESA
+and produtos.codigrupo = CODIGO DO GRUPO
+and produtos.b_permite_frac = true 
+and tamanho_p is not null and tamanho_p <>'' and b_venda_tamanho=true 
+and tamanho_m is not null and tamanho_m <>'' and b_venda_tamanho=true 
+and tamanho_g is not null  and tamanho_g <>'' and b_venda_tamanho=true 
+and tamanho_gg is not null and tamanho_gg <>'' and b_venda_tamanho=true 
+and tamanho_extra is not null  and tamanho_extra <>'' and b_venda_tamanho=true 
+else
+and b_venda_tamanho=false 
+
+
+Observacao: Só ira mostrar caso seja da mesma categoria. Exemplo o produto selecionado pelo cliente foi a COCA Cola
+e esta coca cola esta no grupo de refrigerante, este produto coca cola precisa ser b_permite_frac = true ,
+e os restante dos produtos precisam estar na mesma  grupo, se estiver em outro grupo não listara 
+
+---------------------------------------------------------------------------------------------------------
+	
+	
+	
+
+
+

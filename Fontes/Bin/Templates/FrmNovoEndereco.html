@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="" />
+	<meta name="robots" content="" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="RP Food - Seu novo conceito em Food Delivery" />
+	<meta property="og:title" content="RP Food - Seu novo conceito em Food Delivery" />
+	<meta property="og:description" content="RP Food - Seu novo conceito em Food Delivery" />
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- PAGE TITLE HERE -->
+		<title>RP Food - Online Food Delivery</title>
+	
+	<!-- FAVICONS ICON -->
+    <link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
+    <link href="./vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="./vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">	
+	<link href="./sweetAlert4Delphi/style/sweetalert2.min.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+    <div id="lista-enderecos">
+        <div class="row page-titles">
+            <h4 class="active">Novo Endereço</h4>
+        </div>
+        
+        <div class="row ">
+            <div class="mb-2 me-3" style="margin-top: 10px;"> 
+                {%IWEDTCEP%}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="mb-3 col-md-12">
+                <label class="mb-1"><strong>Endereço</strong> <span class="text-danger">*</span></label>
+                {%IWEDTENDERECO%}
+            </div>
+        </div>  
+
+
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="mb-1"><strong>Número</strong> <span class="text-danger">*</span></label>
+                {%IWEDTNUMERO%}
+            </div>
+            <div class="mb-3 col-md-6">
+                <label class="mb-1"><strong>Complemento</strong></label>
+                {%IWEDTCOMPLEMENTO%}
+            </div>
+        </div> 
+
+        <div class="row">
+            <div class="mb-3 col-md-4">
+                <label class="mb-1"><strong> Taxa motoboy</strong> <span class="text-danger"></span></label>
+                {%IWEDTTAXA%}
+            </div>
+        </div>       
+        
+        
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                <label class="mb-1"><strong>Referência</strong></label>
+                {%IWEDTREFERENCIA%}              
+            </div>              
+        </div>   
+
+        
+        <div class="row">
+            <div class="mb-3 col-md-6">
+                {%IWLBLBAIRROLISTA%}<br>
+               {%IWEDTBAIRROLISTA%}  
+           </div>                                                      
+       </div>        
+       
+       <div class="row">
+           <div class="mb-3 col-md-6">
+              {%IWLBLBAIRRO%}
+              {%IWEDTBAIRRO%}  
+          </div>                                                      
+      </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3 col-md-6">
+          {%IWBTSALVAR%}
+          {%IWBTCANCELAR%}
+        </div>
+    </div>
+
+    <script>
+
+    function LimparEndereco() {
+            document.getElementById('IWEDTCEP').value = '';
+            document.getElementById('IWEDTENDERECO').value = '';
+            document.getElementById('IWEDTNUMERO').value = '';
+            document.getElementById('IWEDTCOMPLEMENTO').value = '';
+            document.getElementById('IWEDTREFERENCIA').value = '';
+            document.getElementById('IWEDTBAIRROLISTA').value = '';
+            document.getElementById('IWEDTCIDADE').value = '';
+            document.getElementById('IWEDTTAXA').value='';
+         
+    }
+
+
+    function PreencheEnderecos(ListaEnderecos) {
+            let conteudoTag = '';
+            ListaEnderecos.forEach(Endereco => {
+                let padrao = '';
+                if (Endereco.enderecoPadrao)
+                    padrao = '<i class="fa fa-check"></i>'
+                conteudoTag = conteudoTag +
+                    `
+                <tr>
+                    <td><strong>${Endereco.cep}</strong></td>                    
+                    <td>${Endereco.endereco}</td>
+                    <td>${Endereco.numero}</td>
+                    <td>${Endereco.bairro}</td>
+                    <td>${padrao}</td>                                 
+                    <td>
+                        <div class="d-flex">
+                            <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"                                 
+                                onclick="AlterarEndereco(${Endereco.idEndereco})"> 
+                                <i class="fa fa-pencil"></i>
+                            </a>                            
+                        </div>
+                    </td>
+                </tr>
+                `;
+            });
+
+            tagLista = document.getElementById('grid_enderecos');
+            tagLista.innerHTML = conteudoTag;
+        }
+
+
+    </script>
+
+
+
+   
+    <script src="./vendor/global/global.min.js"></script>
+	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+	<script src="./vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+	<script src="./js/dlabnav-init.js"></script>
+    <script src="./vendor/swiper/js/swiper-bundle.min.js"></script>
+    <script src="./sweetAlert4Delphi/js/sweetalert2.all.min.js"></script>
+	<script src="./sweetAlert4Delphi/js/sweetalert.custom.js"></script>	
+
+    
+</body>
+
+</html>

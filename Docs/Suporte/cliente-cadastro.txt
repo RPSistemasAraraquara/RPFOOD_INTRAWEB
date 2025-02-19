@@ -1,0 +1,57 @@
+		Tela que o cliente faz o cadastro 		cliente-cadastro.html
+		
+		
+		
+	Busca cep
+
+	select bairro_ceps.cep, bairro.bai_001, bairro.bai_002,
+	bairro.bai_003, ceps.cep_004, ceps.uf_sigla, ceps.cid_ibge, ceps.cidade_desc,ceps.id_cidade
+	from bairro_ceps
+	left join bairro on bairro.bai_001 = bairro_ceps.bai_001
+	and bairro.emp_001 = bairro_ceps.emp_001
+	left join ceps on ceps.cep_002 = bairro_ceps.cep	
+	where bairro_ceps.cep = COLOCAR O CEP DO CLIENTE	
+	o valor da taxa de entrega é o campo  bai_003	
+	Caso não ache o cep, quer dizer que o estabelecimento não atende este cep		
+		
+		
+	Verificações antes de salvar
+	____________________________
+	Campo nome:    :  {  Nome é de preenchimento obrigatório                       }
+	Campo email    :  {  obrigatorio e tem que ter um @                            }
+	Campo senha    :  {  Necessita ter no mínimo 4 digítos                         }
+	Campo CPF      :  {  Verifico se o CPF é valido                                }
+	Campo Celular  :  {  Obrigatorio com essa regra 16988253013 tem que ter o DDD  }     
+	Campo CEP      :  {  Obrigatorio                                               }
+	Campo numero   :  {  Obrigatorio, caso não tenha coloca sem numero             } 
+	
+	
+	Salvar o cliente são dois metodos  SalvarCliente -   SalvarEndereco.
+	
+	.SalvarCliente
+		..Segue o insert
+		____________________________
+	insert into clientes                                            
+      ( cli_001, id_empresa, cli_002, cli_004, sit_001,             
+      (' senha_email, email, tipo_pessoa, celular1, cli_012 )       
+      ('values (                                                    
+      (' :cli_001, :id_empresa, :cli_002, :cli_004,:sit_001,        
+      (' :senha_email, :email, :tipo_pessoa, :celular1, :cli_012 )  
+	  
+	  
+	  
+	  .SalvarEndereco
+	   .. Segue o insert
+	   ____________________________
+	   insert into clientes_endereco (
+      .SQL('id_endereco, cli_001, id_empresa, cep_002, cep_003, cep_004,')
+      .SQL('cli_007, cli_008, cli_009, bai_001, cid_001, cidade_desc, uf, endereco_padrao)
+      .SQL('values (
+      .SQL(':id_endereco, :cli_001, :id_empresa, :cep_002, :cep_003, :cep_004,')
+      .SQL(':cli_007, :cli_008, :cli_009, :bai_001, :cid_001, :cidade_desc, :uf, :endereco_padrao )
+	  
+	  Obs: ele insere como endereco_padrao=true  , ou seja este endereco sera padrão quando ele entrar no sistema,
+	  quando ele for faze o pedido, sera listado sempre este como padrão.
+	  
+	  
+	  Apos o cadastro ele ja é redimensionado para o index.html

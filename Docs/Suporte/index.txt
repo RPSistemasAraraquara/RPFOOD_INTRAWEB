@@ -1,0 +1,91 @@
+Index.html   
+
+
+Nesta tela é listado o seguinte
+PreencheCategorias   Lista as categoria.
+PreencheItens - Lista todos os produtos 
+PreencheProdutosDestaque - Lista os produtos em destaque
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PreencheCategorias
+
+	Este select lista as categorias 
+	
+	select grupos.codigo, grupos.id_empresa, grupos.descricao 
+	from grupos
+	where grupos.id_situacao = 4 and grupos.b_exibir_web = true
+	and exists (select produtos.codigrupo from produtos where produtos.codigrupo = grupos.codigo limit 1)
+	and grupos.id_empresa = CODIGO DA EMPRESA
+	order by grupos.descricao 
+	
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PreencheItens
+	
+	Este select lista todos os produtos	
+	
+	
+	select produtos.id_empresa, produtos.codigo, grupos.codigo as id_grupo,
+	produtos.descricao, produtos.Observacao, produtos.valfinal,
+	tamanho_p, tamanho_m, tamanho_g, tamanho_gg, tamanho_extra, tamanho_padrao,
+	valor_tam_p, valor_tam_m, valor_tam_g, valor_tam_gg, valor_tam_extra,
+	b_venda_tamanho, b_destaque_web, b_permite_frac, b_carrossel
+	from produtos
+	left join grupos on grupos.codigo = produtos.codigrupo
+	where produtos.id_situacao = 4 and produtos.b_venda_web = true
+	and produtos.id_empresa = CODIGO DA EMPRESA
+	order by descricao'
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PreencheProdutosDestaque
+
+	Este select lista todos os produtos em destaque , lista ate 20 produtos apenas  ( listo 20 apenas para não carregar a aplicação)
+	
+	
+	select produtos.id_empresa, produtos.codigo, grupos.codigo as id_grupo,
+	produtos.descricao, produtos.Observacao, produtos.valfinal,
+	tamanho_p, tamanho_m, tamanho_g, tamanho_gg, tamanho_extra, tamanho_padrao,
+	valor_tam_p, valor_tam_m, valor_tam_g, valor_tam_gg, valor_tam_extra,
+	b_venda_tamanho, b_destaque_web, b_permite_frac, b_carrossel
+	from produtos
+	left join grupos on grupos.codigo = produtos.codigrupo
+	where produtos.id_situacao = 4 and produtos.b_venda_web = true
+	and produtos.b_destaque_web = true
+	and produtos.id_empresa = COLOCAR CODIGO DA EMPRESA
+	order by produtos.descricao limit 20
+	
+	
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+OBS:  Nesta tela temos o botao finalizar venda  que redimensiona para o pedido-finalizar.html
+	Temos também o botao a parte superior que tem um carrinho que mostra os produtos comprados, taxa de entrega, opcionais, observacao do item, produtos fração,
+	com imagem do produto e imagem da fração , e valor total do pedido.
+	
+	Temos botao Bora procurar   que redimensiona para a tela produtostodascategoria.html
+	Temos um menu na parte superior que mostra o nome do cliente , clicando nele listara o seguinte 
+	--Meus dados 		    	{  que redimensiona para a tela     cliente-dados.html  }
+	--Aquela consulta basica    {  que redimensiona para a tela venda-historico.html
+	--Bora ver                  {  que redimensiona para a tela pedido-acompanhamento.html}
+	--Vou embora	            {  que redimensiona para a tela login.html}
+	
+	
+	Tambem temos um menu do lado esquerdo com as seguintes botoes
+	
+	Menu 
+	 --Home							 {  que redimensiona para a tela index.html.html}	
+	 --Bora procurar                 {  que redimensiona para a tela produtostodascategoria.html}
+	
+	
+	Pedidos
+	 --Aquela Consulta Basica        {  que redimensiona para a tela venda-historico.html}
+	 -- Bora ver					 {  que redimensiona para a tela pedido-acompanhamento.html}	
+	 
+	 Meus dados
+	  --Eu aqui                      { que redimensiona para a tela     cliente-dados.html  }
+	  --Meus enderecos               { que redimensiona para a tela     cliente-endereco.html  }
+	  
+	  Obs: se clicar na parte superior do do lado esquerdo , na imagem do hamburguer, não importa a pagina que esteja, ira redimensionar para o index.html
+	
+	

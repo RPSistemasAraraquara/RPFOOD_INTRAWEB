@@ -1,0 +1,133 @@
+  Pagina de finalizar Pedido  - pedido-finalizar.html
+  
+  
+  Nesta pagina temos o seguinte
+	1-) Uma aba com Delivery Seguro e Retirada
+
+	2-) Endereco do cliente
+	-- Alterar Endereco
+	-- Novo endereco
+
+	3-) Pagamento
+	4-) Totais
+	5-) Finalizar Pedido	
+	
+	Segue abaixo o memorial descritivo de cada um 
+	
+	
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  Pagamento - listando o os pagamento disponiveis
+  segue o select das formas de pagamentos  
+  
+	select id, id_empresa, descricao, id_situacao,
+	b_venda_web, sfi_codigo
+	from formapgto	
+	where id_empresa = CODIGO DA EMPRESA
+	and b_venda_web = true
+	order by descricao
+	
+	OBS: A forma de pagamento dinheiro, segue a regra do Le Cheff  , SFI 1.
+	Não esqueçam de olhar sempre o where para entender a regra do select 
+  
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Totais   - Os valores de todos os produtos, incluso opcionais e taxa de entrega
+Troco    - Caso o cliente selecione a forma de pagamento dinheiro ( obs não seria a descricao dinheiro mas sim o codigo sfi 1)
+           O valor para solicitar o troco, não poder ser igual ou menor que o valor do pedido		 
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Retirada
+	Lista os dados da empresa
+	e remove a taxa de entrega
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+		Botao Finalizar Venda
+		
+		No primeiro instante verifico se o estabelecimento esta aberto, pode acontecer quando o cliente entrou estava aberto , e quando for finalizar o horario
+		pode estar fechado o estabelecimento, existe uma função no banco que verifica a tabela configuracao_atendimento, so ir no banco e dar o seguinte comando
+		
+		select is_atendimento_disponivel()     - se estiver false    está fechado   ira mandar uma mensagem ao cliente informado que esta fechado e redimensiona para o login.html
+		
+		                                       - se estiver true    esta aberto  prosegue com as informações abaixo
+	Nesse momente tenho esta funções de insert
+	SalvarVenda.          -- Salva a venda
+    SalvarVendaEndereco.  -- Salva o endereco no qual o cliente selecionou para fazer a entrega do pedido 
+    SalvarVendaStatusLog. -- Este status serve para informar ao cliente como esta o andamento do pedido 
+    SalvarItens.          -- Este salva os itens
+	
+	
+	.SalvarVenda
+		insert into venda  (
+		id_venda, id_empresa, id_situacao, id_formapgto, observacao,
+		id_cliente, totals_products, sub_total, taxa_entrega, tipo_entrega,
+		troco, valor_receber, sales, data_pedido, b_recebido_lecheff)
+		values 
+		(:id_venda, :id_empresa, :id_situacao, :id_formapgto, :observacao,
+		:id_cliente, :totals_products, :sub_total, :taxa_entrega, :tipo_entrega,
+		:troco, :valor_receber, :sales, :data_pedido, :b_recebido_lecheff)
+		
+		-----------------------------------------------------------
+ 
+	.SalvarVendaEndereco      
+		insert into venda_endereco  (
+		id_venda, id_cliente, id_bairro, cep, logradouro,      
+		numero, complemento, ponto_referencia, cidade_desc,    
+		uf_sigla, bairro_desc, id_cidade)                      
+		values (                                               
+		:id_venda, :id_cliente, :id_bairro, :cep, :logradouro, 
+		:numero, :complemento, :ponto_referencia, :cidade_desc,
+		:uf_sigla, :bairro_desc, :id_cidade)   
+		-----------------------------------------------------------
+
+	.SalvarVendaStatusLog
+		insert into vendas_status_log (
+		id_venda, id_empresa, id_situacao, data)
+		values (
+		:id_venda, :id_empresa, :id_situacao, :data)
+		
+		
+		-----------------------------------------------------------
+	.SalvarItens
+	
+	
+		Este é do vendaiitem
+		_____________________	
+		insert into vendaitem (
+		id_venda, id_empresa, id_product, numero_item,
+		quantidade, valor_unit_product, totals_products, 
+		id_situacao, tamanho, b_venda_tamanho, item_fracionado, observacao )
+		values (
+		:id_venda, :id_empresa, :id_product, :numero_item,
+		:quantidade, :valor_unit_product, :totals_products, 
+		:id_situacao, :tamanho, :b_venda_tamanho, :item_fracionado, :observacao )
+		
+		Este é do vendaitemopcional
+		_____________________
+		insert into vendaitemopcional (                                  ')
+		id_venda, id_empresa, id_numero_item, id_opcional,               ')
+		quantidade, quantidade_replicar, valorUnitario, valorTotal)      ')
+		values (                                                         ')
+		:id_venda, :id_empresa, :id_numero_item, :id_opcional,           ')
+		:quantidade, :quantidade_replicar, :valorUnitario, :valorTotal)
+		
+		
+		
+		
+		Obs:  o vendaitemopcional só tera se foi informado um produto no qual tinha opcional e o cliente selecionou este opcional
+		
+		Toda venda tera que ter o vendaitem, venda ,vendas_status_log,venda_endereco
+		
+		Apos o termino da inserção sera redimensionado para a tela pedido-acompanhamento.html
+
+
+
+ 
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<!-- All Meta -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="RP SISTEMAS" />
+	<meta name="robots" content="" />
+	<meta name="description" content="RP Food - seu novo conceito em pedido Online" />
+	<meta property="og:title" content="RP Food - seu novo conceito em pedido Online" />
+	<meta property="og:description" content="RP Food - seu novo conceito em pedido Online" />
+	<meta name="format-detection" content="telephone=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<title>RP Food - seu novo conceito em pedido Online</title>
+
+
+	<link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
+
+	<link href="./vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+	<link href="./vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+	<link href="./vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="./vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+	<link href="./sweetAlert4Delphi/style/sweetalert2.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+	<link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+	<!--*******************
+        Preloader start
+    ********************-->
+	<div id="preloader">
+		<div class="lds-ripple">
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+
+	<!--*******************
+        Preloader end
+    ********************-->
+
+	<!--**********************************
+        Main wrapper start
+    ***********************************-->
+	<div id="main-wrapper" class="dlab-overflow">
+		<div class="nav-header">
+			<a href="./index.html" class="brand-logo">
+				<svg class="logo-abbr" width="39" height="31" viewBox="0 0 39 31" fill="none"
+					xmlns="http://www.w3.org/2000/svg">
+
+					<path fill-rule="evenodd" clip-rule="evenodd"
+						d="M25.125 21.125L26.9952 23.2623C27.6771 24.0417 28.8616 24.1206 29.6409 23.4387C29.7036 23.3839 29.7625 23.325 29.8173 23.2623L31.6875 21.125H36.375C35.2848 26.5762 30.4985 30.5 24.9393 30.5H14.0607C8.5015 30.5 3.71523 26.5762 2.625 21.125H25.125Z"
+						fill="var(--primary)" />
+					<path fill-rule="evenodd" clip-rule="evenodd"
+						d="M36.375 9.875H2.625C3.71523 4.4238 8.5015 0.5 14.0607 0.5H24.9393C30.4985 0.5 35.2848 4.4238 36.375 9.875Z"
+						fill="var(--primary)" />
+					<path opacity="0.3"
+						d="M36.375 13.625H2.625C1.58947 13.625 0.75 14.4645 0.75 15.5C0.75 16.5355 1.58947 17.375 2.625 17.375H36.375C37.4105 17.375 38.25 16.5355 38.25 15.5C38.25 14.4645 37.4105 13.625 36.375 13.625Z"
+						fill="var(--primary)" />
+				</svg>
+				<svg class="brand-title" width="147" height="22" viewBox="0 0 147 22" fill="none"
+					xmlns="http://www.w3.org/2000/svg">
+				</svg>
+			</a>
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span><span class="line"></span><span class="line"></span>
+				</div>
+			</div>
+		</div>
+
+		<!--**********************************
+            Nav header end
+        ***********************************-->
+
+		<!--**********************************
+            Header start
+        ***********************************-->
+		<div class="header">
+			<div class="header-content">
+				<nav class="navbar navbar-expand">
+					<div class="container d-block my-0">
+						<div class="d-flex align-items-center justify-content-sm-between justify-content-end">
+							<div class="header-left">
+								<div class="nav-item d-flex align-items-center">
+									<div class="d-flex header-bx" id="menu_cliente_search_bar">
+										<div class="input-group search-area2 ps-3" id="Serach-bar" class="menu_cliente">
+											<span class="input-group-text h-search"><a href="javascript:void(0)"><svg
+														width="28" height="28" viewBox="0 0 28 28" fill="none"
+														xmlns="http://www.w3.org/2000/svg">
+														<path opacity="0.3"
+															d="M16.6751 19.4916C16.2195 19.036 16.2195 18.2973 16.6751 17.8417C17.1307 17.3861 17.8694 17.3861 18.325 17.8417L22.9917 22.5084C23.4473 22.964 23.4473 23.7027 22.9917 24.1583C22.5361 24.6139 21.7974 24.6139 21.3417 24.1583L16.6751 19.4916Z"
+															fill="var(--primary)" />
+														<path
+															d="M12.8333 18.6667C16.055 18.6667 18.6666 16.055 18.6666 12.8333C18.6666 9.61168 16.055 7 12.8333 7C9.61163 7 6.99996 9.61168 6.99996 12.8333C6.99996 16.055 9.61163 18.6667 12.8333 18.6667ZM12.8333 21C8.32297 21 4.66663 17.3437 4.66663 12.8333C4.66663 8.32301 8.32297 4.66667 12.8333 4.66667C17.3436 4.66667 21 8.32301 21 12.8333C21 17.3437 17.3436 21 12.8333 21Z"
+															fill="var(--primary)"/>
+													</svg>
+											</a></span>
+											
+											<input type="text" class="form-control"  placeholder="O que você quer comer hoje?">											
+										</div>	
+
+
+										<div class="search-drop" class="menu_cliente">
+
+
+											<div class="card tag-bx">
+												<div class="d-flex align-items-center justify-content-between mb-2 gap">
+													<div class="card-header d-block border-0">
+														<h4 class=" mb-0 cate-title">Categorias </h4>
+														<div
+															class="card-body col-auto col-md-auto col-sm col form-control-color:var(--branco-principal)">
+															<li id="padrao_lista_categorias"
+																class="d-flex align-items-center flex-wrap">
+															</li>
+
+														</div>
+
+
+													</div>
+												</div>
+
+
+												<div class="card dishe-bx">
+													<div class="card-header border-0 pb-0 pt-0 pe-3">
+														<span
+															class="badge badge-lg badge-danger side-badge">Destaque</span>
+														<i class="fa-solid fa-heart ms-auto c-heart c-pointer"></i>
+													</div>
+
+													<div class="card-body pt-0">
+														<h4>Produtos Destaques</h4>
+
+														<div class="swiper mySwiper-4">
+															<div id="padrao_lista_destaques" class="swiper-wrapper">
+															</div>
+														</div>
+													</div>
+												</div>
+												<div id="close-searchbox"></div>
+
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<ul class="navbar-nav header-right ">
+
+									
+
+									<li class="menu_cliente">
+										<div class="dropdown header-profile2 ">
+											<a class="nav-link " href="javascript:void(0);" role="button"
+												data-bs-toggle="dropdown">
+												<div class="header-info2 d-flex align-items-center">
+													<img src="./images/banner-img/pic-1.png" alt="">
+													<div class="d-flex align-items-center sidebar-info">
+														<div>
+															<h6 class="font-w500 mb-0 ms-2">{%UsuarioLogado%}</h6>
+														</div>
+														<i class="fas fa-chevron-down"></i>
+													</div>
+
+												</div>
+											</a>
+											<div class="dropdown-menu dropdown-menu-end">
+												<a href="cliente-dados.html" class="dropdown-item ai-icon ">
+													<svg xmlns="http://www.w3.org/2000/svg" class="text-primary"
+														width="18" height="18" viewBox="0 0 24 24" fill="none"
+														stroke="currentColor" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round">
+														<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+														<circle cx="12" cy="7" r="4"></circle>
+													</svg>
+													<span class="ms-2">Meus dados</span>
+												</a>
+												<a href="javascript:Logout()" class="dropdown-item ai-icon ms-1">
+													<svg xmlns="http://www.w3.org/2000/svg" class="text-primary"
+														width="18" height="18" viewBox="0 0 24 24" fill="none"
+														stroke="currentColor" stroke-width="2" stroke-linecap="round"
+														stroke-linejoin="round">
+														<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+														<polyline points="16 17 21 12 16 7"></polyline>
+														<line x1="21" y1="12" x2="9" y2="12"></line>
+													</svg>
+													<span class="ms-1">Sair </span>
+												</a>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+				</nav>
+			</div>
+		</div>
+		<!--**********************************
+            Header end ti-comment-alt
+        ***********************************-->
+
+		<!--**********************************
+            Sidebar start
+        ***********************************-->
+		<div class="dlabnav border-right">
+			<div class="dlabnav-scroll">
+				<p class="menu-title style-1"> Menu</p>
+				<ul class="metismenu" id="menu">
+					<li class="menu_cliente">
+						<a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+							<i class="bi bi-grid"></i>
+							<span class="nav-text">Inicio</span>
+						</a>
+						<ul aria-expanded="false" class="menu_cliente">
+							<li><a href="./index.html">Cardápio</a></li>
+
+						</ul>
+					</li>
+
+					
+
+					<li class="menu_cliente">
+						<a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+
+							<i class="bi bi-shop-window"></i>
+							<span class="nav-text">Pedidos</span>
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="./index.html">Novo Pedido</a></li>
+							<li><a href="./pedido-acompanhamento.html">Acompanhe seu Pedido</a></li>
+							<li><a href="./venda-historico.html">Histórico de Pedidos</a></li>
+						</ul>
+					</li>
+
+					<li class="menu_cliente">
+						<a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+							<i class="bi bi-bicycle"></i>
+
+							<span class="nav-text">Perfil</span>
+						</a>
+						<ul aria-expanded="false">
+							<li><a href="./cliente-dados.html">Meus Dados</a></li>
+							<li><a href="./cliente-endereco.html">Meus Endereços</a></li>
+						</ul>
+					</li>
+
+					</li>
+				</ul>
+
+			</div>
+		</div>
+		<!--**********************************
+            Sidebar end
+        ***********************************-->
+
+		<div class="content-body">			
+			<div class="container">
+				$body
+			</div>
+		</div>
+		
+		<div class="footer">
+			<div class="copyright border-top">
+				<p id="versao">Copyright © by <a href="http://www.sistemalechef.com.br" target="_blank"> RP SISTEMAS</a>
+					2023</p>
+			</div>
+		</div>
+
+	</div>
+	<!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+	<script>	
+		// Versao
+		function AtualizaVersao(Versao) {
+			let copyright = document.getElementById('versao');
+			copyright.innerHTML = copyright.innerHTML + ` - ${Versao}`;
+		}
+		
+		// Menu
+		function ConfigurarMenu(IsAdmin) {
+			let classeParaOcultar = 'menu_admin';
+			if (IsAdmin) 
+				classeParaOcultar = 'menu_cliente';
+			
+			let collection = document.getElementsByClassName(classeParaOcultar);
+
+			for (i = 0; i < collection.length; i++)
+				collection[i].hidden = true;
+
+			if (IsAdmin) {
+				document.getElementById('menu_cliente_search_bar').innerHTML = '';
+			}
+		}
+	</script>
+
+	<!-- RPFood -->
+	<script src="./js/rpfood/format.js"></script>
+    <!-- Required vendors -->
+	<script src="./vendor/global/global.min.js"></script>
+	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="./vendor/chart.js/chart.bundle.min.js"></script>
+	<script src="./vendor/swiper/js/swiper-bundle.min.js"></script>
+	<script src="./vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+	<script src="./sweetAlert4Delphi/js/sweetalert2.all.min.js"></script>
+	<script src="./sweetAlert4Delphi/js/sweetalert.custom.js"></script>	
+
+	<script src="./vendor/apexchart/apexchart.js"></script>
+	<script src="./vendor/chartist/js/chartist.min.js"></script>
+	<script src="./vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+ 
+	<script src="./vendor/flot/jquery.flot.js"></script>
+	<script src="./vendor/flot/jquery.flot.pie.js"></script>
+	<script src="./vendor/flot/jquery.flot.resize.js"></script>
+	<script src="./vendor/flot-spline/jquery.flot.spline.min.js"></script>
+ 
+	<script src="./vendor/jquery-sparkline/jquery.sparkline.min.js"></script>
+	<script src="./js/plugins-init/sparkline-init.js"></script>
+ 
+	<script src="./vendor/peity/jquery.peity.min.js"></script>
+	<script src="./js/plugins-init/piety-init.js"></script>
+ 
+	<script src="./js/plugins-init/widgets-script-init.js"></script>
+	<script src="./js/dlabnav-init.js"></script>
+	<script src="./js/custom.js"></script>
+	
+
+	<script>
+		$('.my-select').selectpicker();
+
+		var swiper = new Swiper(".mySwiper-1", {
+			loop: true,
+			dots: true,
+			//nav:true,
+			autoplay: {
+				delay: 3000,
+			},
+
+			navigation: {
+				nextEl: ".swiper-button-next-1",
+				prevEl: ".swiper-button-prev-1",
+				//loop: true
+			},
+
+			pagination: {
+				el: ".swiper-pagination-banner",
+				clickable: true,
+			},
+			mousewheel: false,
+			keyboard: false,
+		});
+
+
+		var swiper = new Swiper(".mySwiper-2", {
+			slidesPerView: 5,
+			spaceBetween: 20,
+			loop: true,
+			autoplay: {
+				delay: 1000,
+			},
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			breakpoints: {
+				360: {
+					slidesPerView: 2,
+					spaceBetween: 20,
+				},
+				600: {
+					slidesPerView: 3,
+					spaceBetween: 20,
+				},
+				768: {
+					slidesPerView: 4,
+					spaceBetween: 20,
+				},
+				1200: {
+					slidesPerView: 3,
+					spaceBetween: 20,
+				},
+				1920: {
+					slidesPerView: 5,
+					spaceBetween: 20,
+				},
+
+			},
+
+		});
+
+		var swiper = new Swiper(".mySwiper-3", {
+			slidesPerView: 3,
+			spaceBetween: 30,
+			autoplay: {
+				delay: 2000,
+			},
+
+			pagination: {
+				el: ".swiper-pagination",
+				clickable: true,
+			},
+			breakpoints: {
+				360: {
+					slidesPerView: 1,
+					spaceBetween: 20,
+				},
+				600: {
+					slidesPerView: 2,
+					spaceBetween: 20,
+				},
+				768: {
+					slidesPerView: 3,
+					spaceBetween: 20,
+				},
+				1200: {
+					slidesPerView: 2,
+					spaceBetween: 20,
+				},
+				1400: {
+					slidesPerView: 3,
+					spaceBetween: 20,
+				},
+
+
+			},
+		});
+
+
+		$(function () {
+			$('[data-decrease]').on('click', decrease);
+			$('[data-increase]').click(increase);
+			$('[data-value]').change(valueChange);
+		});
+
+		function decrease() {
+			var value = $(this).parent().find('[data-value]').val();
+			if (value > 0) {
+				value--;
+				$(this).parent().find('[data-value]').val(value);
+			}
+		}
+
+		function increase() {
+			var value = $(this).parent().find('[data-value]').val();
+			if (value < 100) {
+				value++;
+				$(this).parent().find('[data-value]').val(value);
+			}
+		}
+
+		function valueChange() {
+			var value = $(this).val();
+			if (value == undefined || isNaN(value) == true || value <= 0) {
+				$(this).val(0);
+			} else if (value >= 101) {
+				$(this).val(100);
+			}
+		}
+
+
+		$(document).ready(function () {
+			$(".plus").click(function () {
+				$(this).toggleClass("active");
+
+			});
+		});
+		$(document).ready(function () {
+			$(".c-heart").click(function () {
+				$(this).toggleClass("active");
+
+			});
+		});
+
+
+		jQuery(document).ready(function () {
+			setTimeout(function () {
+				dlabSettingsOptions.version = 'dark';
+				new dlabSettings(dlabSettingsOptions);
+			}, 1500)
+		});
+	</script>
+
+	<script>
+		function PadraoAdicionarCategorias(ListaCategorias) {
+			let conteudoTag = '';
+			ListaCategorias.forEach(Categoria => {
+				conteudoTag = conteudoTag +
+				`
+				<li>
+					<a href="#" onclick="javascript:ajaxCall('OnPadraoClickCategoria', 'idCategoria=${Categoria.codigo}');" 
+						class="btn btn-outline-light btn-rounded me-2">${Categoria.descricao}</a>
+				</li>
+				`;
+			});
+
+			tagLista = document.getElementById('padrao_lista_categorias');
+			tagLista.innerHTML = conteudoTag;
+		}
+
+		function PadraoAdicionarDestaques(Destaques) {
+			let conteudoTag = '';
+			Destaques.forEach(Produto => {
+				conteudoTag = conteudoTag +
+				`
+				<div class="swiper-slide">
+					<div class="card mb-0">
+						<div class="card-body pb-2 pt-3">
+							<div class="text-center pop-cousin">
+								<img src="${Produto.caminhoHtmlImagem}" class="c-pointer" alt="" onclick="javascript:ajaxCall('OnPadraoClickDestaque', 'idProduto=${Produto.codigo}');">
+								<a href="javascript:ajaxCall('OnClickDestaque', 'idProduto={%ID_PRODUTO%}');"><h6>${Produto.descricao}</h6></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				`;
+			});
+
+			tagLista = document.getElementById('padrao_lista_destaques');
+			tagLista.innerHTML = conteudoTag;
+		}
+
+		function Logout() {
+
+			let message = {
+				icon: 'question',
+				title: 'Sair',
+				text: 'Deseja sair do sistema?',
+				showCancelButton: true,
+				confirmButtonText: 'Sim',
+				cancelButtonText: 'Não'
+			};
+
+			Swal.fire(message).then(result => {
+				if (result.isConfirmed) {
+					ajaxCall('OnSair', '');
+				}
+			})
+		}
+
+		function VoltarPaginaAnterior() {
+			window.history.go(-1);
+		}
+
+		function AtualizaTag(Id) {
+			$(`#${Id}`).load(window.location.href + ` #${Id}`);
+		}
+
+		function AtualizaTags(Tags) {
+			Tags.forEach(tag => {
+				AtualizaTag(tag);
+			});
+		}
+
+		function OcultarTag(Id) {
+			document.getElementById(Id).style.display = 'none';
+		}
+
+		function CloseModal(Id) {
+			$(`#${Id}`).modal('hide');			
+		}
+	</script>
+
+
+</body>
+
+</html>

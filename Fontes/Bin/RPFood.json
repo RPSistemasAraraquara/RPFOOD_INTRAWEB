@@ -1,0 +1,13 @@
+{
+    "APP_PATH": "C:\\Users\\rp\\Desktop\\Archives\\Project\\Le Cheff\\Acessorios\\RPFOOD_INTRAWEB\\Fontes\\Bin\\",
+    "PORT": 8080,
+    "DATABASE_HOST": "127.0.0.1",
+    "DATABASE_PORT": 5432,
+    "DATABASE_SCHEMA": "public",
+    "DATABASE_ALIAS": "FOOD",
+    "DATABASE_USERNAME": "postgres",
+    "DATABASE_PASSWORD": "18021950",
+    "SERVICE_NAME": "RPFoodService",
+    "SERVICE_TITLE": "RPFood",
+    "SERVICE_DESCRIPTION": "RPFood - Online Food Delivery"
+}

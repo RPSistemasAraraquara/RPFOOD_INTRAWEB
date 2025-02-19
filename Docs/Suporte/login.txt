@@ -1,0 +1,17 @@
+Login
+
+Verifica o email e CNPJ
+__________________________________________________________________________________________________________________
+Select da busca do login
+
+select id_endereco, cli_001, id_empresa, cep_002, cep_003, endereco_padrao,
+cep_004, cli_007, cli_008, cli_009, bai_001, cid_001, cidade_desc, uf
+from clientes_endereco
+where id_empresa =  Colocar o codigo da empresa
+and cli_001 = Colocar o id do cliente
+order by endereco_padrao desc, id_endereco
+
+Obs: Neste form clicando no entrar ira redimensionar para o form index.html
+
+__________________________________________________________________________________________________________________
+   

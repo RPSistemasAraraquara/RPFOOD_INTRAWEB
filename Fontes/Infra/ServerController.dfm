@@ -1,0 +1,30 @@
+object IWServerController: TIWServerController
+  OnCreate = IWServerControllerBaseCreate
+  AppName = 'RPFOOD'
+  Description = 'RP Food'
+  DisplayName = 'RPFood'
+  Port = 8088
+  Version = '15.6.7'
+  ExceptionLogger.HtmlReportInfos = []
+  SearchEngineOptions.RedirectToContentHandler = True
+  SecurityOptions.ShowSecurityErrorDetails = False
+  SecurityOptions.MaxActiveSessionsPerIp = 100
+  BackButtonOptions.Mode = bmInterceptForm
+  BackButtonOptions.ReloadPage = True
+  ProxyPortRedirection.Active = True
+  PostRedirectGet = prgEnabled
+  SessionOptions.SessionTimeout = 40
+  SessionOptions.LockSessionTimeout = 490000
+  SessionOptions.BrowserCheckBeforeNewSession = False
+  SessionOptions.LockedSessionNoContentResponse = False
+  AutoLoadIniSettings = False
+  OnAfterDispatch = IWServerControllerBaseAfterDispatch
+  OnConfig = IWServerControllerBaseConfig
+  OnNewSession = IWServerControllerBaseNewSession
+  OnBeforeRender = IWServerControllerBaseBeforeRender
+  OnSessionRestarted = IWServerControllerBaseSessionRestarted
+  OnAuthFailed = IWServerControllerBaseAuthFailed
+  Height = 465
+  Width = 513
+  PixelsPerInch = 144
+end

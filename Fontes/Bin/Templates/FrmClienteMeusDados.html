@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+</head>
+
+<body>
+    <div class="row page-titles">
+        <h4 class="active">Meus dados</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">          
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label class="mb-1 col-form-label" for="IWEDTNOME"><strong>Sou joy</strong> <span
+                            class="text-danger">*</span></label>
+                    {%IWEDTNOME%}
+                </div>
+                <div class="mb-3 col-md-4">
+                    <label class="mb-1 col-form-label"><strong>Email</strong> <span class="text-danger">*</span></label>
+                    {%IWEDTEMAIL%}
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col-md-4">
+                    <label class="mb-1"><strong>Senha</strong> <span class="text-danger">*</span></label>
+                    {%IWEDTSENHA%}
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label class="mb-1"><strong>Celular</strong> <span class="text-danger">*</span></label>
+                    {%IWEDTCELULAR%}
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label class="mb-1"><strong>Telefone</strong></label>
+                    {%IWEDTTELEFONE%}
+                </div>
+            </div>
+            <div class="">
+                <button class="btn btn-primary " onClick="javascript:ajaxCall('Gravar', '');">Gravar</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>

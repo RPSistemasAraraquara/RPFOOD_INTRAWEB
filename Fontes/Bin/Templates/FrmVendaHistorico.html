@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+   <link rel="stylesheet" href="./vendor/chartist/css/chartist.min.css">
+   <link rel="stylesheet" href="./vendor/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+</head>
+
+<body>   
+
+
+   <div class="row">
+      <div class="col-xl-12">
+          <div class="card h-auto">
+              <div class="card-body p-2" id="cardVendas">      
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+
+   <script>
+      function TagItensDaVeda(Venda) {
+         let conteudoTag = `<div id="default_collapseOne_${Venda.id}" class="collapse accordion_body" 
+            data-bs-parent="#accordion-${Venda.id}">`;
+
+         Venda.itens.forEach(Item => {
+            let conteudoItem = 
+            `
+            <div class="row">
+               <div class="col-xl-12 col-xxl-12 col-sm-12 b-right style-1">
+                  <div class="order-menu my-4 dlab-space">
+                     <div class="d-flex align-items-center justify-content-xl-center justify-content-lg-start  mb-2  border-xl-right border-0">
+                        <img class="me-2" src="images/popular-img/review-img/pic-1.jpg" alt="">                                                               
+                        <div>
+                           <h6 class="font-w600 text-nowrap mb-0">${Item.produto.descricao}</h6>
+                           <p class="mb-0">Qtde: ${FormatFloat(Item.quantidade, 2)}</p>
+                        </div>
+                        <h6 class="text-primary mb-0 ps-3 ms-auto">${FormatCurrency(Item.valorTotalProduto)}</h6>
+                     </div>
+                     <h6 class="font-w600 text-wrap mb-0"> </h6>
+                  </div>
+               </div>
+            </div>
+            `;
+
+            conteudoTag = conteudoTag + conteudoItem;
+         });
+
+         conteudoTag = conteudoTag + '</div>';
+         return conteudoTag;
+      }
+
+      function AdicionarVenda(ListaVenda) {
+         let tagVendas = document.getElementById('cardVendas');
+         let conteudoTagVendas = '';
+
+         ListaVenda.forEach(Venda => {
+            let conteudoVenda = 
+            `
+            <div id="accordion-one" class="accordion style-1">
+               <div class="accordion-item">
+                  <div class="accordion-header collapsed" data-bs-toggle="collapse" data-bs-target="#default_collapseOne_${Venda.id}">
+                     <div>
+                        <h4 class="font-w500 mb-0">Pedido : ${Venda.id}</h4>
+                        <span>${IsoToDate(Venda.data)}</span>                 
+                     </div>
+                     <div class="dliver-order-bx d-flex align-items-center">
+                        <img  class="me-2" src="images/resturent-review/pic-1.jpg" alt="">                                               
+                        <div>
+                           <h6 class="font-w500">Tipo</h6>
+                           <span>${Venda.tipoEntregaDescription}</span>                                                         
+                        </div>
+                     </div>
+                     <div>
+                        <p class="mb-0">Total</p>
+                        <h4 class="font-w600">${FormatCurrency(Venda.valorTotal)}</h4>
+                     </div>
+                     <div>
+                        <p class="mb-0">Forma de Pagamento</p>
+                        <h5 class="font-w600">${Venda.formaPagamento.descricao}</h5>
+                     </div>                     
+                     <button class="btn ${Venda.situacaoDescriptionBtn} me-5 dev-btn">${Venda.situacaoDescription}</button>      
+                     <button class="btn btn-outline-primary bgl-success me-5 dev-btn" onclick="javascript:ajaxCall('PedirNovamente', 'idVenda=${Venda.id}')" >Quero de novo</button>                
+                     <span class="accordion-header-indicator"></span>                                                                   
+                  </div>                  
+               </div>
+            </div>
+            `;
+
+            conteudoTagVendas = conteudoTagVendas + conteudoVenda + TagItensDaVeda(Venda);
+         });
+
+         tagVendas.innerHTML = conteudoTagVendas;           
+      }
+   </script>
+
+
+   <script src="./vendor/apexchart/apexchart.js"></script>
+   <script src="./vendor/chartist/js/chartist.min.js"></script>
+   <script src="./vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+   <script src="./vendor/flot/jquery.flot.js"></script>
+   <script src="./vendor/flot/jquery.flot.pie.js"></script>
+   <script src="./vendor/flot/jquery.flot.resize.js"></script>
+   <script src="./vendor/flot-spline/jquery.flot.spline.min.js"></script>
+   <script src="./vendor/jquery-sparkline/jquery.sparkline.min.js"></script>
+   <script src="./js/plugins-init/sparkline-init.js"></script>
+   <script src="./vendor/peity/jquery.peity.min.js"></script>
+   <script src="./js/plugins-init/piety-init.js"></script>
+   <script src="./js/plugins-init/widgets-script-init.js"></script>
+</body>
+
+</html>

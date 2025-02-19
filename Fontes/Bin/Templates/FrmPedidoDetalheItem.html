@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+ 
+</head>
+
+<body>
+   <div class="row page-titles">
+      <h4 class="active">{%TITULO_PRODUTO%}</h4>
+   </div>
+   <div class="row">
+      <div class="col-lg-12">
+         <div class="default-tab" id="tab-control">
+            <ul class="nav nav-tabs" role="tablist">
+               <li class="nav-item" id="tab-produto">
+                  <a class="nav-link active" data-bs-toggle="tab" href="#tab_produto">
+                     <i class="la la-home me-2"></i> Produto
+                  </a>
+               </li>
+               <li class="nav-item" id="tab-fracao">
+                  <a class="nav-link" data-bs-toggle="tab" href="#tab_fracao">
+                     <i class="la la-user me-2"></i> Escolha mais de um sabor
+                  </a>
+               </li>
+            </ul>
+            <div class="tab-content" id="divTab">
+               <div class="tab-pane fade show active" id="tab_produto" role="tabpanel">
+                  <div class="pt-4">
+                     <div class="card">
+                        <div class="card-body" id="divItemPedido">
+                           <div class="row">
+                              <div class="col-xl-3 col-lg-6 col-md-6 col-xxl-5">
+                                 <div class="tab-content" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-first" role="tabpanel"
+                                       aria-labelledby="nav-first-tab">
+                                       {%IWIMAGEM_PRODUTO%}
+                                    </div>
+                                 </div>
+                              </div>                              
+                              <div class="col-xl-9 col-lg-6 col-md-6 col-xxl-7 col-sm-12">
+                                 <div class="product-detail-content">
+                                      <div class="new-arrival-content pr">
+                                       <h4>{%TITULO_PRODUTO%}</h4>
+                                       <div class="d-table mb-2" id="divPreco">
+                                          <p class="price float-start d-block">{%VALOR_TOTAL%}</p>
+                                       </div>
+                                       <p class="text-content">{%OBSERVACAO%}</p>
+                                       <div class="new">
+                                          {%IWDESCRICAO_PRODUTO%}
+                                       </div>
+                                       <div class="divTamanhos">
+                                          <div class="d-flex align-items-end flex-wrap">
+                                             <div class="filtaring-area me-auto">
+                                                <div class="size-filter flex-wrap">
+                                                   <class mb-0 subtitle>{%TAMANHODOPRODUTO%}
+                                                </div>
+                                                <div id="divListaTamanhos"></div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+
+                                    <div class="mb-2 me-3">
+                                       <div class="col-4 px-0 mb-2 me-3">
+                                          <label for="IWEDT_QUANTIDADE_ITEM" title="Quantidade">
+                                             Quantidade
+                                          </label>
+                                          {%IWEDT_QUANTIDADE_ITEM%}
+                                       </div>
+                                       <div class="mb-2 me-3">
+                                          <label for="IWEDTOBSERVACAO">Observação</label>
+                                          {%IWEDTOBSERVACAO%}
+                                       </div>
+                                    </div>
+                                    <div class="shopping-cart">
+                                       <a class="btn btn-danger" href="javascript:ajaxCall('OnClickDescartar', '');">
+                                          <i class="fa fa-cancel me-2"></i>Não quero ++
+                                       </a>
+                                       <a class="btn btn-primary" href="javascript:ajaxCall('OnClickConfirmar', '');">
+                                          <i class="fa fa-shopping-basket me-2"></i>É isso aiiii
+                                       </a>
+                                    </div>
+                                    <div class="shopping-cart" style="margin-top:10px;">
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div id="div_lista_opcionais"></div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="tab-pane fade" id="tab_fracao" role="tabpanel">
+               <div class="col-xl-12 col-xxl-12 col-sm-12" id="div_lista_fracoes">
+                  <div class="card">
+                     <div class="card-header">
+                        <div class="shopping-cart mb-2 me-3" style="margin-top: 10px;">
+                           <a class="btn btn-danger" href="javascript:ajaxCall('OnClickDescartar', '');">
+                              <i class="fa fa-cancel me-2"></i>Não quero ++
+                           </a>
+                           <a class="btn btn-primary" href="javascript:ajaxCall('OnClickConfirmar', '');">
+                              <i class="fa fa-shopping-basket me-2"></i>É issoooo
+                           </a>
+                        </div>
+                     </div>
+                     <div class="card-header">
+                        <h4 class="card-title">Bota pra gerar +3</h4>
+                     </div>
+                     <div class="card-body" id="divFracao">
+                        <div class="pt-4" id="div_lista_fracoes">
+                           <div class="row">
+                              <div class="basic-list-group">
+                                 <ul class="list-group" id="lista_fracoes">
+                                 </ul>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="card-footer">
+                        <div class="shopping-cart">
+                           <a class="btn btn-danger" href="javascript:ajaxCall('OnClickDescartar', '');">
+                              <i class="fa fa-cancel me-2"></i>Não quero ++</a>
+
+                           <a class="btn btn-primary" href="javascript:ajaxCall('OnClickConfirmar', '');">
+                              <i class="fa fa-shopping-basket me-2"></i>É issoooo</a>
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   </div>
+   <script>
+      function OcultarTag(tagId) {
+         var elemento = document.getElementById(tagId);
+         if (elemento) {
+            elemento.style.display = 'none';
+         }
+      }
+
+      function OcultarDivTamanho() {
+         OcultarTag('divTamanhos');
+      }
+   </script>
+   <script>
+      function OcultarTabFracao() {
+         OcultarTag('tab-fracao');
+      }
+
+      function LimparFracoes() {
+         var tagLista = document.getElementById('lista_fracoes');
+         tagLista.innerHTML = '';
+      }
+
+      function PreencheFracoes(IdProduto, Descricao, Quantidade, Valor) {
+         tagLista = document.getElementById('lista_fracoes');
+         tagLista.innerHTML += `
+                 <li class="list-group-item">
+                     <ul>
+                         <div>
+                             <div class="new-arrival-content pr">
+                                 <div>
+                                     <label class="form-check-label text-wrap">${Descricao}</label>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="d-flex align-items-center justify-content-between">
+                             <div class="bootstrap-badge">
+                                 <span class="badge badge-lg light badge-primary">${Valor}</span>
+                                 <br>
+                             </div>
+                             <div class="quntity align-items-xxl-end">
+                                 <button data-decrease onClick="AlterarQuantidadeFracao('${IdProduto}', true)">-</button>
+                                 <input data-value type="text" value="${Quantidade}" id="fracao_${IdProduto}" />
+                                 <button data-increase onClick="AlterarQuantidadeFracao('${IdProduto}')">+</button>
+                             </div>
+                         </div>
+                     </ul>
+                 </li>
+             `;
+
+
+         var inputsParaDesabilitar = [
+            document.getElementById(`fracao_${IdProduto}`)
+         ];
+
+         desabilitarInputs(inputsParaDesabilitar);
+      }
+
+      function AlterarQuantidadeFracao(IdProduto, Subtrair) {
+         let quantidadeAtual = document.getElementById(`fracao_${IdProduto}`).value;
+
+         let nomeCallback = 'OnAdicionarFracao';
+         if (Subtrair)
+            nomeCallback = 'OnSubtrairFracao';
+
+         if (quantidadeAtual == 1 && nomeCallback == 'OnAdicionarFracao')
+            return;
+         if (quantidadeAtual != 1 && nomeCallback == 'OnSubtrairFracao')
+            return;
+
+         ajaxCall(nomeCallback, { IdProduto }, false, function (response) {
+            document.getElementById(`fracao_${IdProduto}`).value = response;
+            AtualizaTag('divPreco');
+            AtualizaTag('fracao_quantidade_principal');
+         });
+      }
+
+      function PreencheTamanho(Tamanho, Selecionado) {
+         let checked = '';
+         if (Selecionado)
+            checked = 'checked';
+
+         tagLista = document.getElementById('divListaTamanhos');
+         tagLista.innerHTML += `
+                 <input type="radio" class="btn-check" name="btnradio" id="btnradio_tamanho_${Tamanho}" ${checked} onclick="javascript:ajaxCall('OnClickTamanho', 'tamanho=${Tamanho}');">
+               <label class="btn btn-outline-primary sharp align-self-stretch" for="btnradio_tamanho_${Tamanho}">${Tamanho}</label>
+             `;
+
+         OcultarTag('divTamanhos');
+      }
+
+      function OcultarTag(tagId) {
+         var elemento = document.getElementById(tagId);
+         if (elemento) {
+            elemento.style.display = 'none';
+         }
+      }
+
+      function LimparOpcionais() {
+         var tagLista = document.getElementById('div_lista_opcionais');
+         tagLista.innerHTML = '';
+      }
+
+      function PreencheListaOpcionais(Codigo, Descricao, Quantidade, Valor) {
+         tagLista = document.getElementById('div_lista_opcionais');
+         tagLista.innerHTML += `
+                 <li class="list-group-item">
+                     <ul>
+                         <div>
+                             <div class="new-arrival-content pr">
+                                 <div>
+                                    <label class="form-check-label text-wrap">${Descricao}</label>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="d-flex align-items-center justify-content-between">
+                             <div class="bootstrap-badge">
+                             
+                                 <span class="badge badge-lg light badge-primary">${Valor}</span>
+                                 <br>
+                             </div>
+                             
+
+                             <div class="quntity align-items-xxl-end">
+                                 <button data-decrease onClick="AlterarQuantidadeOpcional('${Codigo}', true)">-</button>
+                                 <input data-value type="text" value="${Quantidade}" id="opcional_${Codigo}">
+                                 <button data-increase onClick="AlterarQuantidadeOpcional('${Codigo}')">+</button>
+                             </div>
+                         </div>
+                     </ul>
+                 </li>
+             `;
+
+         var inputsParaDesabilitar = [
+            document.getElementById(`opcional_${Codigo}`)
+         ];
+
+         desabilitarInputs(inputsParaDesabilitar);
+      }
+
+      function AlterarQuantidadeOpcional(IdProduto, Subtrair) {
+         let nomeCallback = 'OnAdicionarOpcional';
+         if (Subtrair)
+            nomeCallback = 'OnSubtrairOpcional';
+
+         ajaxCall(nomeCallback, { IdProduto }, false, function (response) {
+            let quantidadeAlterada = parseInt(response);
+            if (!isNaN(quantidadeAlterada)) {
+               document.getElementById(`opcional_${IdProduto}`).value = quantidadeAlterada;
+               AtualizaTag('divPreco');
+            }
+         });
+      }
+
+      function AlterarQuantidade() {
+         let quantidade = document.getElementById('IWEDT_QUANTIDADE_ITEM').value;
+         ajaxCall('OnChangeQuantidade', 'quantidade=' + quantidade);
+      }
+   </script>
+</body>
+
+</html>

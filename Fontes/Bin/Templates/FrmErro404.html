@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="" />
+	<meta name="author" content="RP SISTEMAS" />
+	<meta name="robots" content="" />
+	<meta name="description" content="RP Food - seu novo conceito em pedido Online"/>
+	<meta property="og:title" content="RP Food - seu novo conceito em pedido Online" />
+	<meta property="og:description" content="RP Food - seu novo conceito em pedido Online" />
+	<meta name="format-detection" content="telephone=no">
+	
+	<title>RP Food - Página não encontrada!</title>
+	
+	<link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+    <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="./vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
+</head>
+
+<body class="vh-100">
+    <div class="authincation">
+        <div class="container">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-7">
+                    <div class="form-input-content text-center error-page">
+                        <h1 class="error-text fw-bold">404</h1>
+                        <h4><i class="fa fa-exclamation-triangle text-warning"></i> A página que você estava procurando não foi encontrada!</h4>
+                        <p>Você pode ter digitado errado o endereço ou a página pode ter sido movida.</p>
+						<div>
+                            <a class="btn btn-primary" onclick="VoltarPaginaAnterior()" >Voltar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--**********************************
+	Scripts
+***********************************-->
+<!-- Required vendors -->
+<script src="./vendor/global/global.min.js"></script>
+<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="./js/dlabnav-init.js"></script>
+
+<script>
+    function VoltarPaginaAnterior() {
+        window.history.go(-1);
+    }
+</script>    
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- All Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="RP Food - seu novo conceito em pedido Online">
+    <meta name="description" content="RP Food - seu novo conceito em pedido Online">
+    <meta name="author" content="RP SISTEMAS">
+    <!-- OG Meta Tags -->
+    <meta property="og:title" content="RP Food - seu novo conceito em pedido Online">
+    <meta property="og:description" content="RP Food - seu novo conceito em pedido Online">
+    <title>RP Food - seu novo conceito em pedido Online</title>
+
+    <link href="./vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="./vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="./sweetAlert4Delphi/style/sweetalert2.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div style="margin-left: 10px;">
+        {%IWBTN_VOLTAR%}
+    </div>
+    <br>
+
+    <div class="d-flex align-items-left  mb-2">
+        <div class="input-group search-area1 style-1">
+            <span class="input-group-text p-0"><a href="javascript:void(0)">
+                <svg class="me-1" width="32" height="32"
+                        viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z"
+                            fill="#FC8019" />
+                    </svg>
+                </a></span>
+            {%IWEDT_FILTRO%}
+        </div>
+    </div>
+
+    <div class="search-drop">
+        <div class="card tag-bx">
+            <div class="card-header d-block border-4">
+                <ul class="d-flex align-items-center flex-wrap" id="div_lista_categoria">
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent">
+        <div class="tab-pane fade show active" id="pills-grid" role="tabpanel" aria-labelledby="pills-grid-tab">
+            <div class="row" id="div_lista_produtos"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalObservacao">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Observações</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="textoObservacao"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./vendor/chart.js/chart.bundle.min.js"></script>
+    <script src="./vendor/swiper/js/swiper-bundle.min.js"></script>
+    <script src="./vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+    <script>
+        function AdicionarCategoria(ListaCategoria) {
+            var tagLista = document.getElementById('div_lista_categoria');
+            var conteudoTag = '';
+            tagLista.innerHTML = '';
+            ListaCategoria.forEach(function (categoria) {
+                conteudoTag += `
+                <li><a href="javascript:void(0);" onclick="javascript:ajaxCall('OnClickCategoria', 'idCategoria=${categoria.codigo}');"
+                     class="btn badge-danger btn-rounded  me-4 d-flex align-items-center justify-content-center" style="margin: 4%; color: black; width: 120px; height: 80px;" idCategoria="divProdutos_${categoria.codigo}">${categoria.descricao}</a>
+                `;
+            });
+            tagLista.innerHTML = conteudoTag;
+        }
+
+    </script>
+
+    <script>
+
+        function AdicionarProduto(ListaProdutos) {
+            tagLista = document.getElementById('div_lista_produtos');
+            let conteudoTag = '';
+            tagLista.innerHTML = '';
+            ListaProdutos.forEach(Produto => {
+                conteudoTag = conteudoTag +
+                    `
+                <div class="col-xl-3 col-xxl-2 col-sm-4" id="divProdutos_${Produto.codigo}">
+                    <div class="card dishe-bx b-hover style-1">                            
+                        <div class="card-body pb-0 pt-3">
+                            <div class="text-center mb-2">
+                                <img src="${Produto.caminhoHtmlImagem}" class="c-pointer" onclick="javascript:ajaxCall('OnClickProduto', 'idProduto=${Produto.codigo}')">
+                            </div>
+                            <div class="border-bottom pb-3">
+                                <h4 class="font-w500 mb-1">${Produto.descricao}</h4>                                
+                            </div>
+                        </div>
+                        <div class="card-footer border-0 pt-2">
+                            <div class="common d-flex align-items-center justify-content-between" >
+                                <div>
+                                    <a href="javascript:OnAbrirModal('${Produto.observacao}');"><h5>Mais Detalhes...</h5></a>
+                                    <h3 class=" mb-0 text-primary">${FormatCurrency(Produto.valFinal)}</h3>
+                                </div>
+                                <div class="plus c-pointer">
+                                    <div class="sub-bx" onclick="javascript:ajaxCall('OnClickProduto', 'idProduto=${Produto.codigo}')">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                `;
+
+            });
+
+            tagLista.innerHTML = conteudoTag;
+        }
+
+        function OnAbrirModal(AObservacao) {
+            if (!AObservacao)
+                AObservacao = 'Sem observações adicionais...';
+            document.getElementById('textoObservacao').innerText = AObservacao;
+            $('#modalObservacao').modal('show');
+        }
+
+    </script>
+
+</body>
+
+</html>

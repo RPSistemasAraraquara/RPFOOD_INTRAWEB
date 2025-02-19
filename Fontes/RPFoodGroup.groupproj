@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8F85B3F7-E75D-4ADC-9D0C-D16763B7FFD1}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="RPFood_VCL.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="RPFood.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="RPFood_VCL">
+        <MSBuild Projects="RPFood_VCL.dproj"/>
+    </Target>
+    <Target Name="RPFood_VCL:Clean">
+        <MSBuild Projects="RPFood_VCL.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RPFood_VCL:Make">
+        <MSBuild Projects="RPFood_VCL.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="RPFood">
+        <MSBuild Projects="RPFood.dproj"/>
+    </Target>
+    <Target Name="RPFood:Clean">
+        <MSBuild Projects="RPFood.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="RPFood:Make">
+        <MSBuild Projects="RPFood.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="RPFood_VCL;RPFood"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="RPFood_VCL:Clean;RPFood:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="RPFood_VCL:Make;RPFood:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

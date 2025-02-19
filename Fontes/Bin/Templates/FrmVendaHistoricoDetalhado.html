@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="keywords" content="" />
+      <meta name="author" content="RP SISTEMAS" />
+      <meta name="robots" content="" />
+      <meta name="description" content="RP Food - seu novo conceito em pedido Online"/>
+      <meta property="og:title" content="RP Food - seu novo conceito em pedido Online" />
+      <meta property="og:description" content="RP Food - seu novo conceito em pedido Online" />
+      <meta name="format-detection" content="telephone=no">
+      <!-- Mobile Specific -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- PAGE TITLE HERE -->
+      <title>RP Food - seu novo conceito em pedido Online</title>
+      <!-- FAVICONS ICON -->
+      <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
+      <!-- Stylesheet -->
+      <link href="./vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+      <link href="./vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+      <link href="./vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+      <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+      <link href="./vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="/vendor/toastr/css/toastr.min.css">
+      <!-- Style css -->
+      <link href="/vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+      <!-- Global Stylesheet -->
+      <link href="/css/style.css" rel="stylesheet">
+   </head>
+   <body>
+      <div id="main-wrapper">
+      <div class="nav-header">
+            <a href="index.html" class="brand-logo">
+            <svg class="logo-abbr" width="39" height="31" viewBox="0 0 39 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <path fill-rule="evenodd" clip-rule="evenodd" d="M25.125 21.125L26.9952 23.2623C27.6771 24.0417 28.8616 24.1206 29.6409 23.4387C29.7036 23.3839 29.7625 23.325 29.8173 23.2623L31.6875 21.125H36.375C35.2848 26.5762 30.4985 30.5 24.9393 30.5H14.0607C8.5015 30.5 3.71523 26.5762 2.625 21.125H25.125Z" fill="var(--primary)"/>
+               <path fill-rule="evenodd" clip-rule="evenodd" d="M36.375 9.875H2.625C3.71523 4.4238 8.5015 0.5 14.0607 0.5H24.9393C30.4985 0.5 35.2848 4.4238 36.375 9.875Z" fill="var(--primary)"/>
+               <path opacity="0.3" d="M36.375 13.625H2.625C1.58947 13.625 0.75 14.4645 0.75 15.5C0.75 16.5355 1.58947 17.375 2.625 17.375H36.375C37.4105 17.375 38.25 16.5355 38.25 15.5C38.25 14.4645 37.4105 13.625 36.375 13.625Z" fill="var(--primary)"/>
+            </svg>
+            <svg class="brand-title" width="147" height="22" viewBox="0 0 147 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            </svg>
+         </a>
+      </div>
+      <div class="header">
+         <div class="header-content">
+            <nav class="navbar navbar-expand">
+               <div class="container d-block my-0">
+                  <div class="d-flex align-items-center justify-content-sm-between justify-content-end">
+                     <div class="header-left">
+                        <div class="nav-item d-flex align-items-center">
+                           <div class="d-flex header-bx">
+                              <div class="input-group search-area2 ps-3" id="Serach-bar">
+                                 <span class="input-group-text h-search">
+                                    <a href="javascript:void(0)">
+                                       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                          <path opacity="0.3" d="M16.6751 19.4916C16.2195 19.036 16.2195 18.2973 16.6751 17.8417C17.1307 17.3861 17.8694 17.3861 18.325 17.8417L22.9917 22.5084C23.4473 22.964 23.4473 23.7027 22.9917 24.1583C22.5361 24.6139 21.7974 24.6139 21.3417 24.1583L16.6751 19.4916Z" fill="var(--primary)"/>
+                                          <path d="M12.8333 18.6667C16.055 18.6667 18.6666 16.055 18.6666 12.8333C18.6666 9.61168 16.055 7 12.8333 7C9.61163 7 6.99996 9.61168 6.99996 12.8333C6.99996 16.055 9.61163 18.6667 12.8333 18.6667ZM12.8333 21C8.32297 21 4.66663 17.3437 4.66663 12.8333C4.66663 8.32301 8.32297 4.66667 12.8333 4.66667C17.3436 4.66667 21 8.32301 21 12.8333C21 17.3437 17.3436 21 12.8333 21Z" fill="var(--primary)"/>
+                                       </svg>
+                                    </a>
+                                 </span>
+                                 <input type="text" class="form-control"  placeholder="O que você quer comer hoje?">											
+                              </div>
+                              <div class="search-drop">
+                                 <div class="card tag-bx">
+                                    <div class="d-flex align-items-center justify-content-between mb-2 gap">
+                                       <div class="card-header d-block border-0">
+                                          <h4 class=" mb-0 cate-title">Categorias </h4>
+                                          <div class="card-body col-auto col-md-auto col-sm col form-control-color:var(--branco-principal)">
+                                             <li id="padrao_lista_categorias" class="d-flex align-items-center flex-wrap">
+                                             </li>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="card dishe-bx">
+                                       <div class="card-header border-0 pb-0 pt-0 pe-3">
+                                          <span class="badge badge-lg badge-danger side-badge">Destaque</span>
+                                          <i class="fa-solid fa-heart ms-auto c-heart c-pointer"></i>
+                                       </div>
+                                       <div class="card-body pt-0">
+                                          <h4>Produtos Destaques</h4>
+                                          <div class="swiper mySwiper-4">
+                                             <div id="padrao_lista_destaques" class="swiper-wrapper">															
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div id="close-searchbox"></div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <ul class="navbar-nav header-right ">
+                           <li>
+                              <div class="dropdown header-profile2 ">
+                                 <a class="nav-link " href="javascript:void(0);"  role="button" data-bs-toggle="dropdown">
+                                    <div class="header-info2 d-flex align-items-center">
+                                       <img src="images/banner-img/pic-1.png" alt="">
+                                       <div class="d-flex align-items-center sidebar-info">
+                                          <div>
+                                             <h6 class="font-w500 mb-0 ms-2">{%UsuarioLogado%}</h6>
+                                          </div>
+                                          <i class="fas fa-chevron-down"></i>
+                                       </div>
+                                    </div>
+                                 </a>
+                                 <div class="dropdown-menu dropdown-menu-end">
+                                    <a href="cliente-cadastro.html" class="dropdown-item ai-icon ">
+                                       <svg  xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                          <circle cx="12" cy="7" r="4"></circle>
+                                       </svg>
+                                       <span class="ms-2">Meus dados</span>
+                                    </a>
+                                    <a href="javascript:ajaxCall('OnClickSair', '');" class="dropdown-item ai-icon ms-1">
+                                       <svg  xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                          <polyline points="16 17 21 12 16 7"></polyline>
+                                          <line x1="21" y1="12" x2="9" y2="12"></line>
+                                       </svg>
+                                       <span class="ms-1">Sair </span>
+                                    </a>
+                                 </div>
+                              </div>
+                           </li>
+                        </ul>
+                     </div>
+                  </div>
+            </nav>
+            </div>
+         </div>
+         <div class="dlabnav border-right">
+            <div class="dlabnav-scroll">
+               <p class="menu-title style-1"> Menu</p>
+               <ul class="metismenu" id="menu">
+                  <li>
+                     <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                     <i class="bi bi-grid"></i>
+                     <span class="nav-text">Inicio</span>
+                     </a>
+                     <ul aria-expanded="false">
+                        <li><a href="pedido.html">Cardápio</a></li>
+                        <li><a href="index-2.html">Ofertas do Dia</a></li>
+                        <li><a href="food-order.html">Promoção</a></li>
+                        <li><a href="favorite-menu.html">Produtos mais vendidos</a></li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                     <i class="bi bi-shop-window"></i>
+                     <span class="nav-text">Pedidos</span>
+                     </a>
+                     <ul aria-expanded="false">
+                        <li><a href="pedido.html">Novo Pedido</a></li>
+                        <li><a href="venda-historico.html">Histórico de Pedidos</a></li>
+                     </ul>
+                  </li>
+                  <li>
+                     <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                     <i class="bi bi-bicycle"></i>
+                     <span class="nav-text">Perfil</span>
+                     </a>
+                     <ul aria-expanded="false">
+                        <li><a href="deliver-main.html">Meus Dados</a></li>
+                        <li><a href="deliver-order.html">Meus Endereços</a></li>
+                     </ul>
+                  </li>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="content-body">
+            <!-- row -->
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-12">
+                     <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="input-group search-area2">
+                           <span class="input-group-text p-0">
+                              <a href="javascript:void(0)">
+                                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M27.414 24.586L22.337 19.509C23.386 17.928 24 16.035 24 14C24 8.486 19.514 4 14 4C8.486 4 4 8.486 4 14C4 19.514 8.486 24 14 24C16.035 24 17.928 23.386 19.509 22.337L24.586 27.414C25.366 28.195 26.634 28.195 27.414 27.414C28.195 26.633 28.195 25.367 27.414 24.586ZM7 14C7 10.14 10.14 7 14 7C17.86 7 21 10.14 21 14C21 17.86 17.86 21 14 21C10.14 21 7 17.86 7 14Z" fill="#FC8019"/>
+                                 </svg>
+                              </a>
+                           </span>
+                           <input type="text" class="form-control p-0" placeholder="Pesquisar">
+                        </div>
+                        
+                     </div>
+                     <div class="card h-auto biil-bx">
+                        <div class="card-header flex-wrap d-none d-sm-flex">
+                           <div class="d-flex align-items-center">
+                           </div>
+                           <span class="accordion-header-indicator"></span>
+                        </div>
+                        <div class="card-body p-0  overflow-hidden">
+                           <div id="accordion-one" class="accordion style-1">
+                              <div id="ListaItens">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <!--auto obil-->
+                  </div>
+                  
+               </div>
+            </div>
+         </div>
+         <div class="footer">
+            <div class="copyright border-top">
+               <p>Copyright © by <a href="http://www.sistemalechef.com.br" target="_blank">RP Sistemas</a> 2022</p>
+            </div>
+         </div>
+      </div>
+      <script>
+      function historico_clientes(historico) {
+      let conteudoTag = '';
+         	
+        historico.forEach(venda => {
+        conteudoTag = conteudoTag +       
+         		`  
+         <div class="accordion-item" id="venda_${venda.id}">
+                     
+            <div class="row">
+                           
+               <div class="col-xl-6 col-xxl-6 col-sm-12 my-4 border-right">
+                  <div class="dlab-space">
+                     <div>
+                     <h4 class="text-primary mb-2">${venda.descricao_produto}</h4>
+
+                     </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                     <span> Quantidade </span>
+                     <h6 class="mb-0">${FormatFloat(venda.quantidade_produtos)}</h6>
+                        </div>
+                     <div class="d-flex align-items-center justify-content-between">
+                     <span>Valor Unit</span>
+                     <h6 class="mb-0">${FormatCurrency(venda.valor_unitario)}</h6>
+                        </div>
+
+                     <div class="d-flex align-items-center justify-content-between">
+                        <span> Valor Total </span>
+                     <h6 class="mb-0">${FormatCurrency(venda.valor_total_product)}</h6>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                        <span>Observação ${venda.observacao_produto} </span>
+                                    
+                     </div>
+                  </div>
+               </div>
+
+
+
+
+
+               
+            </div>
+
+         </div>
+
+         		`;
+         	});
+         
+         	tagLista = document.getElementById('accordion-one');
+         	tagLista.innerHTML = conteudoTag;
+         }
+           
+      </script>
+      <!-- Required vendors -->
+      <script src="/vendor/global/global.min.js"></script>
+      <script src="/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+      <script src="/vendor/chart.js/Chart.bundle.min.js"></script>
+      <script src="/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+      <script src="/vendor/swiper/js/swiper-bundle.min.js"></script>
+      <script src="/js/dlabnav-init.js"></script>
+      <script src="/js/custom.js"></script>
+      <script src="/js/rpfood/format.js"></script>
+   </body>
+</html>

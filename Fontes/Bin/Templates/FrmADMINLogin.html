@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content=""/>
+	<meta name="author" content=""/>
+	<meta name="robots" content=""/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="RP Food - seu novo conceito em pedido Online" />
+	<meta property="og:title" content="RP Food - seu novo conceito em pedido Online" />
+	<meta property="og:description" content="RP Food - seu novo conceito em pedido Online" />
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- PAGE TITLE HERE -->
+		<title>ADMIN - RP Food - seu novo conceito em pedido Online </title>
+	
+	<!-- FAVICONS ICON -->
+	<link rel="shortcut icon" type="image/png" href="./images/favicon.png" />
+    <link href="./vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">	
+	<link href="../vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+	<link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body class="body">
+    
+	<h1 style="text-align: center;">Administrativo</h1>
+	
+	<div class="container mt-0">
+		<div class="row align-items-center justify-contain-center">
+			<div class="col-xl-12 mt-5">
+				<div class="card border-0">
+					<div class="card-body login-bx">
+						<div class="row  mt-5">
+							<div class="col-xl-8 col-md-6 sign text-center">
+								<div>
+									<img src="../images/login-img/1.jpg" class="food-img" alt="">
+								</div>	
+							</div>
+							<div class="col-xl-4 col-md-6 pe-0">
+								<div class="sign-in-your">
+									<div class="text-center mb-3">
+										<img src="../images/logo-full.png" class="mb-3" alt="">
+										<h4 class="fs-20 font-w800 text-black">Entre com os dados de ADM</h4>
+										<span class="dlab-sign-up">Entrar</span>
+									</div>
+									<form action="index.html">
+										<div class="mb-3">
+											<label class="mb-1"><strong>Email</strong></label>
+											{%IWEDTLOGIN%}											
+										</div>
+										<div class="mb-3">
+											<label class="mb-1"><strong>Senha</strong></label>
+											{%IWEDTSENHA%}
+										</div>
+
+										<div class="text-center">
+											<button type="button" class="btn btn-primary btn-block shadow" id="IWBTNLOGIN">Entrar</button>
+										</div>
+									</form>									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+		<div class="footer">
+        	<div class="copyright border-top">
+			<p id="versao">Copyright © Designed  by <a href="http://www.sistemalechef.com.br" target="_blank">ADMIN - RP SISTEMAS</a> 2023</p>
+        	</div>
+     	</div>
+
+	<script>
+		function AtualizaVersao(Versao) {
+			let copyright = document.getElementById('versao');
+			copyright.innerHTML = copyright.innerHTML + ` - ${Versao}`;
+		}
+	</script>
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="../vendor/global/global.min.js"></script>
+	<script src="../vendor/swiper/js/swiper-bundle.min.js"></script>
+    <script src="../js/dlabnav-init.js"></script>
+    <script src="../js/plugins-init/sweetalert.init.js"></script>
+	<script src="../vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+	
+</body>
+</html>

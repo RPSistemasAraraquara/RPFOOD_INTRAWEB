@@ -1,0 +1,22 @@
+RP FOOD Versão 6.0.0
+
+[Correções]
+
+Corrigida a taxa do bairro quando estava marcado que não utilizava CEP.
+Melhoria na performance das funções em JavaScript.
+Correção no estilo CSS no botão ´INSERIR´, na página index.html
+Correção no botão ´INCLUIR OPCIONAL`, no estilo CSS.
+
+[Novas Funcionalidades]
+
+Incluído um valor de pedido mínimo.
+Restrição de vendas por produto, determinando o dia em que o produto não pode ser comercializado.
+`HAPPY HOUR´ no cadastro do produto, determinando o dia e o horário em que o produto terá um valor diferenciado.  
+Configuração da Opção de APENAS DELIVERY, no fechamento, ocultando a possibilidade de o cliente selecionar RETIRADA NO LOCAL).
+Opcional minimo e maximo.
+Tamanhos do produto personalizado conforme RP Cheff.
+
+
+[Alterações]
+Remoção  do campo nao_exigir_cpf na tabela  configuracao_rpfood
+Drop em algumas colunas da tabela bairro.

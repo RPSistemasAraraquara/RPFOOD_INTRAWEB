@@ -1,0 +1,10 @@
+100 - Enviado para o Le Cheff
+101 - Pedido Rejeitado
+102 - Pedido Aceito
+103 - Produto em Preparo
+104 - Saiu para Entrega
+105 - Pronto para Retirar
+106 - Pedido Finalizado
+107 - Pedido Cancelado Estabelecimento 
+108 - Pedido Cancelado Cliente 
+109 - Pedido Rejeitado Tempo de Espera (10 minutos apos o envio do pedido caso não seja aceito pelo estabelecimento ele é rejeitado)

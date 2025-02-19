@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!-- All Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- SEO Meta Tags -->
+    <meta name="keywords" content="RP Food - seu novo conceito em pedido Online">
+    <meta name="description" content="RP Food - seu novo conceito em pedido Online">
+    <meta name="author" content="RP SISTEMAS">
+    <!-- OG Meta Tags -->
+    <meta property="og:title" content="RP Food - seu novo conceito em pedido Online">
+    <meta property="og:description" content="RP Food - seu novo conceito em pedido Online">
+    <title>RP Food - seu novo conceito em pedido Online</title>
+    <link href="./vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="./vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="./sweetAlert4Delphi/style/sweetalert2.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+ 
+    
+
+
+    <section class="float-buttons">
+        <button class="float-button" onclick="ajaxCall('OnFinalizarPedido', '')">
+            <svg height="40" width="40" viewBox="0 -31 512.00026 512" style="display: block; margin: auto;">
+                <path
+                d="m164.960938 300.003906h.023437c.019531 0 .039063-.003906.058594-.003906h271.957031c6.695312 0 12.582031-4.441406 14.421875-10.878906l60-210c1.292969-4.527344.386719-9.394532-2.445313-13.152344-2.835937-3.757812-7.269531-5.96875-11.976562-5.96875h-366.632812l-10.722657-48.253906c-1.527343-6.863282-7.613281-11.746094-14.644531-11.746094h-90c-8.285156 0-15 6.714844-15 15s6.714844 15 15 15h77.96875c1.898438 8.550781 51.3125 230.917969 54.15625 243.710938-15.941406 6.929687-27.125 22.824218-27.125 41.289062 0 24.8125 20.1875 45 45 45h272c8.285156 0 15-6.714844 15-15s-6.714844-15-15-15h-272c-8.269531 0-15-6.730469-15-15 0-8.257812 6.707031-14.976562 14.960938-14.996094zm312.152343-210.003906-51.429687 180h-248.652344l-40-180zm0 0"
+                fill="#171622" />
+            <path
+                d="m150 405c0 24.8125 20.1875 45 45 45s45-20.1875 45-45-20.1875-45-45-45-45 20.1875-45 45zm45-15c8.269531 0 15 6.730469 15 15s-6.730469 15-15 15-15-6.730469-15-15 6.730469-15 15-15zm0 0" />
+            <path
+                d="m362 405c0 24.8125 20.1875 45 45 45s45-20.1875 45-45-20.1875-45-45-45-45 20.1875-45 45zm45-15c8.269531 0 15 6.730469 15 15s-6.730469 15-15 15-15-6.730469-15-15 6.730469-15 15-15zm0 0" />
+        </svg>
+            <span class="button-text" style="flex-grow: 1; text-align: center;">Bora Fechar</span>
+        </button>
+    </section>
+
+
+
+    <a href="produtostodascategoria.html" class="btn btn-primary btn-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-search"
+            viewBox="0 0 16 16">
+            <path
+                d="M14.854 13.44l-3.428-3.429a5.5 5.5 0 1 0-.708.708l3.429 3.428a.5.5 0 0 0 .708-.708zM6.5 11A4.5 4.5 0 1 1 11 6.5 4.5 4.5 0 0 1 6.5 11z" />
+        </svg>
+        Bora procurarrrr
+    </a>
+    <br><br>
+
+    <div class="col-xl-12 col-xxl-12 col-sm-12">
+        <div class="d-flex align-items-center justify-content-between mb-2">
+            <h2 class="mb-0 cate-title  accordion-danger-solid" style="color:tomato">Aqui ta on</h2>
+        </div>
+        <div class="swiper swiper-categorias">
+            <div class="swiper-wrapper" id="listadestaques">
+               
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+   
+    <div class="col-xl-12 col-xxl-12 col-sm-12">
+        <div class="d-flex align-items-center justify-content-between">
+            <h4 class="mb-0 cate-title" style="color:darkgoldenrod;">Categorias</h4>
+          
+        </div>
+        <br>
+        <div class="swiper swiper-categorias">
+            <div class="swiper-wrapper" id="listaCategorias">
+            </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+
+    <br>
+    <div id="pills-grid" class="tab-pane fade show active" role="tabpanel" aria-labelledby="pills-grid-tab">
+    </div>
+
+    <script src="./vendor/chart.js/chart.bundle.min.js"></script>
+    <script src="./vendor/swiper/js/swiper-bundle.min.js"></script>
+    <script src="./vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+    <script>
+        function AdicionarProduto(ListaProdutos) {
+            var tagLista = document.getElementById('pills-grid');
+            var conteudoTag = '';
+            tagLista.innerHTML = '';
+
+            ListaProdutos.forEach(function (Produto) {
+                conteudoTag += `
+			        <div class="col-xl-6 col-xxl-6 col-sm-6" style="cursor: pointer" onclick="javascript:ajaxCall('OnClickProd', 'idProduto=${Produto.codigo}');">
+			            <div class="card review b-hover style-1">
+			            <i class="fa-solid fa-heart ms-auto c-pointer c-heart"></i>
+			            <div class="card-body pb-0 pt-1">
+			                <div class="text-center mb-2">
+			                <img src="${Produto.caminhoHtmlImagem}" alt="Imagem do produto">
+			                <a href="javascript:ajaxCall('OnClickProd', 'idProduto=${Produto.codigo}');"></a>
+			                </div>
+			                <div class="border-bottom pb-3">
+			                <h4>${Produto.descricao}</h4>
+			                <div class="d-flex align-items-center" style="cursor: pointer" onclick="javascript:ajaxCall('OnClickProd', 'idProduto=${Produto.codigo}');">
+			
+			                    <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+			                    <path d="M8 0.500031L9.79611 6.02789H15.6085L10.9062 9.4443L12.7023 14.9722L8 11.5558L3.29772 14.9722L5.09383 9.4443L0.391548 6.02789H6.20389L8 0.500031Z" fill="#FC8019"/>
+			                    </svg>
+			                    <p class="font-w500 mb-0 px-2">1000</p>
+			                    
+			                    <svg width="16" height="15" viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+			                    <path d="M8 0.500031L9.79611 6.02789H15.6085L10.9062 9.4443L12.7023 14.9722L8 11.5558L3.29772 14.9722L5.09383 9.4443L0.391548 6.02789H6.20389L8 0.500031Z" fill="#FC8019"/>
+			                    </svg>			                    
+			                </div>
+			                </div>
+			                <a href="javascript:void(0);"><h4>Bora saber mais detalhes...</h4></a>
+			            </div>			            
+			            
+			            <div class="card-footer border-1 pt-2">
+			                <div class="common d-flex align-items-center justify-content-between">
+			                <div>                           
+			                    <h3 class="mb-0 text-primary">${FormatCurrency(Produto.valFinal)}</h3>                                
+			                </div>                        
+			                <br>                      
+			            </div>
+			            <div class="plusprimvarydark" style="float: right; margin-right: 3px;">
+                            </div>			
+			          
+			                </div>
+			            </div>
+			        </div>
+			        `;
+            });
+
+            tagLista.innerHTML = `
+			        <div class="tab-pane fade show active" id="pills-grid" role="tabpanel" aria-labelledby="pills-grid-tab">
+			        <div class="row">
+			            ${conteudoTag}
+			        </div>
+			        </div>
+			    `;
+        }
+
+        function AdicionarCategoria(ListaCategorias) {
+        let conteudoTag = '';
+        if (!Array.isArray(ListaCategorias)) return;  
+
+        ListaCategorias.forEach(function (Categoria) {
+        conteudoTag += `
+        <div class="swiper-slide" style="cursor: pointer" onclick="javascript:ajaxCall('OnClickCategoria', 'idCategoria=${Categoria.codigo}');">
+        <div class="card dishe-bx exclusive1" style="height: 240px;">
+        <div class="card-body p-0 text-center">
+        <img src="${Categoria.caminhoHtmlImagem}" style="margin:8px; width: 100px; height: 130px;">
+        </div>
+        <span class="badge text-wrap limited-text" data-maxlength="24" style="font-size: 10px;color:darkgoldenrod;">${Categoria.descricao}</span>  
+        </div>
+        </div>
+        `;
+        });
+
+        const elements = document.querySelectorAll(".limited-text");
+        elements.forEach(element => {
+        const maxLength = element.getAttribute("data-maxlength");
+        const text = element.innerText;
+        if (text.length > maxLength) {
+        element.innerText = `${text.substring(0, maxLength)}...`;
+        }
+        });
+
+        document.getElementById('listaCategorias').innerHTML = conteudoTag;
+        }
+
+        function AdicionarProdutoDestaque(IdProduto, Descricao, Imagem) {
+        const tagLista = document.getElementById('listadestaques');
+        if (!tagLista) {
+        return;
+        }
+        
+        const container = document.createElement('div');
+        container.className = 'swiper-slide';
+        container.style.cursor = 'pointer';
+        container.setAttribute('onclick', `javascript:ajaxCall('OnClickDestaque', 'idProduto=${IdProduto}');`);
+
+       
+        container.innerHTML = `
+        <div class="card dishe-bx exclusive"> 
+        <span class="badge badge-lg badge-danger side-badge">Ta Off</span>
+        <i class="fa-solid fa-heart ms-auto c-heart c-pointer" aria-hidden="true"></i>
+        <div class="card-body p-0 text-center">
+        <img src="${Imagem}" alt="Product Image" style="margin:6px; width: 110px; height: 130px;">
+        </div>
+        <span class="badge text-wrap limited-text" data-maxlength="26">${Descricao}</span>  
+        </div>
+        `;
+
+        tagLista.appendChild(container);
+
+        const heartIcon = container.querySelector('.fa-heart');
+        heartIcon.addEventListener('click', function(event) {
+        event.stopPropagation(); 
+        toggleFavorite(IdProduto); 
+        });
+
+        truncateTextInContainer(container);
+        }
+
+        function truncateTextInContainer(container) {
+        const elements = container.getElementsByClassName("limited-text");
+        Array.from(elements).forEach(element => {
+        const maxLength = parseInt(element.getAttribute("data-maxlength"), 10);
+        if (element.innerText.length > maxLength) {
+        element.innerText = element.innerText.substring(0, maxLength) + "...";
+        }
+        });
+        }
+
+        function toggleFavorite(id) {
+        console.log(`Toggle favorite state for product ID: ${id}`);
+
+        }
+        // Opcionais
+        function AdicionarItemPedidoOpcional(ItemPedido, IndexItem) {
+        let conteudoTag = '';
+        if (ItemPedido.opcionais) {
+        ItemPedido.opcionais.forEach((Opcional, indexOpcional) => {
+        conteudoTag += `
+            <div class="order-check d-flex align-items-stretch my-3">
+            <div class="dlab-info">
+            <div class="d-flex align-items-stretch">
+            <h6 class="dlab-title text-wrap text-orange">(UP).. ${addLineBreaks(sanitizeHtml(Opcional.opcional.descricao), 40)}</h6>
+            <h6 class="dlab-title text-wrap text-orange">${FormatCurrency(Opcional.valorTotal)}</h6>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between">
+            <span class="text-wrap text-orange">${FormatCurrency(Opcional.valorUnitario)}</span>
+            <div class="quntity">
+            <button aria-label="Decrease quantity" data-decrease onclick="AlterarQuantidadeOpcional(${IndexItem}, ${indexOpcional}, true)">-</button>
+            <input data-value type="text" value="${Opcional.quantidade}" disabled />
+            <button aria-label="Increase quantity" data-increase onclick="AlterarQuantidadeOpcional(${IndexItem}, ${indexOpcional}, false)">+</button>
+            </div>
+            </div>
+            </div>
+            </div>
+        `;
+        });
+        }
+        return conteudoTag;
+        }
+
+        function sanitizeHtml(html) {
+                 return html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+
+        // Frações
+        function AdicionarItemPedidoFracao(ItemPedido) {
+        let conteudoTag = '';
+        if (ItemPedido.fracoes) {
+        ItemPedido.fracoes.forEach(function (Fracao) {
+   
+        if (!Fracao.produto || !Fracao.produto.caminhoHtmlImagem || !Fracao.produto.descricao) {
+        console.error('Missing product details');
+        return; 
+        }
+
+        const descricaoSanitized = sanitizeHtml(Fracao.produto.descricao);
+        const descricaoWithLineBreaks = addLineBreaks(descricaoSanitized, 40);
+        const tamanhoInfo = Fracao.tamanho ? `[Tamanho: ${sanitizeHtml(Fracao.tamanho)}]` : '';
+     
+        conteudoTag += `
+        <div class="order-check d-flex align-items-center my-3">
+        <div class="dlab-media">
+        <img src="${Fracao.produto.caminhoHtmlImagem}" alt="Product Image">
+        </div>
+        <div class="dlab-info">
+        <div class="d-flex align-items-center justify-content-between">
+        <h5 class="dlab-title text-wrap text-orange">
+        (+sabor) ${descricaoWithLineBreaks} ${tamanhoInfo}
+        </h5>
+        </div>
+        </div>
+        </div>
+        `;
+        });
+        }
+
+        return conteudoTag;
+        }
+
+        function sanitizeHtml(html) {
+           return html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function addLineBreaks(text, maxLineLength) { 
+        const result = [];
+        let line = '';
+        text.split(' ').forEach(word => {
+        if ((line + word).length > maxLineLength) {
+        result.push(line);
+        line = word;
+        } else {
+        line += (line.length > 0 ? ' ' : '') + word;
+        }
+        });
+        if (line) {
+        result.push(line);
+        }
+        return result.join('<br>');
+        }
+
+
+
+        // Itens do Pedido
+        function AdicionarItensDoPedido(ListaItens) {
+            let conteudoTag = '';
+            let index = 0;
+            if (ListaItens) {
+                ListaItens.forEach(function (Item) {
+                    conteudoTag += `
+                                
+                                    <div class="row">
+            <div class="col-sm-12 col-xl-12 col-lg-12 col-xxl-6 col-md-6 offset-sm-1">
+                <div class="order-check d-flex align-items-center my-3" id="div_item_${index}">
+                <div class="dlab-media">
+                    <img src="${Item.produto.caminhoHtmlImagem}">
+                </div>
+                <div class="dlab-info">
+                    <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="dlab-title text-wrap text-orange">
+                        ${addLineBreaks(Item.produto.descricao, 40)} ${Item.tamanho ? `[Tamanho: ${Item.tamanho} ]` : ''}                       
+                    </h5>                          
+                    
+                    <div class="d-flex align-content-end justify-content-end">
+                        <h5 class="dlab-title text-wrap text-orange">
+                        ${FormatCurrency(Item.valorUnitario)}                        
+                        </h5>
+                        <a href="javascript:ajaxCall('OnEditarItemPedido', 'index=${index}');"></a>
+                    </div>
+                    
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                    <div class="quntity">
+                        <button data-decrease onclick="AlterarQuantidadeItem('${Item.produto.codigo}', ${index}, true)">-</button>
+                        <input data-value type="text" value="${Item.quantidade}" id="item_quantidade_${index}" disabled />
+                        <button data-increase onclick="AlterarQuantidadeItem('${Item.produto.codigo}', ${index})">+</button>                       
+                    </div>
+                    ${FormatCurrency(Item.valorTotalProduto)}
+                   
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        ${addLineBreaks(Item.observacao , 40)} 
+                        </div>
+                </div>
+                </div>
+            </div>
+            </div>
+			                
+			            `;
+
+                    conteudoTag += AdicionarItemPedidoFracao(Item);
+                    conteudoTag += AdicionarItemPedidoOpcional(Item, index);
+                    index++;
+                });
+            }
+
+            const tagItens = document.getElementById('div_itens_do_pedido');
+            tagItens.innerHTML = conteudoTag;
+        }
+
+        function AlterarQuantidadeItem(IdProduto, Index, Subtrair) {
+            let nomeCallback = 'OnItemAdicionarQuantidade';
+            if (Subtrair)
+                nomeCallback = 'OnItemSubtrairQuantidade';
+            ajaxCall(nomeCallback, { Index }, false, function (response) {
+                let pedido = JSON.parse(response);
+                AdicionarItensDoPedido(pedido.itens);
+                AtualizaTags(['pedido_valor_pago', 'pedido_valor_total']);
+            });
+        }
+
+        function AlterarQuantidadeOpcional(IndexItem, IndexOpcional, Subtrair) {
+            let nomeCallback = 'OnOpcionalAdicionarQuantidade';
+            if (Subtrair)
+                nomeCallback = 'OnOpcionalSubtrairQuantidade';
+            ajaxCall(nomeCallback, { IndexItem, IndexOpcional }, false, function (response) {
+                let pedido = JSON.parse(response);
+                AdicionarItensDoPedido(pedido.itens);
+                AtualizaTags(['pedido_valor_pago', 'pedido_valor_total']);
+            });
+        }
+
+        function GetSwipper(AClass) {
+            return new Swiper(AClass, {
+                slidesPerView: 3,
+                spaceBetween: 20,
+                loop: true,
+                autoplay: {
+                    delay: 5000,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                breakpoints: {
+                    360: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    480: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                    },
+                    992: {
+                        slidesPerView: 4,
+                        spaceBetween: 20,
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                        spaceBetween: 20,
+                    },
+                    1440: {
+                        slidesPerView: 5,
+                        spaceBetween: 20,
+                    },
+                    1920: {
+                        slidesPerView: 6,
+                        spaceBetween: 20,
+                    },
+                },
+            });
+        }
+
+        var swiper = GetSwipper(".swiper-categorias");
+
+        var swiperBanner = new Swiper(".swiper-banner", {
+            loop: true,
+            dots: true,
+            autoplay: {
+                delay: 3000,
+            },
+            navigation: {
+                nextEl: ".swiper-button-next-1",
+                prevEl: ".swiper-button-prev-1",
+            },
+            pagination: {
+                el: ".swiper-pagination-banner",
+                clickable: true,
+            },
+            mousewheel: true,
+            keyboard: false,
+
+
+        });
+    </script>
+</body>
+
+</html>

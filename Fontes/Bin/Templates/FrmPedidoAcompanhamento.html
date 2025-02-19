@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="RP Food - seu novo conceito em pedido Online">
+    <meta name="description" content="RP Food - seu novo conceito em pedido Online">
+    <meta name="author" content="RP SISTEMAS">
+    <meta property="og:title" content="RP Food - seu novo conceito em pedido Online">
+    <meta property="og:description" content="RP Food - seu novo conceito em pedido Online">
+    <title>RP Food - seu novo conceito em pedido Online</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-xl-8 col-xxl-7">
+            <div class="card" id="card_status">
+                <div class="card-body pb-0">
+                    <h4 class="cate-title mb-0">Acompanhamento</h4>
+                    <br />
+                    <p class="mb-0" id="texto_status_pedido">Ainda não fez seu pedido?</p>
+                    <p></p>
+                    <div class="progress mt-3">
+                        <div class="progress-bar bg-gradient1 active progress-bar-striped"
+                            style="width: 0%; height:10px;" role="progressbar" id="task_progresso">
+                        </div>
+                    </div>
+                    <br />
+
+                    <div id="DZ_W_TimeLine" class="widget-timeline dlab-scroll ">
+                        <h3 class="mt-3 mb-0 cate-title" id="titulo_venda_data">{%TITULO_VENDA_DATA%}</h3>
+                        <ul class="timeline" id="lista_status">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-xxl-5" id="divPedido">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card dlab-bg dlab-position">
+                        <div class="card-header border-0 pb-0">
+                            <h4 class="cate-title">Seu Pedido</h4>
+                        </div>
+                        <div class="card-body pt-0 pb-2">
+
+                            <div class="bb-border">
+                                <p class="font-w500 text-primary fs-15 mb-2">Endereço</p>
+                                <div class="d-flex  align-items-center justify-content-between mb-2">
+                                    <h4 class="mb-0">
+                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M20.46 9.63C20.3196 8.16892 19.8032 6.76909 18.9612 5.56682C18.1191 4.36456 16.9801 3.40083 15.655 2.7695C14.3299 2.13816 12.8639 1.86072 11.3997 1.96421C9.93555 2.06769 8.52314 2.54856 7.3 3.36C6.2492 4.06265 5.36706 4.9893 4.71695 6.07339C4.06684 7.15749 3.6649 8.37211 3.54 9.63C3.41749 10.8797 3.57468 12.1409 4.00017 13.3223C4.42567 14.5036 5.1088 15.5755 6 16.46L11.3 21.77C11.393 21.8637 11.5036 21.9381 11.6254 21.9889C11.7473 22.0397 11.878 22.0658 12.01 22.0658C12.142 22.0658 12.2727 22.0397 12.3946 21.9889C12.5164 21.9381 12.627 21.8637 12.72 21.77L18 16.46C18.8912 15.5755 19.5743 14.5036 19.9998 13.3223C20.4253 12.1409 20.5825 10.8797 20.46 9.63ZM16.6 15.05L12 19.65L7.4 15.05C6.72209 14.3721 6.20281 13.5523 5.87947 12.6498C5.55614 11.7472 5.43679 10.7842 5.53 9.83C5.62382 8.86111 5.93177 7.92516 6.43157 7.08985C6.93138 6.25453 7.61056 5.54071 8.42 5C9.48095 4.29524 10.7263 3.9193 12 3.9193C13.2737 3.9193 14.5191 4.29524 15.58 5C16.387 5.53862 17.0647 6.24928 17.5644 7.08094C18.064 7.9126 18.3733 8.84461 18.47 9.81C18.5663 10.7674 18.4484 11.7343 18.125 12.6406C17.8016 13.5468 17.2807 14.3698 16.6 15.05ZM12 6C11.11 6 10.24 6.26392 9.49994 6.75839C8.75992 7.25286 8.18314 7.95566 7.84255 8.77793C7.50195 9.6002 7.41284 10.505 7.58647 11.3779C7.7601 12.2508 8.18869 13.0526 8.81802 13.682C9.44736 14.3113 10.2492 14.7399 11.1221 14.9135C11.995 15.0872 12.8998 14.9981 13.7221 14.6575C14.5443 14.3169 15.2471 13.7401 15.7416 13.0001C16.2361 12.26 16.5 11.39 16.5 10.5C16.4974 9.30734 16.0224 8.16428 15.1791 7.32094C14.3357 6.4776 13.1927 6.00265 12 6ZM12 13C11.5055 13 11.0222 12.8534 10.6111 12.5787C10.2 12.304 9.87952 11.9135 9.6903 11.4567C9.50109 10.9999 9.45158 10.4972 9.54804 10.0123C9.6445 9.52733 9.88261 9.08187 10.2322 8.73224C10.5819 8.38261 11.0273 8.1445 11.5123 8.04804C11.9972 7.95158 12.4999 8.00109 12.9567 8.1903C13.4135 8.37952 13.804 8.69996 14.0787 9.11108C14.3534 9.5222 14.5 10.0056 14.5 10.5C14.5 11.163 14.2366 11.7989 13.7678 12.2678C13.2989 12.7366 12.663 13 12 13Z"
+                                                fill="var(--primary)" />
+                                        </svg>
+                                        <span id="venda_endereco_bairro"></span>
+                                    </h4>
+                                </div>
+                                <p id="venda_endereco_completo"></p>
+                            </div>                                           
+                        </div>
+                        <div class="card-footer  pt-0 border-0" id="div_totais">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <p>Taxa de Entrega</p>
+                                <h4 class="font-w500" id="venda_taxa_entrega">R$ 0.00</h4>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <h4 class="font-w500">Total</h4>
+                                <h5 class="font-w500 text-primary" id="venda_valor_total">R$ 0.00</h5>
+                                <h5 class="font-w500 text-primary" id="venda_forma_pagamento"></h5>                                
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./js/rpfood/format.js"></script>
+    <script>
+        var statusProgresso = 0;
+        var tid = setTimeout(AddProgresso, 1500);
+
+        function AtualizarDadosVenda(Venda) {
+            let tagTextoStatusPedido = document.getElementById('texto_status_pedido');
+            let tagTituloVenda = document.getElementById('titulo_venda_data');
+            let tagTaxaEntrega = document.getElementById('venda_taxa_entrega');
+            let tagValorTotal = document.getElementById('venda_valor_total');
+            
+
+            let textoStatus = 'Ainda não fez seu pedido?';
+            let textoTituloVenda = '';
+            if (Venda) {
+                textoStatus = Venda.listaStatus[Venda.listaStatus.length - 1]?.situacaoDescricao || textoStatus; // Pegar a descrição do último status
+                textoTituloVenda = 'Pedido realizado em ' + IsoToDateTime(Venda.data);
+
+                document.getElementById('venda_endereco_bairro').innerHTML = Venda.vendaEndereco?.bairro || '';
+                document.getElementById('venda_endereco_completo').innerHTML = Venda.vendaEndereco?.enderecoCompleto || '';
+                document.getElementById('venda_taxa_entrega').innerHTML = FormatCurrency(Venda.taxaEntrega);
+                document.getElementById('venda_valor_total').innerHTML = FormatCurrency(Venda.valorTotal);
+                document.getElementById('venda_forma_pagamento').innerHTML = FormatCurrency(Venda.formaPagamento.descricao);
+
+                ListarStatus(Venda);
+                ListarItens(Venda);
+            }
+
+            tagTextoStatusPedido.innerHTML = textoStatus;
+            tagTituloVenda.innerHTML = textoTituloVenda;
+        }
+
+        function ListarItens(Venda) {
+            let conteudoTag = '';
+            Venda.itens.forEach(Item => {
+                conteudoTag +=
+                    `
+        <div class="order-check d-flex align-items-center my-3">
+            <div class="dlab-media">
+                <img src="${Item.produto?.caminhoHtmlImagem}" alt="${Item.produto?.descricao}">
+            </div>
+            <div class="dlab-info">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h5 class="dlab-title"><a href="javascript:void(0);">${Item.produto?.descricao}</a></h5>
+                    <h5 class="text-primary ms-2">${FormatCurrency(Item.valorTotalProduto)}</h5>
+                </div>
+                <div class="d-flex align-items-center justify-content-between">
+                    <span>${FormatCurrency(Item.valorUnitario)}</span>	
+                    <span>${Item.quantidade}</span>	
+                </div>
+            </div>
+        </div>
+        `;
+            });
+
+            let divItens = document.getElementById('div_itens_do_pedido');
+            divItens.innerHTML = conteudoTag;
+        }
+
+        function ListarStatus(Venda) {
+            let tagLista = document.getElementById('lista_status');
+            let conteudoTag = '';
+
+            if (Venda) {
+                for (i = 0; i < Venda.listaStatus.length; i++) {
+                    let status = Venda.listaStatus[i];
+                    let classItem = 'timeline-badge primary';
+                    if (i % 2 == 0)
+                        classItem = 'timeline-badge info';
+
+                    conteudoTag +=
+                        `
+            <li>
+                <div class="${classItem}"></div>
+                <a class="timeline-panel text-muted" href="#">
+                    <span>${IsoToDateTime(status.data)}</span>
+                    <h6 class="mb-0">${status.situacaoDescricao}</h6>
+                </a>
+            </li>
+            `;
+                }
+            }
+
+            tagLista.innerHTML = conteudoTag;
+        }
+
+        function AddProgresso() {
+            if (statusProgresso == 0) {
+                Carregar();
+                statusProgresso = statusProgresso + 1;
+            } else {
+                statusProgresso = statusProgresso + 1;
+                if (statusProgresso > 1000)
+                    statusProgresso = 0;
+                let divProgress = document.getElementById('task_progresso');
+                divProgress.style = `width: ${statusProgresso}%; height:10px;`;
+            }
+            tid = setTimeout(AddProgresso, 2500);
+        }
+
+        function Carregar() {
+            ajaxCall('OnRefreshVenda', {}, false,
+                function (response) {
+                    let Venda = JSON.parse(response);
+                    AtualizarDadosVenda(Venda);
+                });
+        }
+
+    </script>
+</body>
+
+</html>

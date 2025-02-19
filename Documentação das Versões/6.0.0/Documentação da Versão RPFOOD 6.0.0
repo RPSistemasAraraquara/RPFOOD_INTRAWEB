@@ -1,0 +1,96 @@
+Documentação da Versão 6.0.0
+
+***************************************************************************************************************************************************************************
+1-)Implementando restrição de vendas.
+Como funciona? Na tabela ´restricoesvendas´, existe uma coluna chamada
+´idEmpresa´,´idProduto´ e os dias da semana do tipo boolean. Para ter acesso aos nomes do campos,
+verifique a documentação do BD.
+
+Estrutura da tabela
+
+CREATE TABLE IF NOT EXISTS restricoesVendas (
+	idEmpresa integer,
+	idProduto integer,
+	segundaFeira boolean DEFAULT false,
+	tercaFeira boolean DEFAULT false,
+	quartaFeira boolean DEFAULT false,
+	quintaFeira boolean DEFAULT false,
+	sextaFeira boolean DEFAULT false,
+	sabado boolean DEFAULT false,
+	domingo boolean DEFAULT false
+);
+
+
+Regra do negócio:
+Como funciona? Se o campo IdProduto da tabela ´restricoesvendas´ estiver preenchido com o código do produto, assim como quando
+o campo ´restringirVenda´ da tabela produtos estiver true, além do campo da semana da tabela ´restricoesVendas´ estiver true, o produto não poderá ser vendido.
+	
+	
+Considerando que o dia atual é segunda-feira, ilustramos a seguinte situação: 
+	
+	Tabela ´produto´ - Campo ´restringirVenda=true´ 
+	Tabela ´restricoesVendas´ -  Já que o dia atual é segunda-feira, ´idProduto=1`, ´segundaFeira=true´
+	Neste cenário, o produto 1 não poderá ser vendido.	
+	
+OBS: Este preenchimento é feito pelo Le Cheff .
+
+***************************************************************************************************************************************************************************
+2-) Happy Hour 
+
+Obedece à regra do Le Cheff.
+
+Regra do negócio
+Como funciona? Na tabela `happy_hour´,  há a coluna ´idproduto´, que é vinculada à tabela produtos com as colunas `código´, horainicial e horafinal. Considere que, também, haverá o dia da semana.
+	
+	Atente-se à ilustração abaixo:
+	Tabela ´produtos`       =  utiliza_happy_hour =true 
+	Tabela  happy_hour    =  idProduto=1 , horainicial='19:00:01', horafinal='23:58:00', segundafeira=true
+
+
+Estrutura da tabela
+
+CREATE TABLE happy_hour (
+	id serial4 NOT NULL,
+	idproduto int4 NOT NULL,
+	idempresa int4 NOT NULL,
+	horainicial time NOT NULL,
+	horafinal time NOT NULL,
+	segundafeira bool NOT NULL,
+	tercafeira bool NOT NULL,
+	quartafeira bool NOT NULL,
+	quintafeira bool NOT NULL,
+	sextafeira bool NOT NULL,
+	sabado bool NOT NULL,
+	domingo bool NOT NULL,
+	valor numeric(15, 3) NOT NULL,
+	CONSTRAINT happy_hour_pkey PRIMARY KEY (id)
+);
+
+
+OBS: Este preenchimento é feito pelo Le Cheff .
+
+
+***************************************************************************************************************************************************************************
+3-) Pedido mínimo 
+
+Na tabela configuracao_rpfood, foi criada uma coluna com nome `pedido_minimo´.
+
+Caso este campo seja maior que 0, é porque o cliente deseja um valor de pedido mínimo.
+
+Regra do negócio:
+Como funciona? Em ´FINALIZAR VENDA` , o sistema verifica se o valor do pedido é igual ou maior que o pedido mínimo.
+
+OBS: O valor do pedido mínimo não é contabilizado com o valor de taxa de entrega.
+
+
+
+***************************************************************************************************************************************************************************
+
+4-) Tipo de Entrega (Delivery/Retirada no Local) ou apenas Delivery
+
+Na tabela `configuracao_rpfood´, foi criado um campo utiliza_tipo_entrega_retirada do tipo boolean quando o default for false. Quando é false significa que o estabelecimento não utiliza retirada no local.
+
+Regra do negócio:
+
+Quando o campo utiliza_tipo_entrega_retirada é false, ao finalizar o pedido, a aba RETIRADA NO LOCAL não estará visível.
+Quando o campo ´utiliza_tipo_entrega_retirada´ é true,  ao finalizar o pedido, a aba RETIRADA NO LOCAL estará visível.

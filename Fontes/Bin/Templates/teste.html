@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        #overlay {
+            background: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999; /* Make sure it sits on top of everything else */
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="row page-titles">
+        <div class="col-sm-12">
+            <!-- Button with onclick function to disable itself and display overlay -->
+            <button id="myButton" class="btn btn-danger btn-block" onclick="disableAndCallAjax(); javascript:ajaxCall('OnFinalizarPedido', '')">Finalizar Pedido</button>
+        </div>
+    </div>
+
+    <!-- Overlay div -->
+    <div id="overlay"></div>
+
+    <script>
+        function disableAndCallAjax() {
+            // Disable the button
+            document.getElementById('myButton').disabled = true;
+
+            // Display the overlay
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function ajaxCall(id, params) {
+            // Simulating AJAX call with setTimeout
+            setTimeout(function() {
+                // Hide the overlay and enable the button after AJAX call is finished
+                document.getElementById('overlay').style.display = 'none';
+                document.getElementById('myButton').disabled = false;
+            }, 2000); // Simulate an AJAX call delay of 2 seconds
+        }
+    </script>
+</body>
+</html>
+
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Sweet Auto Close</h4>
+                                <div class="card-content">
+                                    <div class="sweetalert">
+                                        <button class="btn btn-danger btn sweet-auto">Sweet Auto btn-close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Sweet Prompt</h4>
+                                <div class="card-content">
+                                    <div class="sweetalert">
+                                        <button class="btn btn-success btn sweet-prompt">Sweet Prompt</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /# card -->
+                    </div>
+                    <!-- /# column -->
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Sweet Ajax</h4>
+                                <div class="card-content"></div>
+                                <div class="sweetalert">
+                                    <button class="btn btn-info btn sweet-ajax">Sweet Ajax</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--**********************************
+            Content body end
+        ***********************************-->
+
+
+        <!--**********************************
+            Footer start
+        ***********************************-->
+        <div class="footer">
+           <div class="copyright border-top">
+   <p>Copyright © Designed   by <a href="https://themeforest.net/user/dexignlabs" target="_blank">DexignLab</a> 2022</p>
+            </div>
+        </div>
+        <!--**********************************
+            Footer end
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button start
+        ***********************************-->
+
+        <!--**********************************
+           Support ticket button end
+        ***********************************-->
+
+        
+    </div>
+    <!--**********************************
+        Main wrapper end
+    ***********************************-->
+
+    <!--**********************************
+        Scripts
+    ***********************************-->
+    <!-- Required vendors -->
+    <script src="./vendor/global/global.min.js"></script>
+	<script src="./vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+
+    <script src="./vendor/sweetalert2/dist/sweetalert2.min.js"></script>
+    <script src="./js/plugins-init/sweetalert.init.js"></script>
+
+	<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
+    <script src="./js/custom.js"></script>
+	<script src="./js/dlabnav-init.js"></script>
+<script src="./vendor/swiper/js/swiper-bundle.min.js"></script>
+
+	
+    
+</body>
+</html>

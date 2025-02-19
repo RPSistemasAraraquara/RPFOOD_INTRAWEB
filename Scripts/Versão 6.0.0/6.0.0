@@ -1,0 +1,264 @@
+create table IF NOT EXISTS mesa(
+
+mes_001 integer,
+emp_001 integer,
+mes_002 varchar(30),
+mes_003 integer,
+id_situacao integer default 4
+
+
+);
+
+
+create table IF NOT EXISTS vendamesa(
+
+id_venda integer ,
+id_empresa  integer,
+id_situacao integer,
+totals_products numeric(15,3),
+sub_total       numeric(15,3),
+sales           numeric (15,3),     
+data_pedido     timestamp,
+b_recebido_lecheff boolean default false,
+observacao     varchar(300),
+numero_mesa     integer,
+descricao_mesa   varchar(20)
+
+);
+
+
+CREATE TABLE IF NOT EXISTS VendaMesaItem (
+	id_venda integer NOT NULL,
+	id_empresa integer NOT NULL,
+	id_product integer NOT NULL,
+	numero_item integer NOT NULL,
+	quantidade numeric(15, 4) NOT NULL DEFAULT 0,
+	valor_unit_product numeric(15, 4) NOT NULL DEFAULT 0,
+	totals_products numeric(15, 4) NOT NULL DEFAULT 0,
+	id_situacao integer NULL,
+	tamanho varchar(2) NULL,
+	b_venda_tamanho bool NULL DEFAULT false,
+	item_fracionado integer ,
+	observacao varchar(150) ,
+	b_recebido_lecheff boolean default false,
+	CONSTRAINT pk_VendaMesaItem PRIMARY KEY (id_venda, id_empresa, numero_item)
+	
+);
+
+CREATE TABLE happy_hour (
+	id serial NOT NULL,
+	idproduto integer NOT NULL,
+	idempresa integer NOT NULL,
+	horainicial time NOT NULL,
+	horafinal time NOT NULL,
+	segundafeira bool NOT NULL,
+	tercafeira bool NOT NULL,
+	quartafeira bool NOT NULL,
+	quintafeira bool NOT NULL,
+	sextafeira bool NOT NULL,
+	sabado bool NOT NULL,
+	domingo bool NOT NULL,
+	valor numeric(15, 3) NOT NULL,
+	CONSTRAINT happy_hour_pkey PRIMARY KEY (id)
+);
+
+
+alter table vendamesaitem add column utilizou_happy_hour boolean default false;
+alter table vendamesaitem add column utilizou_promocao boolean default false;
+alter table clientes_endereco add column taxa numeric(15,3);
+alter table vendaitem add column utilizou_happy_hour boolean default false;
+
+
+
+CREATE TABLE IF NOT EXISTS vendaitemopcional
+(
+    id_venda integer NOT NULL,
+    id_empresa integer NOT NULL,
+    id_numero_item integer NOT NULL,
+    id_opcional integer NOT NULL,
+    gratis numeric(15,4) NOT NULL DEFAULT 0,
+    valor numeric(15,4) NOT NULL DEFAULT 0,
+    valorunitario numeric(15,4) NOT NULL DEFAULT 0,
+    valortotal numeric(15,4) NOT NULL DEFAULT 0,
+    quantidade numeric(15,4) NOT NULL DEFAULT 0,
+    quantidade_replicar numeric(15,4) NOT NULL DEFAULT 0,
+	b_recebido_lecheff boolean default false
+);
+
+
+
+alter table configuracao_rpfood  drop column nao_exigir_cpf;
+alter table produtos add column utiliza_promocao boolean default false;
+
+
+
+CREATE TABLE IF NOT EXISTS promocao
+(
+    id_promocao integer,
+    id_empresa integer NOT NULL,
+    id_material integer NOT NULL,
+    tipo_desconto integer NOT NULL DEFAULT 0,
+    segundaFeira boolean NOT NULL DEFAULT false,
+    tercaFeira boolean NOT NULL DEFAULT false,
+    quartaFeira boolean NOT NULL DEFAULT false,
+    quintaFeira boolean NOT NULL DEFAULT false,
+    sextaFeira boolean NOT NULL DEFAULT false,
+    sabado boolean NOT NULL DEFAULT false,
+    domingo boolean NOT NULL DEFAULT false,
+    tipoMesa boolean NOT NULL DEFAULT false,
+    tipoDelivery boolean NOT NULL DEFAULT false,
+    tipoComanda boolean NOT NULL DEFAULT false,
+    descontoSegundaPadrao numeric(15,3) DEFAULT 0,
+    descontoSegundaTamanhoP numeric(15,3) DEFAULT 0,
+    descontoSegundaTamanhoM numeric(15,3) DEFAULT 0,
+    descontoSegundaTamanhoG numeric(15,3) DEFAULT 0,
+    descontoSegundaTamanhoGG numeric(15,3) DEFAULT 0,
+    descontoSegundaTamanhoExtra numeric(15,3) DEFAULT 0,
+	
+	
+    desconto_ter_padrao numeric(15,3) DEFAULT 0,
+    desconto_ter_tam_p numeric(15,3) DEFAULT 0,
+    desconto_ter_tam_m numeric(15,3) DEFAULT 0,
+    desconto_ter_tam_g numeric(15,3) DEFAULT 0,
+    desconto_ter_tam_gg numeric(15,3) DEFAULT 0,
+    desconto_ter_tam_extra numeric(15,3) DEFAULT 0,
+    desconto_qua_padrao numeric(15,3) DEFAULT 0,
+    desconto_qua_tam_p numeric(15,3) DEFAULT 0,
+    desconto_qua_tam_m numeric(15,3) DEFAULT 0,
+    desconto_qua_tam_g numeric(15,3) DEFAULT 0,
+    desconto_qua_tam_gg numeric(15,3) DEFAULT 0,
+    desconto_qua_tam_extra numeric(15,3) DEFAULT 0,
+    desconto_qui_padrao numeric(15,3) DEFAULT 0,
+    desconto_qui_tam_p numeric(15,3) DEFAULT 0,
+    desconto_qui_tam_m numeric(15,3) DEFAULT 0,
+    desconto_qui_tam_g numeric(15,3) DEFAULT 0,
+    desconto_qui_tam_gg numeric(15,3) DEFAULT 0,
+    desconto_qui_tam_extra numeric(15,3) DEFAULT 0,
+    desconto_sex_padrao numeric(15,3) DEFAULT 0,
+    desconto_sex_tam_p numeric(15,3) DEFAULT 0,
+    desconto_sex_tam_m numeric(15,3) DEFAULT 0,
+    desconto_sex_tam_g numeric(15,3) DEFAULT 0,
+    desconto_sex_tam_gg numeric(15,3) DEFAULT 0,
+    desconto_sex_tam_extra numeric(15,3) DEFAULT 0,
+    desconto_sab_padrao numeric(15,3) DEFAULT 0,
+    desconto_sab_tam_p numeric(15,3) DEFAULT 0,
+    desconto_sab_tam_m numeric(15,3) DEFAULT 0,
+    desconto_sab_tam_g numeric(15,3) DEFAULT 0,
+    desconto_sab_tam_gg numeric(15,3) DEFAULT 0,
+    desconto_sab_tam_extra numeric(15,3) DEFAULT 0,
+    desconto_dom_padrao numeric(15,3) DEFAULT 0,
+    desconto_dom_tam_p numeric(15,3) DEFAULT 0,
+    desconto_dom_tam_m numeric(15,3) DEFAULT 0,
+    desconto_dom_tam_g numeric(15,3) DEFAULT 0,
+    desconto_dom_tam_gg numeric(15,3) DEFAULT 0,
+    desconto_dom_tam_extra numeric(15,3) DEFAULT 0,
+  CONSTRAINT pk_promocao PRIMARY KEY (id_promocao, id_empresa),
+       
+    CONSTRAINT fk_promocao_idmaterial FOREIGN KEY (id_material, id_empresa)
+        REFERENCES produtos (codigo, id_empresa) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE CASCADE
+);
+
+
+alter table configuracao_rpfood add column utiliza_tipo_entrega_retirada boolean default true;
+alter table produtos add column b_exporta_peso_balanca boolean default false;
+alter table configuracao_rpfood add column modo_acougue boolean not null default false;
+alter table configuracao_rpfood add column pedido_minimo numeric(15,2) not null default 0.00;
+alter table produtos add column b_peso_balanca boolean not null default false;
+
+CREATE TABLE IF NOT EXISTS restricoesVendas (
+idEmpresa integer,
+idProduto integer,
+segundaFeira boolean DEFAULT false,
+tercaFeira boolean DEFAULT false,
+quartaFeira boolean DEFAULT false,
+quintaFeira boolean DEFAULT false,
+sextaFeira boolean DEFAULT false,
+sabado boolean DEFAULT false,
+domingo boolean DEFAULT false
+);
+
+alter table produtos add column restringirVenda boolean default false;
+
+
+
+alter table bairro drop column usu_001_1;
+alter table bairro drop column usu_001_2;
+alter table bairro drop column usu_001_3;
+alter table bairro drop column dat_001_1;
+alter table bairro drop column dat_001_2;
+alter table bairro drop column dat_001_3;
+
+alter table produtos add column utiliza_happy_hour boolean default false;
+
+
+
+drop table ceps;
+drop table ceps_transf;
+alter table bairro_ceps add column logradouro varchar(125);
+
+
+alter table formapgto drop column version_rec;
+alter table bairro drop column version_rec;
+alter table produtos drop column version_rec;
+alter table happy_hour add column utiliza_Mesa boolean default false;
+alter table happy_hour add column utiliza_Delivery boolean default false;
+alter table configuracao_funcionamento drop column version_rec;
+ALTER TABLE configuracao_funcionamento ADD COLUMN id SERIAL PRIMARY KEY;
+drop table ceps;
+drop table ceps_transf;
+alter table venda_endereco drop column cidade_desc;
+alter table venda_endereco drop column id_cidade;
+alter table venda_endereco drop column uf_sigla; 
+
+alter table clientes_endereco drop column cid_001;
+alter table clientes_endereco drop column cidade_desc;
+alter table clientes_endereco drop column uf;
+
+
+alter table bairro_ceps add column id_cidade integer;
+alter table bairro_ceps add column cidade_desc varchar(75);
+alter table bairro_ceps add column uf_sigla varchar(2);
+
+
+
+
+
+alter table configuracao_rpfood ADD COLUMN id SERIAL PRIMARY KEY;
+
+
+alter table empresas drop column version_rec;
+
+alter table usuarios drop column version_rec;
+
+alter table opcional drop column version_rec;
+
+alter table grupos drop column version_rec;
+
+alter table configuracao_rpfood drop column version_rec; 
+
+alter table configuracao_rpfood add column utiliza_controle_opcionais boolean default false;
+
+alter table produtos add column opcional_minimo integer default 0;
+alter table produtos add column opcional_maximo integer default 0;
+
+ALTER TABLE produtos
+ALTER COLUMN observacao TYPE varchar(1200);
+
+
+
+
+ALTER TABLE vendaitem 
+ALTER COLUMN tamanho TYPE varchar(40);
+
+
+
+    
+
+
+
+
+
+
+

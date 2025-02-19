@@ -1,0 +1,30 @@
+object FrmPadrao: TFrmPadrao
+  Left = 0
+  Top = 0
+  Width = 979
+  Height = 599
+  RenderInvisibleControls = True
+  AllowPageAccess = True
+  ConnectionMode = cmAny
+  OnCreate = IWAppFormCreate
+  OnAsyncPageLoaded = IWAppFormAsyncPageLoaded
+  Background.Fixed = False
+  LayoutMgr = IWTemplate
+  HandleTabs = False
+  LeftToRight = True
+  LockUntilLoaded = True
+  LockOnSubmit = True
+  ShowHint = True
+  KeepAlive = True
+  DesignLeft = 2
+  DesignTop = 2
+  object IWTemplate: TIWTemplateProcessorHTML
+    MasterFormTag = False
+    TagType = ttIntraWeb
+    OnUnknownTag = IWTemplateUnknownTag
+    MasterTemplate = 'FrmPadrao.html'
+    RenderStyles = False
+    Left = 456
+    Top = 184
+  end
+end
