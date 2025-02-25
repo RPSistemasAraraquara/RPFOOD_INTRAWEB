@@ -179,7 +179,6 @@ begin
     .ParamAsInteger('idCliente', AIdCliente)
     .ParamAsDateTime('dataInicio', StartOfTheDay(ADataInicio))
     .ParamAsDateTime('dataFim', EndOfTheDay(ADataFim));
-
   LDataSet := Query.OpenDataSet;
   try
     Result := DataSetToList(LDataSet);

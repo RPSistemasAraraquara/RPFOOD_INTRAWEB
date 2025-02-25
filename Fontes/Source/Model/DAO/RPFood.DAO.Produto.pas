@@ -115,6 +115,8 @@ begin
       if Result.restringirVenda then
        Result.restricao := TRPFoodDAOFactory(FactoryDAO).IdEmpresa(Result.idEmpresa).RestricaoVendaDAO.Buscar(result.codigo);
 
+
+
     except
       Result.Free;
       raise;

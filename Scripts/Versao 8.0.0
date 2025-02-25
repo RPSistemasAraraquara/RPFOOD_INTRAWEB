@@ -1,0 +1,1 @@
+alter table vendaitemopcional add column b_recebido_lecheff boolean default false;

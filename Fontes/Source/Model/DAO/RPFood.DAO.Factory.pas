@@ -291,10 +291,7 @@ begin
    FRestricaoVendaDAO:=TRPFoodDAORestricaoVenda.Create(FConexao);
    FRestricaoVendaDAO.IdEmpresa(FIdEmpresa);
   end;
-
-
   Result:=FRestricaoVendaDAO;
- // Result.ManagerTransaction(True);
 end;
 
 procedure TRPFoodDAOFactory.Rollback;
