@@ -30,8 +30,8 @@ var
   LDataSet: TDataSet;
 begin
   Select;
-  Query.SQL(' where id_situacao=4 and  id_situacao =:id_situacao')
-  .ParamAsInteger('id_situacao',AIdEmpresa);
+  Query.SQL(' where id_situacao=4 and  id_Empresa =:id_Empresa')
+  .ParamAsInteger('id_Empresa',AIdEmpresa);
   LDataSet:=Query.OpenDataSet;
   try
     Result:= DataSetToEntity(LDataSet);
@@ -52,7 +52,6 @@ begin
       Result.Key            := ADataset.FieldByName('publicKey').AsString;
       Result.IdSituacao     := ADataset.FieldByName('id_situacao').AsInteger;
       Result.IdEmpresa      := ADataset.FieldByName('id_Empresa').AsInteger;
-
     except
       Result.Free;
       raise;
