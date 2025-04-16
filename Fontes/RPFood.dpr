@@ -94,7 +94,10 @@ uses
   RPFood.DAO.Promocao in 'Source\Model\DAO\RPFood.DAO.Promocao.pas',
   RPFood.DAO.RestricaoVenda in 'Source\Model\DAO\RPFood.DAO.RestricaoVenda.pas',
   RPFood.View.NovoEndereco in 'Source\View\RPFood.View.NovoEndereco.pas' {FrmNovoEndereco: TIWAppForm},
-  RPFood.View.BuscarEndereco in 'Source\View\RPFood.View.BuscarEndereco.pas' {FrmBuscarEndereco: TIWAppForm};
+  RPFood.View.BuscarEndereco in 'Source\View\RPFood.View.BuscarEndereco.pas' {FrmBuscarEndereco: TIWAppForm},
+  RPFood.Migrations.Init in 'Migrations\RPFood.Migrations.Init.pas',
+  RPFood.Migrations.M0000001.EmpresaCriarTabela in 'Migrations\RPFood.Migrations.M0000001.EmpresaCriarTabela.pas',
+  RPFood.Entity.Configuracao.PagamentoMercadoPago in 'Source\Model\Entity\RPFood.Entity.Configuracao.PagamentoMercadoPago.pas';
 
 {$R *.RES}
 

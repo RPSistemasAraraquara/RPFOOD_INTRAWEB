@@ -99,17 +99,17 @@ uses
   RPFood.View.NovoEndereco in 'Source\View\RPFood.View.NovoEndereco.pas' {FrmNovoEndereco: TIWAppForm},
   RPFood.View.BuscarEndereco in 'Source\View\RPFood.View.BuscarEndereco.pas' {FrmBuscarEndereco: TIWAppForm},
   RPFood.Entity.Configuracao.PagamentoMercadoPago in 'Source\Model\Entity\RPFood.Entity.Configuracao.PagamentoMercadoPago.pas',
-  RPFood.DAO.Configuracao.PagamentoMercadoPago in 'Source\Model\DAO\RPFood.DAO.Configuracao.PagamentoMercadoPago.pas';
+  RPFood.DAO.Configuracao.PagamentoMercadoPago in 'Source\Model\DAO\RPFood.DAO.Configuracao.PagamentoMercadoPago.pas',
+  RPFood.Migrations.Init in 'Migrations\RPFood.Migrations.Init.pas',
+  RPFood.Migrations.M0000001.EmpresaCriarTabela in 'Migrations\RPFood.Migrations.M0000001.EmpresaCriarTabela.pas';
 
 {$R *.res}
 
 begin
+{$IFDEF DEBUG}
+  ReportMemoryLeaksOnShutdown := True;
+{$ENDIF}
 
- {$IFDEF DEBUG}
-  ReportMemoryLeaksOnShutdown := true;
-
- {$ENDIF}
-  TIWStart.Execute(true);
-
-
+  StartMigration;
+  TIWStart.Execute(True);
 end.

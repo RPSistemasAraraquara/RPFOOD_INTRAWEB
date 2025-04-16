@@ -10,6 +10,14 @@
 			"failed": false,
 			"changed": false
 		},
+		"github.com/gabrielbaltazar/acbr": {
+			"name": "acbr",
+			"version": "1.0.5",
+			"hash": "357e9bbd1ef4ccb43b709d96a68d3a58",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
 		"github.com/gabrielbaltazar/gbjson": {
 			"name": "gbjson",
 			"version": "1.0.11",
@@ -36,8 +44,8 @@
 		},
 		"github.com/gabrielbaltazar/m4d": {
 			"name": "m4d",
-			"version": "1.1.1",
-			"hash": "b9eefb9b0db5f5a8fc29f2e066caa635",
+			"version": "1.1.2",
+			"hash": "0ad18235d43d4ad9f2a173140fac3104",
 			"artifacts": {},
 			"failed": false,
 			"changed": false
