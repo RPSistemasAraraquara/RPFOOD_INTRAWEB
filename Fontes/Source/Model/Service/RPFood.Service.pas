@@ -90,7 +90,6 @@ begin
   Result := FImagemService;
 end;
 
-
 function TRPFoodService.LoginClienteService: TRPFoodServiceLoginCliente;
 begin
   if not Assigned(FLoginClienteService) then

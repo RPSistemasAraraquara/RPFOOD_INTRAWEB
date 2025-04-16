@@ -97,7 +97,9 @@ uses
   RPFood.Entity.RestricaoVenda in 'Source\Model\Entity\RPFood.Entity.RestricaoVenda.pas',
   RPFood.DAO.RestricaoVenda in 'Source\Model\DAO\RPFood.DAO.RestricaoVenda.pas',
   RPFood.View.NovoEndereco in 'Source\View\RPFood.View.NovoEndereco.pas' {FrmNovoEndereco: TIWAppForm},
-  RPFood.View.BuscarEndereco in 'Source\View\RPFood.View.BuscarEndereco.pas' {FrmBuscarEndereco: TIWAppForm};
+  RPFood.View.BuscarEndereco in 'Source\View\RPFood.View.BuscarEndereco.pas' {FrmBuscarEndereco: TIWAppForm},
+  RPFood.Entity.Configuracao.PagamentoMercadoPago in 'Source\Model\Entity\RPFood.Entity.Configuracao.PagamentoMercadoPago.pas',
+  RPFood.DAO.Configuracao.PagamentoMercadoPago in 'Source\Model\DAO\RPFood.DAO.Configuracao.PagamentoMercadoPago.pas';
 
 {$R *.res}
 

@@ -1,0 +1,54 @@
+{
+	"hash": "24a213174d7f48edf99ba5662f3e157d",
+	"updated": "2025-04-07T09:56:34.2964851-03:00",
+	"installedModules": {
+		"github.com/adrianosantostreina/adrconnection": {
+			"name": "adrconnection",
+			"version": "4.1.3",
+			"hash": "8ebd3e6e8557da3ace7673d7f2782eab",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/gabrielbaltazar/gbjson": {
+			"name": "gbjson",
+			"version": "1.0.11",
+			"hash": "9f3f8d23501e9249638dd6a332a536c0",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/gabrielbaltazar/holdon4d": {
+			"name": "holdon4d",
+			"version": "1.0.0",
+			"hash": "bb37d37251bed978e6c26ac4aea0ffff",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/gabrielbaltazar/igrowl4delphi": {
+			"name": "igrowl4delphi",
+			"version": "1.0.0",
+			"hash": "cb704c7cbd202b00e9369c78e7203036",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/gabrielbaltazar/m4d": {
+			"name": "m4d",
+			"version": "1.1.1",
+			"hash": "b9eefb9b0db5f5a8fc29f2e066caa635",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"github.com/gabrielbaltazar/sweetalert4delphi": {
+			"name": "sweetalert4delphi",
+			"version": "1.0.0",
+			"hash": "1b1997a906bad4a67e3caeb40eee4e91",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}
