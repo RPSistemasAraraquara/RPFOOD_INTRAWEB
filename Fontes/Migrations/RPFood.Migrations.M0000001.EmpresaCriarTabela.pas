@@ -613,24 +613,6 @@ begin
   .SQL(' ALTER FUNCTION public.is_atendimento_disponivel()                                      ')
   .SQL(' OWNER TO postgres;                                                                     ')
   .ExecSQL;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 end;
 
 initialization
