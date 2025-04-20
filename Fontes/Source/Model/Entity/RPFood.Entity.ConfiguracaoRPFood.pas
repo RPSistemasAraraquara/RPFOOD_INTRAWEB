@@ -17,6 +17,7 @@ type
     Fmodoacougue             : Boolean;
     FpedidoMinimo            : Currency;
     Futilizacontroleopcionais: Boolean;
+    FIntegracaoMercadoPago   : Boolean;
   public
     constructor Create;
 
@@ -28,7 +29,7 @@ type
     property modoacougue              : Boolean   read Fmodoacougue               write Fmodoacougue;
     property pedidoMinimo             : Currency  read Fpedidominimo              write Fpedidominimo;
     property utilizacontroleopcionais : Boolean   read Futilizacontroleopcionais  write Futilizacontroleopcionais;
-
+    property IntegracaoMercadoPago    : Boolean   read FIntegracaoMercadoPago     write FIntegracaoMercadoPago;
   end;
 
 implementation
