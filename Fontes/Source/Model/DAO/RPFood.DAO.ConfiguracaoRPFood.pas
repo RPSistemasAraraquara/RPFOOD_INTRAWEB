@@ -39,6 +39,7 @@ begin
       Result.modoacougue                := ADataSet.FieldByName('modo_acougue').AsBoolean;
       Result.pedidominimo               := ADataSet.FieldByName('pedido_minimo').AsCurrency;
       Result.utilizacontroleopcionais   := ADataSet.FieldByName('utiliza_controle_opcionais').AsBoolean;
+      Result.IntegracaoMercadoPago      := ADataSet.FieldByName('integracaomercadopago').AsBoolean;
     except
       Result.Free;
       raise
@@ -68,7 +69,8 @@ begin
     .SQL('tempo_entrega_rpfood,                        ')
     .SQL('utiliza_tipo_entrega_retirada,               ')
     .SQl('modo_acougue,pedido_minimo,                  ')
-    .SQL('utiliza_controle_opcionais                   ')
+    .SQL('utiliza_controle_opcionais,                  ')
+    .SQL('integracaomercadopago                        ')
     .SQL('from configuracao_rpfood                     ');
 end;
 
