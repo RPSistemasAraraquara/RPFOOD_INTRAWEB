@@ -25,6 +25,7 @@ const
   ROTA_SOBRE                   = 'sobre.html';
   ROTA_NOVO_ENDERECO           = 'novo-endereco.html';
   ROTA_SELECIONA_ENDERECOS     = 'cliente.endereco.html';
+  ROTA_PEDIDO_PAGAMENTO        = 'pedido-pagamento.html';
 
 implementation
 
