@@ -10,6 +10,7 @@ type
     Fdescricao      : string;
     FpermiteVendaWeb: Boolean;
     FsfiCodigo      : Integer;
+    FPagamentoOnline: Boolean;
     function GetPermiteTroco: Boolean;
   public
     constructor Create;
@@ -21,6 +22,7 @@ type
     property permiteVendaWeb    : Boolean     read FpermiteVendaWeb write FpermiteVendaWeb;
     property sfiCodigo          : Integer     read FsfiCodigo       write FsfiCodigo;
     property permiteTroco       : Boolean     read GetPermiteTroco;
+    property PagamentoOnline    : Boolean     read FPagamentoOnline write FPagamentoOnline;
   end;
 
 implementation
@@ -34,6 +36,7 @@ begin
   Self.descricao       := ASource.descricao;
   Self.permiteVendaWeb := ASource.permiteVendaWeb;
   Self.sfiCodigo       := ASource.sfiCodigo;
+  Self.PagamentoOnline := ASource.PagamentoOnline;
 end;
 
 constructor TRPFoodEntityFormaPagamento.Create;
