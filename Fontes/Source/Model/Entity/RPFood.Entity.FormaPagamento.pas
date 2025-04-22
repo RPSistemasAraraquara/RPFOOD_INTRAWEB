@@ -12,6 +12,7 @@ type
     FsfiCodigo      : Integer;
     FPagamentoOnline: Boolean;
     function GetPermiteTroco: Boolean;
+    function GetPIX:Boolean;
   public
     constructor Create;
     procedure Assign(ASource: TRPFoodEntityFormaPagamento);
@@ -23,6 +24,7 @@ type
     property sfiCodigo          : Integer     read FsfiCodigo       write FsfiCodigo;
     property permiteTroco       : Boolean     read GetPermiteTroco;
     property PagamentoOnline    : Boolean     read FPagamentoOnline write FPagamentoOnline;
+    property UtilizaPIX: Boolean read GetPIX;
   end;
 
 implementation
@@ -47,6 +49,11 @@ end;
 function TRPFoodEntityFormaPagamento.GetPermiteTroco: Boolean;
 begin
   Result := FsfiCodigo = 1;
+end;
+
+function TRPFoodEntityFormaPagamento.GetPIX: Boolean;
+begin
+  Result:=FsfiCodigo=17;
 end;
 
 end.

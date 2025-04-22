@@ -66,8 +66,7 @@ type
     procedure IWOBSERVACAOAsyncChange(Sender: TObject; EventParams: TStringList);
     procedure IWAppFormAsyncPageUnloaded(Sender: TObject;EventParams: TStringList; AIsCurrent: Boolean);
     procedure IWAppFormShow(Sender: TObject);
-    procedure IWEDTSELECIONAENDERECOSAsyncClick(Sender: TObject;
-      EventParams: TStringList);
+    procedure IWEDTSELECIONAENDERECOSAsyncClick(Sender: TObject;  EventParams: TStringList);
   private
     FEnderecoCadastro    : TRPFoodEntityClienteEndereco;
     FPedido              : TRPFoodEntityPedido;
@@ -206,8 +205,7 @@ begin
   TrocoConfirmar;
 end;
 
-procedure TFrmPedidoFinalizar.IWEDTSELECIONAENDERECOSAsyncClick(
-  Sender: TObject; EventParams: TStringList);
+procedure TFrmPedidoFinalizar.IWEDTSELECIONAENDERECOSAsyncClick(Sender: TObject; EventParams: TStringList);
 begin
   inherited;
     WebApplication.GoToURL(ROTA_SELECIONA_ENDERECOS);
@@ -362,12 +360,19 @@ var
   LPagamento              : TRPFoodEntityFormaPagamento;
 begin
   LIdPagamentoSelecionado := AParams.Values['idPagamento'].ToInteger;
+
   if LIdPagamentoSelecionado <> FPedido.formaPagamento.id then
   begin
     for LPagamento in FFormasPagamento do
     begin
       if LPagamento.id = LIdPagamentoSelecionado then
       begin
+        if LPagamento.PagamentoOnline and LConfiguracaoFOOD.IntegracaoMercadoPago then
+        begin
+          FPedido.formaPagamento.Assign(LPagamento);
+          WebApplication.GoToURL(ROTA_PEDIDO_PAGAMENTO);
+        end;
+
         FPedido.formaPagamento.Assign(LPagamento);
         IWEDT_VALOR_PAGO.Text := '0';
         FPedido.valorAReceber := 0;

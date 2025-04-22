@@ -10,7 +10,8 @@ uses
   RPFood.Service.Imagem,
   RPFood.Service.Login.Cliente,
   RPFood.Service.Venda,
-  RPFood.Service.Venda.Copia;
+  RPFood.Service.Venda.Copia,
+  RPFood.Service.Pagamento;
 
 
 type
@@ -24,6 +25,8 @@ type
     FLoginClienteService: TRPFoodServiceLoginCliente;
     FVendaService       : TRPFoodServiceVenda;
     FVendaCopiaService  : TRPFoodServiceVendaCopia;
+    FPagamentoService   : TRPFoodServicePagamento;
+
   public
     destructor Destroy; override;
     function ClienteService                       : TRPFoodServiceCliente;
@@ -32,6 +35,7 @@ type
     function LoginClienteService                  : TRPFoodServiceLoginCliente;
     function VendaService                         : TRPFoodServiceVenda;
     function VendaCopiaService                    : TRPFoodServiceVendaCopia;
+    function PagamentoService                     : TRPFoodServicePagamento;
     function Components(AValue: TRPFoodComponents): TRPFoodService;
     function DAO(AValue: TRPFoodDAOFactory)       : TRPFoodService;
   end;
@@ -68,6 +72,7 @@ begin
   FLoginClienteService.Free;
   FVendaService.Free;
   FVendaCopiaService.Free;
+  FPagamentoService.Free;
   inherited;
 end;
 
@@ -98,6 +103,16 @@ begin
     FLoginClienteService.DAO(FDAO);
   end;
   Result := FLoginClienteService;
+end;
+
+function TRPFoodService.PagamentoService: TRPFoodServicePagamento;
+begin
+  if not Assigned(FPagamentoService) then
+  begin
+    FPagamentoService:=TRPFoodServicePagamento.Create;
+    FPagamentoService.DAO(FDAO);
+  end;
+  Result:=FPagamentoService;
 end;
 
 function TRPFoodService.VendaCopiaService: TRPFoodServiceVendaCopia;

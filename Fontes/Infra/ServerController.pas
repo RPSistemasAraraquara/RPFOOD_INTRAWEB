@@ -73,6 +73,7 @@ uses
   RPFood.View.Sobre,
   RPFood.View.NovoEndereco,
   RPFood.View.BuscarEndereco,
+  RPFood.View.Pedido.Pagamento,
   Winapi.Windows;
 
 procedure TIWServerController.IWServerControllerBaseCreate(Sender: TObject);
@@ -178,6 +179,7 @@ begin
   THandlers.Add(ROTA_ERROR_500, TContentForm.Create(TIWException));
   THandlers.Add(ROTA_PRODUTO_TODAS_CATEGORIA, TContentForm.Create(TFrmProdutosTodasCategoria));
   THandlers.Add(ROTA_SELECIONA_ENDERECOS, TContentForm.Create(TFrmBuscarEndereco));
+  THandlers.Add(ROTA_PEDIDO_PAGAMENTO,TContentForm.Create(TFrmPedidoPagamentoOnline));
 end;
 
 procedure TIWServerController.IWServerControllerBaseNewSession(ASession: TIWApplication);

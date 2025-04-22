@@ -24,7 +24,7 @@ object IWServerController: TIWServerController
   OnBeforeRender = IWServerControllerBaseBeforeRender
   OnSessionRestarted = IWServerControllerBaseSessionRestarted
   OnAuthFailed = IWServerControllerBaseAuthFailed
-  Height = 465
-  Width = 513
-  PixelsPerInch = 144
+  Height = 543
+  Width = 599
+  PixelsPerInch = 168
 end

@@ -178,7 +178,6 @@ begin
       FPedido.endereco.Assign(FCliente.enderecoPadrao);
       FCliente.enderecoPadrao.taxaEntrega:=FBairro.taxa;
       FPedido.taxaEntrega                := FBairro.taxa;
-
     finally
      FBairro.Free;
     end;

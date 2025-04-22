@@ -27,7 +27,8 @@ uses
   RPFood.DAO.ConfiguracaoRPFood,
   RPFOOD.DAO.Happy_Hour,
   RPFood.DAO.Promocao,
-  RPFood.DAO.RestricaoVenda;
+  RPFood.DAO.RestricaoVenda,
+  RPFood.DAO.Configuracao.PagamentoMercadoPago;
 
 type
   TRPFoodDAOCliente                          = RPFood.DAO.Cliente.TRPFoodDAOCliente;
@@ -42,6 +43,7 @@ type
   TRPFoodDAOTransferenciaImagens             = RPFood.DAO.TransferenciaImagens.TRPFoodDAOTransferenciaImagens;
   TRPfoodDAOPromocao                         = RPFood.DAO.Promocao.TRPfoodDAOPromocao;
   TRPFoodDAORestricaoVenda                   = RPFood.DAO.RestricaoVenda.TRPFoodDAORestricaoVenda;
+  TRPFoodDAOConfiguracaoPagamentoMercadoPago = RPFood.DAO.Configuracao.PagamentoMercadoPago.TRPFoodDAOConfiguracaoPagamentoMercadoPago;
 
 
   TRPFoodDAOFactory = class
@@ -71,33 +73,35 @@ type
     FHappyHourDAO                            : TRPFoodDAOHappy_Hour;
     FPromocaoDAO                             : TRPfoodDAOPromocao;
     FRestricaoVendaDAO                       : TRPFoodDAORestricaoVenda;
+    FConfiguracaoPagamentoMercadoPagoDAO     : TRPFoodDAOConfiguracaoPagamentoMercadoPago;
   public
     constructor Create(AConexao: IADRConnection);
     destructor Destroy; override;
 
-    function ADMINUsuarioDAO            : TRPFoodDAOADMINUsuario;
-    function BairroDAO: TRPFoodDAOBairro;
-    function CategoriaDAO               : TRPFoodDAOCategoria;
-    function ClienteDAO                 : TRPFoodDAOCliente;
-    function ClienteEnderecoDAO         : TRPFoodDAOClienteEndereco;
-    function EmpresaDAO                 : TRPFoodDAOEmpresa;
-    function EnderecoDAO                : TRPFoodDAOEndereco;
-    function FormaPagamentoDAO          : TRPFoodDAOFormaPagamento;
-    function OpcionalDAO                : TRPFoodDAOOpcional;
-    function ProdutoDAO                 : TRPFoodDAOProduto;
-    function ProdutoOpcionalDAO         : TRPFoodDAOProdutoOpcional;
-    function VendaDAO                   : TRPFoodDAOVenda;
-    function VendaEnderecoDAO           : TRPFoodDAOVendaEndereco;
-    function VendaItemDAO               : TRPFoodDAOVendaItem;
-    function VendaItemOpcionalDAO       : TRPFoodDAOVendaItemOpcional;
-    function VendaStatusLogDAO          : TRPFoodDAOVendaStatusLog;
-    function RelatorioVendas            : TRPFoodRelatorioVendas;
-    function ConfiguracaoFuncionamento  : TRPFoodDAOConfiguracaoFuncionamento;
-    function TransferenciaImangesDAO    : TRPFoodDAOTransferenciaImagens;
-    function ConfiguracaoRPFoodDAO      : TRPFoodDAOConfiguracaoRPFood;
-    function HappyHourDAO               : TRPFoodDAOHappy_Hour;
-    function PromocaoDAO                : TRPfoodDAOPromocao;
-    function RestricaoVendaDAO          : TRPFoodDAORestricaoVenda;
+    function ADMINUsuarioDAO                        : TRPFoodDAOADMINUsuario;
+    function BairroDAO                              : TRPFoodDAOBairro;
+    function CategoriaDAO                           : TRPFoodDAOCategoria;
+    function ClienteDAO                             : TRPFoodDAOCliente;
+    function ClienteEnderecoDAO                     : TRPFoodDAOClienteEndereco;
+    function EmpresaDAO                             : TRPFoodDAOEmpresa;
+    function EnderecoDAO                            : TRPFoodDAOEndereco;
+    function FormaPagamentoDAO                      : TRPFoodDAOFormaPagamento;
+    function OpcionalDAO                            : TRPFoodDAOOpcional;
+    function ProdutoDAO                             : TRPFoodDAOProduto;
+    function ProdutoOpcionalDAO                     : TRPFoodDAOProdutoOpcional;
+    function VendaDAO                               : TRPFoodDAOVenda;
+    function VendaEnderecoDAO                       : TRPFoodDAOVendaEndereco;
+    function VendaItemDAO                           : TRPFoodDAOVendaItem;
+    function VendaItemOpcionalDAO                   : TRPFoodDAOVendaItemOpcional;
+    function VendaStatusLogDAO                      : TRPFoodDAOVendaStatusLog;
+    function RelatorioVendas                        : TRPFoodRelatorioVendas;
+    function ConfiguracaoFuncionamento              : TRPFoodDAOConfiguracaoFuncionamento;
+    function TransferenciaImangesDAO                : TRPFoodDAOTransferenciaImagens;
+    function ConfiguracaoRPFoodDAO                  : TRPFoodDAOConfiguracaoRPFood;
+    function HappyHourDAO                           : TRPFoodDAOHappy_Hour;
+    function PromocaoDAO                            : TRPfoodDAOPromocao;
+    function RestricaoVendaDAO                      : TRPFoodDAORestricaoVenda;
+    function ConfiguracaoPagamentoMercadoPagoDAO    : TRPFoodDAOConfiguracaoPagamentoMercadoPago;
     function IdEmpresa(AValue: Integer) : TRPFoodDAOFactory;
     procedure StartTransaction;
     procedure Commit;
@@ -164,6 +168,14 @@ begin
 
 end;
 
+function TRPFoodDAOFactory.ConfiguracaoPagamentoMercadoPagoDAO: TRPFoodDAOConfiguracaoPagamentoMercadoPago;
+begin
+  if not Assigned(FConfiguracaoPagamentoMercadoPagoDAO) then
+    FConfiguracaoPagamentoMercadoPagoDAO:=TRPFoodDAOConfiguracaoPagamentoMercadoPago.Create(FConexao);
+  Result:=FConfiguracaoPagamentoMercadoPagoDAO;
+  Result.ManagerTransaction(True);
+end;
+
 function TRPFoodDAOFactory.ConfiguracaoRPFoodDAO: TRPFoodDAOConfiguracaoRPFood;
 begin
   if not Assigned(FConfiguracaoRPFoodDAO) then
@@ -202,6 +214,7 @@ begin
   FHappyHourDAO.Free;
   FPromocaoDAO.Free;
   FRestricaoVendaDAO.Free;
+  FConfiguracaoPagamentoMercadoPagoDAO.Free;
   inherited;
 end;
 

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="RP Food - seu novo conceito em pedido Online">
+    <meta name="description" content="RP Food - seu novo conceito em pedido Online">
+    <meta name="author" content="RP SISTEMAS">
+    <meta property="og:title" content="RP Food - seu novo conceito em pedido Online">
+    <meta property="og:description" content="RP Food - seu novo conceito em pedido Online">
+    <title>RP Food - seu novo conceito em pedido Online</title>
+    <link href="./vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+    <link href="./vendor/swiper/css/swiper-bundle.min.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="./vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+    <link href="./sweetAlert4Delphi/style/sweetalert2.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    
+</head>
+
+<body>
+    <div class="row page-titles">
+        <h4 class="active" style="text-align: center;">Boraa Fechar</h4>
+    </div>
+
+    <div class="row">
+        <div class="col-xl-12 col-xxl-12 col-sm-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="default-tab" id="tab-control">
+
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item" id="tab_tipo_entrega">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#tab_delivery"
+                                            onclick="javascript:ajaxCall('OnSelecionarTipoEntrega', 'tipoRetirada=D')">
+                                            <i class="la la-home me-2"></i>
+                                           Pagamento Seguro
+                                        </a>
+                                    </li>
+
+
+                                    
+                                    
+                                    
+                                </ul>
+
+                                
+                                
+                                   
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-auto text-center">
+            <label class="mb-2 d-block"><strong>Boraee pagar com QRCODE</strong></label>
+            <div style="display: inline-block;">
+                {%IWQRCODE%}
+            </div>
+        </div>
+    </div>   
+    
+    
+    
+    
+    <div class="row page-titles">
+        <div class="col-sm-12">
+            <div class="needs-validation" novalidate="">
+                <h4 class="mb-1" style="color: chocolate; text-align: center">Aguardando o pagamento</h4><br>
+                {%IWCODIGOQRCODE%}
+                    
+                <hr class="mb-4">
+                <div style="margin-left: 10px;">
+                    {%IWQRCODEURL%}
+                </div>
+
+                <h4 class="mb-3" style="color:chocolate">Totais</h4>
+                <div class="row">
+                    <div class="dlab-info">
+                        <div id="div_totais_pedido" class="d-flex align-items-center justify-content-between">
+                            <span id="span_valor_total">Valor Total: R$ {%VALOR_PEDIDO%}</span>                                                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+
+    <div class="row page-titles">
+        <div class="col-sm-12">
+            <button class="btn btn-danger btn-block" onclick="javascript:ajaxCall('OnFinalizarPedido', '')">Boraa fechar
+                Pedido </button>               
+        </div>
+    </div>   
+
+    
+
+    
+</body>
+
+</html>
