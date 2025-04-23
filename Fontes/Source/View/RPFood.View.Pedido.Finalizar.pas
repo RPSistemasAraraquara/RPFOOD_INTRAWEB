@@ -358,6 +358,7 @@ procedure TFrmPedidoFinalizar.OnSelecionarPagamento(AParams: TStringList);
 var
   LIdPagamentoSelecionado : Integer;
   LPagamento              : TRPFoodEntityFormaPagamento;
+  LEmFuncionamento:Boolean;
 begin
   LIdPagamentoSelecionado := AParams.Values['idPagamento'].ToInteger;
 
@@ -367,6 +368,19 @@ begin
     begin
       if LPagamento.id = LIdPagamentoSelecionado then
       begin
+
+        if (LConfiguracaoFOOD.pedidoMinimo > 0) and ((FPedido.valorTotal - FPedido.taxaEntrega) < LConfiguracaoFOOD.pedidoMinimo) then
+        begin
+          MensagemErro('Opa, houve um erro',  Format('Pedido mínimo não atingido. Valor mínimo: %f', [LConfiguracaoFOOD.pedidoMinimo]));
+          Exit;
+        end;
+
+        LEmFuncionamento := FController.DAO.ConfiguracaoFuncionamento.EmHorarioDeFuncionamento;
+          if not LEmFuncionamento  then
+            FHoldOn.Text('ixee estamos fechado agora...')
+            .Callback('OnCancelarPedido')
+            .Show;
+
         if LPagamento.PagamentoOnline and LConfiguracaoFOOD.IntegracaoMercadoPago then
         begin
           FPedido.formaPagamento.Assign(LPagamento);

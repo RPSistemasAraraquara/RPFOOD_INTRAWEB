@@ -21,10 +21,9 @@ implementation
 
 procedure TRPFoodMigrationsM0000002AddFormaPagamentoOnline.Setup;
 begin
-  Self.Version := 'ADD Tabela FormaPGTO Column de PagamentoOnline ';
+  Self.Version    := 'ADD Tabela FormaPGTO Column de PagamentoOnline ';
   Self.SeqVersion := 2;
-  Self.DateTime := StrToDateTime('20/04/2025 11:40:10');
-
+  Self.DateTime   := StrToDateTime('20/04/2025 11:40:10');
 end;
 
 procedure TRPFoodMigrationsM0000002AddFormaPagamentoOnline.Up;

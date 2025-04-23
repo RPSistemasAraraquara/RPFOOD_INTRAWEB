@@ -110,4 +110,12 @@ inherited FrmPedidoPagamentoOnline: TFrmPedidoPagamentoOnline
     JpegOptions.ProgressiveEncoding = False
     JpegOptions.Smoothing = True
   end
+  object TmrAguardaPagamento: TIWTimer
+    Enabled = False
+    Interval = 3000
+    ShowAsyncLock = False
+    OnAsyncTimer = TmrAguardaPagamentoAsyncTimer
+    Left = 532
+    Top = 98
+  end
 end

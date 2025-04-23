@@ -25,6 +25,8 @@ uses
     FIdPIX: string;
    function Base64ToStream(const Base64: string): TMemoryStream;
   public
+    destructor Destroy; override;
+
     function DAO(AValue: TRPFoodDAOFactory): TRPFoodServicePagamento;
     function ValorPedido(AValor:Double):TRPFoodServicePagamento;
     function GerarQRCode(AImage: TIWImage): TRPFoodServicePagamento;
@@ -73,8 +75,8 @@ begin
 
   FComponenteMercadoPago:=TMercadoPago.Create(nil);
 
-  FComponenteMercadoPago.Configuracoes.AccessToken:= FConfiguracaoMercadoPago.AcessToken;
-  FComponenteMercadoPago.Configuracoes.PublicKey  := FConfiguracaoMercadoPago.Key;
+  FComponenteMercadoPago.Configuracoes.AccessToken:= 'APP_USR-3460279939958444-041513-f8e8b9888b1ec5e03aa9a1c42008f18e-2389505207';            //FConfiguracaoMercadoPago.AcessToken;
+  FComponenteMercadoPago.Configuracoes.PublicKey  :=  'APP_USR-bc20506a-2859-4e8e-9ee6-a2a9721188a6';//FConfiguracaoMercadoPago.Key;
   FComponenteMercadoPago.Configuracoes.URLPayment := 'https://api.mercadopago.com/v1/payments?access_token=';
   FComponenteMercadoPago.Configuracoes.URLToken   := 'https://api.mercadopago.com/v1/card_tokens?public_key=';
   FComponenteMercadoPago.PIX.ClienteNome          := ANome;
@@ -83,11 +85,8 @@ begin
   FComponenteMercadoPago.PIX.ClienteEmail         := AEmail;
   FComponenteMercadoPago.PIX.Descricao            := 'Pedido Delivery';
   FComponenteMercadoPago.PIX.Valor                := FValorPedido;
-
-  FComponenteMercadoPago.PIX.URLNotificacao       := 'https://www.rpfood.com.br';
-
-
-
+  FComponenteMercadoPago.PIX.Url                  := 'www.rpfood.com.br';
+ FComponenteMercadoPago.PIX.URLNotificacao        := 'https://www.servidor.com';
 end;
 
 procedure TRPFoodServicePagamento.ConsultarStatusPIX(var AStatus: string);
@@ -106,15 +105,17 @@ begin
   FDAO:=AValue;
 end;
 
+destructor TRPFoodServicePagamento.Destroy;
+begin
+  FComponenteMercadoPago.Free;
+  inherited;
+end;
+
 function TRPFoodServicePagamento.GerarQRCode(AImage: TIWImage): TRPFoodServicePagamento;
 var
   LStream: TMemoryStream;
 begin
   Result := Self;
-
-
-
-
 
   if FComponenteMercadoPago.PIX.Gerar then
   begin
@@ -131,7 +132,7 @@ begin
       QrCodeDigitavel   := FComponenteMercadoPago.PIX.QrCode;
       QrCodeURL         := FComponenteMercadoPago.PIX.Url;
       IdPIX             := FComponenteMercadoPago.PIX.ID;
-      FComponenteMercadoPago.PIX.Url    := 'www.rpfood.com.br';
+
     finally
       LStream.Free;
     end;
