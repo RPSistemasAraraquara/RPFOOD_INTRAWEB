@@ -33,6 +33,7 @@ begin
    .SQL(' idempresa integer not null,                 ')
    .SQL(' idVenda integer not null,                   ')
    .SQL(' idcliente integer ,                         ')
+   .SQL(' idautorizacaopagamento varchar(120),        ')
    .SQL(' integracaopagamento varchar(50),            ')
    .SQL(' urlqrcode varchar(155),                     ')
    .SQL(' valorpagamentoonline numeric (15,3),        ')

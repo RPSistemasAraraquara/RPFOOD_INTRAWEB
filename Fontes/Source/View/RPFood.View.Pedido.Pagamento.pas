@@ -151,6 +151,7 @@ procedure TFrmPedidoPagamentoOnline.OnAfterFinalizarPedido(AParams: TStringList)
 begin
   try
     Sleep(3000);
+    FController.Service.PagamentoService.Pedido(FPedido).SalvarPagamento;
     FController.Service.VendaService.Pedido(FPedido).Salvar;
     FSessaoCliente.PedidoSessao.InicializarPedido;
     FPedido := FSessaoCliente.PedidoSessao.Pedido;
@@ -167,12 +168,10 @@ end;
 
 procedure TFrmPedidoPagamentoOnline.OnFinalizarPedido(AParams: TStringList);
 begin
-    FHoldOn.Text('Confirmando Pedido...')
-      .Callback('OnAfterFinalizarPedido')
-      .Show;
-
+  FHoldOn.Text('Confirmando Pedido...')
+  .Callback('OnAfterFinalizarPedido')
+  .Show;
 end;
-
 
 initialization
   TFrmPedidoPagamentoOnline.SetURL('', 'pedido-pagamento.html');

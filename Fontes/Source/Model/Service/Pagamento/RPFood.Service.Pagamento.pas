@@ -16,29 +16,31 @@ uses
  type
  TRPFoodServicePagamento  = class
   private
-    FDAO      : TRPFoodDAOFactory;
-    FValorPedido:Currency;
-    FConfiguracaoMercadoPago : TRPFoodEntityConfiguracaoPagamentoMercadoPago;
-    FComponenteMercadoPago: TMercadoPago;
-    FQrCodeDigitavel: string;
-    FQrCodeURL: string;
-    FIdPIX: string;
+    FDAO                      : TRPFoodDAOFactory;
+    FPedido                   : TRPFoodEntityPedido;
+    FPagamentoOnline          : TRPFoodEntityPagamentoOnline;
+    FConfiguracaoMercadoPago  : TRPFoodEntityConfiguracaoPagamentoMercadoPago;
+    FComponenteMercadoPago    : TMercadoPago;
+    FValorPedido              : Currency;
+    FQrCodeDigitavel          : string;
+    FQrCodeURL                : string;
+    FIdPIX                    : string;
    function Base64ToStream(const Base64: string): TMemoryStream;
   public
     destructor Destroy; override;
 
     function DAO(AValue: TRPFoodDAOFactory): TRPFoodServicePagamento;
+    function Pedido(AValue: TRPFoodEntityPedido): TRPFoodServicePagamento;
     function ValorPedido(AValor:Double):TRPFoodServicePagamento;
     function GerarQRCode(AImage: TIWImage): TRPFoodServicePagamento;
     function CarregarConfiguracoesMercadoPago(ANome,AEmail:string):TRPFoodServicePagamento;
     procedure LeQRCodeDigitavel(var AQrcode, QUrl: string);
+    procedure SalvarPagamento;
     property QrCodeDigitavel: string read FQrCodeDigitavel write FQrCodeDigitavel;
     property QrCodeURL: string read FQrCodeURL write FQrCodeURL;
     procedure ConsultarStatusPIX(var AStatus:string);
     property IdPIX: string read FIdPIX write FIdPIX;
-
  end;
-
 
 implementation
 
@@ -81,7 +83,6 @@ begin
   FComponenteMercadoPago.Configuracoes.URLToken   := 'https://api.mercadopago.com/v1/card_tokens?public_key=';
   FComponenteMercadoPago.PIX.ClienteNome          := ANome;
   FComponenteMercadoPago.PIX.ClienteSobrenome     := ANome+AEmail;
-
   FComponenteMercadoPago.PIX.ClienteEmail         := AEmail;
   FComponenteMercadoPago.PIX.Descricao            := 'Pedido Delivery';
   FComponenteMercadoPago.PIX.Valor                := FValorPedido;
@@ -108,6 +109,7 @@ end;
 destructor TRPFoodServicePagamento.Destroy;
 begin
   FComponenteMercadoPago.Free;
+  FPagamentoOnline.Free;
   inherited;
 end;
 
@@ -115,7 +117,7 @@ function TRPFoodServicePagamento.GerarQRCode(AImage: TIWImage): TRPFoodServicePa
 var
   LStream: TMemoryStream;
 begin
-  Result := Self;
+    Result := Self;
 
   if FComponenteMercadoPago.PIX.Gerar then
   begin
@@ -132,7 +134,6 @@ begin
       QrCodeDigitavel   := FComponenteMercadoPago.PIX.QrCode;
       QrCodeURL         := FComponenteMercadoPago.PIX.Url;
       IdPIX             := FComponenteMercadoPago.PIX.ID;
-
     finally
       LStream.Free;
     end;
@@ -143,6 +144,34 @@ procedure TRPFoodServicePagamento.LeQRCodeDigitavel(var AQrcode, QUrl: string);
 begin
   AQrcode := QrCodeDigitavel;
   QUrl := QrCodeURL;
+end;
+
+function TRPFoodServicePagamento.Pedido(AValue: TRPFoodEntityPedido): TRPFoodServicePagamento;
+begin
+  Result:=Self;
+  FPedido:=AValue
+end;
+
+procedure TRPFoodServicePagamento.SalvarPagamento;
+var
+LPagamentoOnline:TRPFoodDAOPagamentoOnline;
+begin
+  LPagamentoOnline := FDAO.PagamentoOnlineDAO;
+  try
+    FPagamentoOnline:=TRPFoodEntityPagamentoOnline.Create;
+    FPagamentoOnline.IdEmpresa:=FPedido.idEmpresa;
+    FPagamentoOnline.IdCliente:=FPedido.cliente.idCliente;
+    FPagamentoOnline.ModeloIntegracao:='MERCADOPAGO';
+    FPagamentoOnline.UrlQrCodePagamento:=QrCodeURL;
+    FPagamentoOnline.ValorPagamentoOnLine:=FComponenteMercadoPago.PIX.Valor;
+    FPagamentoOnline.StatusPagamento:= FComponenteMercadoPago.PIX.Status.Descricao;
+    FPagamentoOnline.idautorizacaopagamento:=FComponenteMercadoPago.PIX.ID;
+    LPagamentoOnline.Insert(FPagamentoOnline);
+    FDAO.Commit;
+  except
+    FDAO.Rollback;
+    raise;
+  end;
 end;
 
 function TRPFoodServicePagamento.ValorPedido(AValor: Double): TRPFoodServicePagamento;

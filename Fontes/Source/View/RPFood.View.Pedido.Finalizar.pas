@@ -162,6 +162,7 @@ begin
   end;
 end;
 
+
 procedure TFrmPedidoFinalizar.IWAppFormCreate(Sender: TObject);
 begin
   inherited;
@@ -375,7 +376,7 @@ begin
           Exit;
         end;
 
-        LEmFuncionamento := FController.DAO.ConfiguracaoFuncionamento.EmHorarioDeFuncionamento;
+         LEmFuncionamento := FController.DAO.ConfiguracaoFuncionamento.EmHorarioDeFuncionamento;
           if not LEmFuncionamento  then
             FHoldOn.Text('ixee estamos fechado agora...')
             .Callback('OnCancelarPedido')

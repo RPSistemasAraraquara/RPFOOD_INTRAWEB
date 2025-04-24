@@ -28,7 +28,8 @@ uses
   RPFOOD.DAO.Happy_Hour,
   RPFood.DAO.Promocao,
   RPFood.DAO.RestricaoVenda,
-  RPFood.DAO.Configuracao.PagamentoMercadoPago;
+  RPFood.DAO.Configuracao.PagamentoMercadoPago,
+  RPFood.DAO.PagamentoOnline;
 
 type
   TRPFoodDAOCliente                          = RPFood.DAO.Cliente.TRPFoodDAOCliente;
@@ -44,7 +45,7 @@ type
   TRPfoodDAOPromocao                         = RPFood.DAO.Promocao.TRPfoodDAOPromocao;
   TRPFoodDAORestricaoVenda                   = RPFood.DAO.RestricaoVenda.TRPFoodDAORestricaoVenda;
   TRPFoodDAOConfiguracaoPagamentoMercadoPago = RPFood.DAO.Configuracao.PagamentoMercadoPago.TRPFoodDAOConfiguracaoPagamentoMercadoPago;
-
+  TRPFoodDAOPagamentoOnline                  = RPFood.DAO.PagamentoOnline.TRPFoodDAOPagamentoOnline;
 
   TRPFoodDAOFactory = class
   private
@@ -74,6 +75,7 @@ type
     FPromocaoDAO                             : TRPfoodDAOPromocao;
     FRestricaoVendaDAO                       : TRPFoodDAORestricaoVenda;
     FConfiguracaoPagamentoMercadoPagoDAO     : TRPFoodDAOConfiguracaoPagamentoMercadoPago;
+    FPagamentoOnlineDAO                      : TRPFoodDAOPagamentoOnline;
   public
     constructor Create(AConexao: IADRConnection);
     destructor Destroy; override;
@@ -102,6 +104,7 @@ type
     function PromocaoDAO                            : TRPfoodDAOPromocao;
     function RestricaoVendaDAO                      : TRPFoodDAORestricaoVenda;
     function ConfiguracaoPagamentoMercadoPagoDAO    : TRPFoodDAOConfiguracaoPagamentoMercadoPago;
+    function PagamentoOnlineDAO                     : TRPFoodDAOPagamentoOnline;
     function IdEmpresa(AValue: Integer) : TRPFoodDAOFactory;
     procedure StartTransaction;
     procedure Commit;
@@ -215,6 +218,7 @@ begin
   FPromocaoDAO.Free;
   FRestricaoVendaDAO.Free;
   FConfiguracaoPagamentoMercadoPagoDAO.Free;
+  FPagamentoOnlineDAO.Free;
   inherited;
 end;
 
@@ -261,6 +265,14 @@ begin
   if not Assigned(FOpcionalDAO) then
     FOpcionalDAO := TRPFoodDAOOpcional.Create(FConexao);
   Result := FOpcionalDAO;
+  Result.ManagerTransaction(True);
+end;
+
+function TRPFoodDAOFactory.PagamentoOnlineDAO: TRPFoodDAOPagamentoOnline;
+begin
+  if not Assigned(FPagamentoOnlineDAO) then
+    FPagamentoOnlineDAO:=TRPFoodDAOPagamentoOnline.Create(FConexao);
+  Result:=FPagamentoOnlineDAO;
   Result.ManagerTransaction(True);
 end;
 

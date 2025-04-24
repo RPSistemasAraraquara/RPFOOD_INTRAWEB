@@ -68,7 +68,6 @@ begin
   end;
 end;
 
-
 function TRPFoodViewPedidoSessao.Categorias: TObjectList<TRPFoodEntityCategoria>;
 var
   LCategoria: TRPFoodEntityCategoria;

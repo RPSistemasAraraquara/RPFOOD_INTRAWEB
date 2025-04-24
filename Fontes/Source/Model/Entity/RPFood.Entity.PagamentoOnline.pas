@@ -9,7 +9,7 @@ uses
   RPFood.Entity.Endereco;
 
   type
-  TPFoodEntityPagamentoOnline = class
+  TRPFoodEntityPagamentoOnline = class
   private
     FIdEmpresa: integer;
     FIdVenda: Integer;
@@ -18,10 +18,12 @@ uses
     FUrlQrCodePagamento:string;
     FValorPagamentoOnLine: Currency;
     FStatusPagamento: string;
+    Fidautorizacaopagamento: string;
   public
     property IdEmpresa: integer read FIdEmpresa write FIdEmpresa;
     property IdVenda: Integer read FIdVenda write FIdVenda;
     property IdCliente: Integer read FIdCliente write FIdCliente;
+    property idautorizacaopagamento: string read Fidautorizacaopagamento write Fidautorizacaopagamento;
     property ModeloIntegracao: string read FModeloIntegracao write FModeloIntegracao;
     property UrlQrCodePagamento: string read FUrlQrCodePagamento write FUrlQrCodePagamento;
     property ValorPagamentoOnLine: Currency read FValorPagamentoOnLine write FValorPagamentoOnLine;

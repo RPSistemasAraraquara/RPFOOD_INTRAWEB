@@ -23,7 +23,8 @@ uses
   RPFood.Entity.ConfiguracaoRPFood,
   RPFood.Entity.Happy_Hour,
   RPFood.Entity.RestricaoVenda,
-  RPFood.Entity.Configuracao.PagamentoMercadoPago;
+  RPFood.Entity.Configuracao.PagamentoMercadoPago,
+  RPFood.Entity.PagamentoOnline;
 
 type
   TRPFoodEntityADMINUsuario                       = RPFood.Entity.ADMIN.Usuario.TRPFoodEntityADMINUsuario;
@@ -55,6 +56,7 @@ type
   TRPFoodEntityRestricaoVenda                     = RPFood.Entity.RestricaoVenda.TRPFoodEntityRestricaoVenda;
   TRPFoodEntityPromocao                           = RPFood.Entity.Produto.TRPFoodEntityPromocao;
   TRPFoodEntityConfiguracaoPagamentoMercadoPago   = RPFood.Entity.Configuracao.PagamentoMercadoPago.TRPFoodEntityConfiguracaoPagamentoMercadoPago;
+  TRPFoodEntityPagamentoOnline                    = RPFood.Entity.PagamentoOnline.TRPFoodEntityPagamentoOnline;
 
 implementation
 
