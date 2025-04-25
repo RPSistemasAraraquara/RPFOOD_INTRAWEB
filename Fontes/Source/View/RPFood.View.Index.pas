@@ -303,31 +303,75 @@ begin
   end;
 end;
 
+//procedure TFrmIndex.CarregarProdutos;
+//var
+//  LProduto: TRPFoodEntityProduto;
+//  I: Integer;
+//begin
+//    FreeAndNil(FProdutos);
+//
+//  if not Assigned(FProdutos) then
+//    FProdutos := FController.DAO.ProdutoDAO.BuscarTodosProdutos(FSessaoCliente.IdEmpresa);
+//  for I := Pred(FProdutos.Count) downto 0 do
+//  begin
+//    LProduto := FProdutos[I];
+//    if LProduto.restricao.DiaDeRestricao then
+//      FProdutos.ExtractAt(I).Free
+//
+//    else
+//    begin
+//      FController.Service.ImagemService
+//      .Objeto(LProduto)
+//      .IdEmpresa(FSessaoCliente.IdEmpresa)
+//      .Carregar;
+//    end;
+//  end;
+//  FiltrarProdutos;
+//end;
 procedure TFrmIndex.CarregarProdutos;
 var
   LProduto: TRPFoodEntityProduto;
+  LCategoria: TRPFoodEntityCategoria;
+  LProdutosCategoria: TObjectList<TRPFoodEntityProduto>;
+  LCategorias: TObjectList<TRPFoodEntityCategoria>;
   I: Integer;
 begin
-    FreeAndNil(FProdutos);
+  FreeAndNil(FProdutos);
+  FProdutos := TObjectList<TRPFoodEntityProduto>.Create(True);
 
-  if not Assigned(FProdutos) then
-    FProdutos := FController.DAO.ProdutoDAO.BuscarTodosProdutos(FSessaoCliente.IdEmpresa);
-  for I := Pred(FProdutos.Count) downto 0 do
-  begin
-    LProduto := FProdutos[I];
-    if LProduto.restricao.DiaDeRestricao then
-      FProdutos.ExtractAt(I).Free
-
-    else
+  LCategorias := FController.DAO.CategoriaDAO.Listar(FSessaoCliente.IdEmpresa);
+  try
+    for LCategoria in LCategorias do
     begin
-      FController.Service.ImagemService
-      .Objeto(LProduto)
-      .IdEmpresa(FSessaoCliente.IdEmpresa)
-      .Carregar;
+      LProdutosCategoria := FController.DAO.ProdutoDAO.Listar(FSessaoCliente.IdEmpresa, LCategoria.codigo);
+      try
+        for I := Pred(LProdutosCategoria.Count) downto 0 do
+        begin
+          LProduto := LProdutosCategoria[I];
+          if LProduto.restricao.DiaDeRestricao then
+            LProdutosCategoria.ExtractAt(I).Free
+          else
+          begin
+            FController.Service.ImagemService
+              .Objeto(LProduto)
+              .IdEmpresa(FSessaoCliente.IdEmpresa)
+              .Carregar;
+
+            // Move o produto para FProdutos
+            FProdutos.Add(LProdutosCategoria.ExtractAt(I));
+          end;
+        end;
+      finally
+        FreeAndNil(LProdutosCategoria);
+      end;
     end;
+  finally
+    FreeAndNil(LCategorias);
   end;
   FiltrarProdutos;
 end;
+
+
 
 procedure TFrmIndex.FiltrarProdutos;
 var

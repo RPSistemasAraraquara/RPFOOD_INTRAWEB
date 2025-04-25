@@ -1,19 +1,27 @@
 inherited FrmIndex: TFrmIndex
+  Width = 1999
+  Height = 1223
+  Margins.Left = 6
+  Margins.Top = 6
+  Margins.Right = 6
+  Margins.Bottom = 6
   Title = 'Pedido'
   OnDestroy = IWAppFormDestroy
-  PixelsPerInch = 144
+  ExplicitWidth = 1999
+  ExplicitHeight = 1223
+  PixelsPerInch = 168
   DesignLeft = 2
   DesignTop = 2
   object IWEDT_FILTRO: TIWEdit [0]
     AlignWithMargins = False
-    Left = 424
-    Top = 352
-    Width = 200
-    Height = 32
-    Margins.Left = 5
-    Margins.Top = 5
-    Margins.Right = 5
-    Margins.Bottom = 5
+    Left = 495
+    Top = 411
+    Width = 233
+    Height = 37
+    Margins.Left = 6
+    Margins.Top = 6
+    Margins.Right = 6
+    Margins.Bottom = 6
     Visible = False
     ExtraTagParams.Strings = (
       'placeholder="O que voc'#234' quer comer hoje..."')
