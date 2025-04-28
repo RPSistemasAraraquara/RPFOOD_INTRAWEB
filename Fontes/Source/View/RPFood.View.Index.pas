@@ -263,7 +263,6 @@ begin
   ExecutaJavaScript(LComando);
 end;
 
-
 procedure TFrmIndex.PreencheProdutos;
 var
   LComando: string;
@@ -328,6 +327,7 @@ end;
 //  end;
 //  FiltrarProdutos;
 //end;
+
 procedure TFrmIndex.CarregarProdutos;
 var
   LProduto: TRPFoodEntityProduto;
@@ -371,13 +371,10 @@ begin
   FiltrarProdutos;
 end;
 
-
-
 procedure TFrmIndex.FiltrarProdutos;
 var
   LFiltro: string;
   LProduto: TRPFoodEntityProduto;
-
 begin
   if not Assigned(FProdutosFiltrados) then
     FProdutosFiltrados := TObjectList<TRPFoodEntityProduto>.Create(False);
@@ -386,8 +383,8 @@ begin
   LFiltro := Trim(IWEDT_FILTRO.Text);
   for LProduto in FProdutos do
   begin
-     if (LFiltro = EmptyStr) or (LProduto.descricao.ToLower.Contains(LFiltro.ToLower)) then
-          FProdutosFiltrados.Add(LProduto);
+    if (LFiltro = EmptyStr) or (LProduto.descricao.ToLower.Contains(LFiltro.ToLower)) then
+      FProdutosFiltrados.Add(LProduto);
   end;
 end;
 

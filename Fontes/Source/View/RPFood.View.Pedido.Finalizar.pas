@@ -311,14 +311,12 @@ procedure TFrmPedidoFinalizar.VerificaRetirada;
 begin
   if LConfiguracaoFOOD.PermiteRetiradanoLocal then
   begin
-    IWLBLRETIRADA.text:='''
-      <a class="nav-link" data-bs-toggle="tab" href="#tab_retirada"
-      onclick="javascript:ajaxCall('OnSelecionarTipoEntrega', 'tipoRetirada=R')">
-      <i class="la la-user me-2"></i>
-      Retirada
-      </a>
-
-    ''' ;
+    IWLBLRETIRADA.Text :=
+      '<a class="nav-link" data-bs-toggle="tab" href="#tab_retirada"' + sLineBreak +
+      'onclick="javascript:ajaxCall(''OnSelecionarTipoEntrega'', ''tipoRetirada=R'')">' + sLineBreak +
+      '<i class="la la-user me-2"></i>' + sLineBreak +
+      'Retirada' + sLineBreak +
+      '</a>';
   end;
 end;
 

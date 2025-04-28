@@ -137,47 +137,44 @@
             });
 
             tagLista.innerHTML = `
-			        <div class="tab-pane fade show active" id="pills-grid" role="tabpanel" aria-labelledby="pills-grid-tab">
-			        <div class="row">
-			            ${conteudoTag}
-			        </div>
-			        </div>
-			    `;
+                <div class="tab-pane fade show active" id="pills-grid" role="tabpanel" aria-labelledby="pills-grid-tab">
+                    <div class="row">${conteudoTag}</div>
+                </div>`;
         }
 
         function AdicionarCategoria(ListaCategorias) {
-        let conteudoTag = '';
-        if (!Array.isArray(ListaCategorias)) return;  
+            let conteudoTag = '';
+            if (!Array.isArray(ListaCategorias)) 
+                return;  
 
-        ListaCategorias.forEach(function (Categoria) {
-        conteudoTag += `
-        <div class="swiper-slide" style="cursor: pointer" onclick="javascript:ajaxCall('OnClickCategoria', 'idCategoria=${Categoria.codigo}');">
-        <div class="card dishe-bx exclusive1" style="height: 240px;">
-        <div class="card-body p-0 text-center">
-        <img src="${Categoria.caminhoHtmlImagem}" style="margin:8px; width: 100px; height: 130px;">
-        </div>
-        <span class="badge text-wrap limited-text" data-maxlength="24" style="font-size: 10px;color:darkgoldenrod;">${Categoria.descricao}</span>  
-        </div>
-        </div>
-        `;
-        });
+            ListaCategorias.forEach(function (Categoria) {
+                conteudoTag += `
+                    <div class="swiper-slide" style="cursor: pointer" onclick="javascript:ajaxCall('OnClickCategoria', 'idCategoria=${Categoria.codigo}');">
+                        <div class="card dishe-bx exclusive1" style="height: 240px;">
+                            <div class="card-body p-0 text-center">
+                                <img src="${Categoria.caminhoHtmlImagem}" style="margin:8px; width: 100px; height: 130px;">
+                            </div>
+                            <span class="badge text-wrap limited-text" data-maxlength="24" style="font-size: 10px;color:darkgoldenrod;">${Categoria.descricao}</span>  
+                        </div>
+                    </div>`;
+            });
 
-        const elements = document.querySelectorAll(".limited-text");
-        elements.forEach(element => {
-        const maxLength = element.getAttribute("data-maxlength");
-        const text = element.innerText;
-        if (text.length > maxLength) {
-        element.innerText = `${text.substring(0, maxLength)}...`;
-        }
-        });
+            const elements = document.querySelectorAll(".limited-text");
+            elements.forEach(element => {
+                const maxLength = element.getAttribute("data-maxlength");
+                const text = element.innerText;
+                if (text.length > maxLength) {
+                    element.innerText = `${text.substring(0, maxLength)}...`;
+                }
+            });
 
-        document.getElementById('listaCategorias').innerHTML = conteudoTag;
+            document.getElementById('listaCategorias').innerHTML = conteudoTag;
         }
 
         function AdicionarProdutoDestaque(IdProduto, Descricao, Imagem) {
-        const tagLista = document.getElementById('listadestaques');
-        if (!tagLista) {
-        return;
+            const tagLista = document.getElementById('listadestaques');
+            if (!tagLista) {
+                return;
         }
         
         const container = document.createElement('div');
@@ -209,46 +206,46 @@
         }
 
         function truncateTextInContainer(container) {
-        const elements = container.getElementsByClassName("limited-text");
-        Array.from(elements).forEach(element => {
-        const maxLength = parseInt(element.getAttribute("data-maxlength"), 10);
-        if (element.innerText.length > maxLength) {
-        element.innerText = element.innerText.substring(0, maxLength) + "...";
-        }
-        });
+            const elements = container.getElementsByClassName("limited-text");
+            Array.from(elements).forEach(element => {
+                const maxLength = parseInt(element.getAttribute("data-maxlength"), 10);
+                if (element.innerText.length > maxLength) {
+                    element.innerText = element.innerText.substring(0, maxLength) + "...";
+                }
+            });
         }
 
         function toggleFavorite(id) {
-        console.log(`Toggle favorite state for product ID: ${id}`);
-
+            console.log(`Toggle favorite state for product ID: ${id}`);
         }
+        
         // Opcionais
         function AdicionarItemPedidoOpcional(ItemPedido, IndexItem) {
-        let conteudoTag = '';
-        if (ItemPedido.opcionais) {
-        ItemPedido.opcionais.forEach((Opcional, indexOpcional) => {
-        conteudoTag += `
-            <div class="order-check d-flex align-items-stretch my-3">
-            <div class="dlab-info">
-            <div class="d-flex align-items-stretch">
-            <h6 class="dlab-title text-wrap text-orange">(UP).. ${addLineBreaks(sanitizeHtml(Opcional.opcional.descricao), 40)}</h6>
-            <h6 class="dlab-title text-wrap text-orange">${FormatCurrency(Opcional.valorTotal)}</h6>
-            </div>
+            let conteudoTag = '';
+            if (ItemPedido.opcionais) {
+                ItemPedido.opcionais.forEach((Opcional, indexOpcional) => {
+                    conteudoTag += `
+                        <div class="order-check d-flex align-items-stretch my-3">
+                        <div class="dlab-info">
+                        <div class="d-flex align-items-stretch">
+                        <h6 class="dlab-title text-wrap text-orange">(UP).. ${addLineBreaks(sanitizeHtml(Opcional.opcional.descricao), 40)}</h6>
+                        <h6 class="dlab-title text-wrap text-orange">${FormatCurrency(Opcional.valorTotal)}</h6>
+                        </div>
 
-            <div class="d-flex align-items-center justify-content-between">
-            <span class="text-wrap text-orange">${FormatCurrency(Opcional.valorUnitario)}</span>
-            <div class="quntity">
-            <button aria-label="Decrease quantity" data-decrease onclick="AlterarQuantidadeOpcional(${IndexItem}, ${indexOpcional}, true)">-</button>
-            <input data-value type="text" value="${Opcional.quantidade}" disabled />
-            <button aria-label="Increase quantity" data-increase onclick="AlterarQuantidadeOpcional(${IndexItem}, ${indexOpcional}, false)">+</button>
-            </div>
-            </div>
-            </div>
-            </div>
-        `;
-        });
-        }
-        return conteudoTag;
+                        <div class="d-flex align-items-center justify-content-between">
+                        <span class="text-wrap text-orange">${FormatCurrency(Opcional.valorUnitario)}</span>
+                        <div class="quntity">
+                        <button aria-label="Decrease quantity" data-decrease onclick="AlterarQuantidadeOpcional(${IndexItem}, ${indexOpcional}, true)">-</button>
+                        <input data-value type="text" value="${Opcional.quantidade}" disabled />
+                        <button aria-label="Increase quantity" data-increase onclick="AlterarQuantidadeOpcional(${IndexItem}, ${indexOpcional}, false)">+</button>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+                    `;
+                });
+            }
+            return conteudoTag;
         }
 
         function sanitizeHtml(html) {
@@ -258,37 +255,37 @@
 
         // Frações
         function AdicionarItemPedidoFracao(ItemPedido) {
-        let conteudoTag = '';
-        if (ItemPedido.fracoes) {
-        ItemPedido.fracoes.forEach(function (Fracao) {
-   
-        if (!Fracao.produto || !Fracao.produto.caminhoHtmlImagem || !Fracao.produto.descricao) {
-        console.error('Missing product details');
-        return; 
-        }
+            let conteudoTag = '';
+            if (ItemPedido.fracoes) {
+                ItemPedido.fracoes.forEach(function (Fracao) {
+    
+                    if (!Fracao.produto || !Fracao.produto.caminhoHtmlImagem || !Fracao.produto.descricao) {
+                        console.error('Missing product details');
+                        return; 
+                    }
 
-        const descricaoSanitized = sanitizeHtml(Fracao.produto.descricao);
-        const descricaoWithLineBreaks = addLineBreaks(descricaoSanitized, 40);
-        const tamanhoInfo = Fracao.tamanho ? `[Tamanho: ${sanitizeHtml(Fracao.tamanho)}]` : '';
+                    const descricaoSanitized = sanitizeHtml(Fracao.produto.descricao);
+                    const descricaoWithLineBreaks = addLineBreaks(descricaoSanitized, 40);
+                    const tamanhoInfo = Fracao.tamanho ? `[Tamanho: ${sanitizeHtml(Fracao.tamanho)}]` : '';
      
-        conteudoTag += `
-        <div class="order-check d-flex align-items-center my-3">
-        <div class="dlab-media">
-        <img src="${Fracao.produto.caminhoHtmlImagem}" alt="Product Image">
-        </div>
-        <div class="dlab-info">
-        <div class="d-flex align-items-center justify-content-between">
-        <h5 class="dlab-title text-wrap text-orange">
-        (+sabor) ${descricaoWithLineBreaks} ${tamanhoInfo}
-        </h5>
-        </div>
-        </div>
-        </div>
-        `;
-        });
-        }
+                    conteudoTag += `
+                        <div class="order-check d-flex align-items-center my-3">
+                        <div class="dlab-media">
+                        <img src="${Fracao.produto.caminhoHtmlImagem}" alt="Product Image">
+                        </div>
+                        <div class="dlab-info">
+                        <div class="d-flex align-items-center justify-content-between">
+                        <h5 class="dlab-title text-wrap text-orange">
+                        (+sabor) ${descricaoWithLineBreaks} ${tamanhoInfo}
+                        </h5>
+                        </div>
+                        </div>
+                        </div>
+                    `;
+                });
+            }
 
-        return conteudoTag;
+            return conteudoTag;
         }
 
         function sanitizeHtml(html) {
@@ -296,20 +293,20 @@
         }
 
         function addLineBreaks(text, maxLineLength) { 
-        const result = [];
-        let line = '';
-        text.split(' ').forEach(word => {
-        if ((line + word).length > maxLineLength) {
-        result.push(line);
-        line = word;
-        } else {
-        line += (line.length > 0 ? ' ' : '') + word;
-        }
-        });
-        if (line) {
-        result.push(line);
-        }
-        return result.join('<br>');
+            const result = [];
+            let line = '';
+            text.split(' ').forEach(word => {
+                if ((line + word).length > maxLineLength) {
+                    result.push(line);
+                    line = word;
+                } else {
+                    line += (line.length > 0 ? ' ' : '') + word;
+                }
+            });
+            if (line) {
+                result.push(line);
+            }
+            return result.join('<br>');
         }
 
 
@@ -320,46 +317,42 @@
             let index = 0;
             if (ListaItens) {
                 ListaItens.forEach(function (Item) {
-                    conteudoTag += `
-                                
-                                    <div class="row">
-            <div class="col-sm-12 col-xl-12 col-lg-12 col-xxl-6 col-md-6 offset-sm-1">
-                <div class="order-check d-flex align-items-center my-3" id="div_item_${index}">
-                <div class="dlab-media">
-                    <img src="${Item.produto.caminhoHtmlImagem}">
-                </div>
-                <div class="dlab-info">
-                    <div class="d-flex align-items-center justify-content-between">
-                    <h5 class="dlab-title text-wrap text-orange">
-                        ${addLineBreaks(Item.produto.descricao, 40)} ${Item.tamanho ? `[Tamanho: ${Item.tamanho} ]` : ''}                       
-                    </h5>                          
-                    
-                    <div class="d-flex align-content-end justify-content-end">
-                        <h5 class="dlab-title text-wrap text-orange">
-                        ${FormatCurrency(Item.valorUnitario)}                        
-                        </h5>
-                        <a href="javascript:ajaxCall('OnEditarItemPedido', 'index=${index}');"></a>
-                    </div>
-                    
-                    </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                    <div class="quntity">
-                        <button data-decrease onclick="AlterarQuantidadeItem('${Item.produto.codigo}', ${index}, true)">-</button>
-                        <input data-value type="text" value="${Item.quantidade}" id="item_quantidade_${index}" disabled />
-                        <button data-increase onclick="AlterarQuantidadeItem('${Item.produto.codigo}', ${index})">+</button>                       
-                    </div>
-                    ${FormatCurrency(Item.valorTotalProduto)}
-                   
-                    </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        ${addLineBreaks(Item.observacao , 40)} 
-                        </div>
-                </div>
-                </div>
-            </div>
-            </div>
-			                
-			            `;
+                    conteudoTag += `                                
+                        <div class="row">
+                            <div class="col-sm-12 col-xl-12 col-lg-12 col-xxl-6 col-md-6 offset-sm-1">
+                                <div class="order-check d-flex align-items-center my-3" id="div_item_${index}">
+                                    <div class="dlab-media">
+                                        <img src="${Item.produto.caminhoHtmlImagem}">
+                                    </div>
+                                    <div class="dlab-info">
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h5 class="dlab-title text-wrap text-orange">
+                                                ${addLineBreaks(Item.produto.descricao, 40)} ${Item.tamanho ? `[Tamanho: ${Item.tamanho} ]` : ''}                       
+                                            </h5>                          
+                                        
+                                            <div class="d-flex align-content-end justify-content-end">
+                                                <h5 class="dlab-title text-wrap text-orange">
+                                                    ${FormatCurrency(Item.valorUnitario)}                        
+                                                </h5>
+                                                <a href="javascript:ajaxCall('OnEditarItemPedido', 'index=${index}');"></a>
+                                            </div>                                    
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <div class="quntity">
+                                                <button data-decrease onclick="AlterarQuantidadeItem('${Item.produto.codigo}', ${index}, true)">-</button>
+                                                    <input data-value type="text" value="${Item.quantidade}" id="item_quantidade_${index}" disabled />
+                                                <button data-increase onclick="AlterarQuantidadeItem('${Item.produto.codigo}', ${index})">+</button>                       
+                                            </div>
+                                            ${FormatCurrency(Item.valorTotalProduto)}
+                                        
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            ${addLineBreaks(Item.observacao , 40)} 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
 
                     conteudoTag += AdicionarItemPedidoFracao(Item);
                     conteudoTag += AdicionarItemPedidoOpcional(Item, index);

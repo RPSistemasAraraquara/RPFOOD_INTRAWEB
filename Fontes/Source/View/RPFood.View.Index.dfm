@@ -1,21 +1,21 @@
 inherited FrmIndex: TFrmIndex
-  Width = 1999
-  Height = 1223
+  Width = 715
+  Height = 415
   Margins.Left = 6
   Margins.Top = 6
   Margins.Right = 6
   Margins.Bottom = 6
   Title = 'Pedido'
   OnDestroy = IWAppFormDestroy
-  ExplicitWidth = 1999
-  ExplicitHeight = 1223
+  ExplicitWidth = 715
+  ExplicitHeight = 415
   PixelsPerInch = 168
   DesignLeft = 2
   DesignTop = 2
   object IWEDT_FILTRO: TIWEdit [0]
     AlignWithMargins = False
-    Left = 495
-    Top = 411
+    Left = 119
+    Top = 91
     Width = 233
     Height = 37
     Margins.Left = 6

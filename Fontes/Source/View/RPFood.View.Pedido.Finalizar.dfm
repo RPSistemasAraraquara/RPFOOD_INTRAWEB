@@ -10,8 +10,8 @@ inherited FrmPedidoFinalizar: TFrmPedidoFinalizar
   ExplicitWidth = 1034
   ExplicitHeight = 960
   PixelsPerInch = 168
-  DesignLeft = 4
-  DesignTop = 4
+  DesignLeft = 2
+  DesignTop = 2
   object IWEDT_VALOR_PAGO: TIWEdit [0]
     AlignWithMargins = False
     Left = 37
