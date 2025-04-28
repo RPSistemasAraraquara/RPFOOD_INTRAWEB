@@ -269,7 +269,6 @@ var
   LComando: string;
   LJSON: string;
   LCategoria: TRPFoodEntityCategoria;
-  LTotalPorCategoria: Integer;
   LProduto: TRPFoodEntityProduto;
   LCategorias: TObjectList<TRPFoodEntityCategoria>;
   LJSONCategorias: TJSONArray;
@@ -277,56 +276,53 @@ var
   LJSONProduto: TJSONObject;
   LJSONProdutos: TJSONArray;
 begin
-  LJSON := '[]';
   LJSONCategorias := TJSONArray.Create;
-  LTotalPorCategoria := 0;
-  LCategorias := TObjectList<TRPFoodEntityCategoria>.Create(False);
   try
-    for LCategoria in FSessaoCliente.PedidoSessao.Categorias do
-    begin
-      LTotalPorCategoria := 0;
-      for LProduto in FProdutosFiltrados do
+    LCategorias := TObjectList<TRPFoodEntityCategoria>.Create(False);
+    try
+      for LCategoria in FSessaoCliente.PedidoSessao.Categorias do
       begin
-        if LProduto.idGrupo = LCategoria.codigo then
+        for LProduto in FProdutosFiltrados do
         begin
-          LCategorias.Add(LCategoria);
-          Break;
-        end;
-      end;
-    end;
-
-    for LCategoria in LCategorias do
-    begin
-      LJSONProdutos := nil;
-      LJSONCategoria := TJSONObject.Create;
-      LJSONCategoria.AddPair('descricao', LCategoria.descricao);
-      LJSONCategorias.AddElement(LJSONCategoria);
-      for LProduto in FProdutosFiltrados do
-      begin
-        if LProduto.idGrupo = LCategoria.codigo then
-        begin
-          if not Assigned(LJSONProdutos) then
+          if LProduto.idGrupo = LCategoria.codigo then
           begin
-            LJSONProdutos := TJSONArray.Create;
-            LJSONCategoria.AddPair('produtos', LJSONProdutos);
+            LCategorias.Add(LCategoria);
+            Break;
           end;
-          LJSONProduto := FController.Components.JSON.ToJSONObject(LProduto);
-          LJSONProdutos.AddElement(LJSONProduto);
         end;
       end;
+
+      for LCategoria in LCategorias do
+      begin
+        LJSONProdutos := nil;
+        LJSONCategoria := TJSONObject.Create;
+        LJSONCategoria.AddPair('codigo', TJSONNumber.Create(LCategoria.codigo))
+          .AddPair('descricao', LCategoria.descricao);
+        LJSONCategorias.AddElement(LJSONCategoria);
+        for LProduto in FProdutosFiltrados do
+        begin
+          if LProduto.idGrupo = LCategoria.codigo then
+          begin
+            if not Assigned(LJSONProdutos) then
+            begin
+              LJSONProdutos := TJSONArray.Create;
+              LJSONCategoria.AddPair('produtos', LJSONProdutos);
+            end;
+            LJSONProduto := FController.Components.JSON.ToJSONObject(LProduto);
+            LJSONProdutos.AddElement(LJSONProduto);
+          end;
+        end;
+      end;
+    finally
+      LCategorias.Free;
     end;
+
+    LJSON := LJSONCategorias.ToString;
+    LComando := Format('AdicionarProduto(%s);', [LJSON]);
+    ExecutaJavaScript(LComando);
   finally
-    LCategorias.Free;
+    LJSONCategorias.Free;
   end;
-
-
-  LJSON := LJSONCategorias.ToString;
-//  if Assigned(FProdutosFiltrados) then
-//    LJSON := FController.Components.JSON
-//      .ToJSONString<TRPFoodEntityProduto>(FProdutosFiltrados);
-
-  LComando := Format('AdicionarProduto(%s);', [LJSON]);
-  ExecutaJavaScript(LComando);
 end;
 
 procedure TFrmIndex.PreencheProdutosDestaque;

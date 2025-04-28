@@ -94,9 +94,20 @@
             var conteudoTag = '';
             tagLista.innerHTML = '';
 
+            conteudoTag += '<div class="accordion accordion-primary" id="accordion-one">';
             ListaCategorias.forEach(function (Categoria) {
 
-                conteudoTag += `<h4 class="mb-0 cate-title" style="color:darkgoldenrod;">${Categoria.descricao}</h4>`;
+                conteudoTag += `
+                    <div class="accordion-item">
+                        <div class="accordion-header rounded-lg" id="heading_${Categoria.codigo}" data-bs-toggle="collapse" data-bs-target="#categoria_${Categoria.codigo}" 
+                            aria-controls="categoria_${Categoria.codigo}"   aria-expanded="true" role="button">
+                            <span class="accordion-header-icon"></span>
+                            <span class="accordion-header-text">${Categoria.descricao}</span>
+                            <span class="accordion-header-indicator"></span>
+                        </div>
+                        <div id="categoria_${Categoria.codigo}" class="collapse show" aria-labelledby="heading_${Categoria.codigo}" data-bs-parent="#accordion-one">
+                `;            
+
 
                 Categoria.produtos.forEach(function (Produto) {
                     conteudoTag += `
@@ -140,7 +151,13 @@
                         </div>
                         `;
                 });
+
+                conteudoTag += '</div></div>';
             });
+
+            conteudoTag += '</div>';
+
+            console.log(conteudoTag);
 
             tagLista.innerHTML = `
                 <div class="tab-pane fade show active" id="pills-grid" role="tabpanel" aria-labelledby="pills-grid-tab">
