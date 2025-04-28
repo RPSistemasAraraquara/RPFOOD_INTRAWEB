@@ -4,6 +4,7 @@ interface
 
 uses
   System.Classes,
+  System.JSON,
   Vcl.Controls,
   Vcl.Forms,
   RPFood.View.Padrao,
@@ -267,11 +268,62 @@ procedure TFrmIndex.PreencheProdutos;
 var
   LComando: string;
   LJSON: string;
+  LCategoria: TRPFoodEntityCategoria;
+  LTotalPorCategoria: Integer;
+  LProduto: TRPFoodEntityProduto;
+  LCategorias: TObjectList<TRPFoodEntityCategoria>;
+  LJSONCategorias: TJSONArray;
+  LJSONCategoria: TJSONObject;
+  LJSONProduto: TJSONObject;
+  LJSONProdutos: TJSONArray;
 begin
   LJSON := '[]';
-  if Assigned(FProdutosFiltrados) then
-    LJSON := FController.Components.JSON
-      .ToJSONString<TRPFoodEntityProduto>(FProdutosFiltrados);
+  LJSONCategorias := TJSONArray.Create;
+  LTotalPorCategoria := 0;
+  LCategorias := TObjectList<TRPFoodEntityCategoria>.Create(False);
+  try
+    for LCategoria in FSessaoCliente.PedidoSessao.Categorias do
+    begin
+      LTotalPorCategoria := 0;
+      for LProduto in FProdutosFiltrados do
+      begin
+        if LProduto.idGrupo = LCategoria.codigo then
+        begin
+          LCategorias.Add(LCategoria);
+          Break;
+        end;
+      end;
+    end;
+
+    for LCategoria in LCategorias do
+    begin
+      LJSONProdutos := nil;
+      LJSONCategoria := TJSONObject.Create;
+      LJSONCategoria.AddPair('descricao', LCategoria.descricao);
+      LJSONCategorias.AddElement(LJSONCategoria);
+      for LProduto in FProdutosFiltrados do
+      begin
+        if LProduto.idGrupo = LCategoria.codigo then
+        begin
+          if not Assigned(LJSONProdutos) then
+          begin
+            LJSONProdutos := TJSONArray.Create;
+            LJSONCategoria.AddPair('produtos', LJSONProdutos);
+          end;
+          LJSONProduto := FController.Components.JSON.ToJSONObject(LProduto);
+          LJSONProdutos.AddElement(LJSONProduto);
+        end;
+      end;
+    end;
+  finally
+    LCategorias.Free;
+  end;
+
+
+  LJSON := LJSONCategorias.ToString;
+//  if Assigned(FProdutosFiltrados) then
+//    LJSON := FController.Components.JSON
+//      .ToJSONString<TRPFoodEntityProduto>(FProdutosFiltrados);
 
   LComando := Format('AdicionarProduto(%s);', [LJSON]);
   ExecutaJavaScript(LComando);

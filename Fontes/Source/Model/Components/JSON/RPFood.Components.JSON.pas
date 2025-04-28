@@ -15,6 +15,7 @@ type
   public
     function FromJSONString<T: class, constructor>(AStrJson: string): T;
     function ToJSONString(AObject: TObject): string; overload;
+    function ToJSONObject(AObject: TObject): TJSONObject;
     function ToJSONString<T: class, constructor>(AList: TObjectList<T>): string; overload;
   end;
 
@@ -25,6 +26,11 @@ implementation
 function TRPFoodComponentsJSON.FromJSONString<T>(AStrJson: string): T;
 begin
   Result := TGBJSONDefault.Serializer<T>.JsonStringToObject(AStrJson);
+end;
+
+function TRPFoodComponentsJSON.ToJSONObject(AObject: TObject): TJSONObject;
+begin
+  Result := TGBJSONDefault.Deserializer.ObjectToJsonObject(AObject);
 end;
 
 function TRPFoodComponentsJSON.ToJSONString(AObject: TObject): string;
