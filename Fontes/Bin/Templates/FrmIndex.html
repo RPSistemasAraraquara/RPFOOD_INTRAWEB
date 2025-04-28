@@ -81,8 +81,9 @@
 
     <br>
     
-    <div id="pills-grid" class="tab-pane fade show active" role="tabpanel" aria-labelledby="pills-grid-tab">
-    </div>
+    <div id="categorias_produtos">
+
+    </div>    
 
     <script src="./vendor/chart.js/chart.bundle.min.js"></script>
     <script src="./vendor/swiper/js/swiper-bundle.min.js"></script>
@@ -90,7 +91,7 @@
 
     <script>
         function AdicionarProduto(ListaCategorias) {
-            var tagLista = document.getElementById('pills-grid');
+            var tagLista = document.getElementById('categorias_produtos');
             var conteudoTag = '';
             tagLista.innerHTML = '';
 
@@ -106,6 +107,7 @@
                             <span class="accordion-header-indicator"></span>
                         </div>
                         <div id="categoria_${Categoria.codigo}" class="collapse show" aria-labelledby="heading_${Categoria.codigo}" data-bs-parent="#accordion-one">
+                            <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="pills-grid-tab">
                 `;            
 
 
@@ -134,7 +136,7 @@
                                 </div>
                                 </div>
                                 <a href="javascript:void(0);"><h4>Bora saber mais detalhes...</h4></a>
-                            </div>			            
+                            </div>		            
                             
                             <div class="card-footer border-1 pt-2">
                                 <div class="common d-flex align-items-center justify-content-between">
@@ -152,7 +154,7 @@
                         `;
                 });
 
-                conteudoTag += '</div></div>';
+                conteudoTag += '</div></div></div>';
             });
 
             conteudoTag += '</div>';
