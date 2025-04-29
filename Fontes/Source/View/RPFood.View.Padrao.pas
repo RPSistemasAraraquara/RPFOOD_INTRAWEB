@@ -39,7 +39,8 @@ uses
   IWHTML40Container,
   IWRegion,
   UserSessionUnitCliente,
-  RTTI, TypInfo,
+  RTTI,
+  TypInfo,
   Growl4D.Interfaces,
   Growl4D.Types,
   Growl4D.IW,
@@ -210,8 +211,6 @@ procedure TFrmPadrao.OnSair(AParams: TStringList);
 begin
  WebApplication.TerminateAndRedirect('login.html');
 end;
-
-
 
 procedure TFrmPadrao.RecarregarTag(ATagId: string);
 var

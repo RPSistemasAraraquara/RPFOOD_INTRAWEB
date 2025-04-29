@@ -110,7 +110,7 @@ end;
 
 function TRPFoodResources.VersaoSistema: string;
 begin
-  Result := 'v 6.0.0';
+  Result := 'v 7.0.0';
 end;
 
 procedure TRPFoodResources.SaveConfig(AFileName: string);

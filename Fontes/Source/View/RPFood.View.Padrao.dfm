@@ -1,8 +1,12 @@
 object FrmPadrao: TFrmPadrao
   Left = 0
   Top = 0
-  Width = 979
-  Height = 599
+  Width = 1713
+  Height = 1048
+  Margins.Left = 5
+  Margins.Top = 5
+  Margins.Right = 5
+  Margins.Bottom = 5
   RenderInvisibleControls = True
   AllowPageAccess = True
   ConnectionMode = cmAny
@@ -16,6 +20,7 @@ object FrmPadrao: TFrmPadrao
   LockOnSubmit = True
   ShowHint = True
   KeepAlive = True
+  PixelsPerInch = 168
   DesignLeft = 2
   DesignTop = 2
   object IWTemplate: TIWTemplateProcessorHTML

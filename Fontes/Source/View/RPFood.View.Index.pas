@@ -350,32 +350,6 @@ begin
   end;
 end;
 
-//procedure TFrmIndex.CarregarProdutos;
-//var
-//  LProduto: TRPFoodEntityProduto;
-//  I: Integer;
-//begin
-//    FreeAndNil(FProdutos);
-//
-//  if not Assigned(FProdutos) then
-//    FProdutos := FController.DAO.ProdutoDAO.BuscarTodosProdutos(FSessaoCliente.IdEmpresa);
-//  for I := Pred(FProdutos.Count) downto 0 do
-//  begin
-//    LProduto := FProdutos[I];
-//    if LProduto.restricao.DiaDeRestricao then
-//      FProdutos.ExtractAt(I).Free
-//
-//    else
-//    begin
-//      FController.Service.ImagemService
-//      .Objeto(LProduto)
-//      .IdEmpresa(FSessaoCliente.IdEmpresa)
-//      .Carregar;
-//    end;
-//  end;
-//  FiltrarProdutos;
-//end;
-
 procedure TFrmIndex.CarregarProdutos;
 var
   LProduto: TRPFoodEntityProduto;
