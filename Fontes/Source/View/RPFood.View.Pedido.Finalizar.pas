@@ -209,7 +209,7 @@ end;
 procedure TFrmPedidoFinalizar.IWEDTSELECIONAENDERECOSAsyncClick(Sender: TObject; EventParams: TStringList);
 begin
   inherited;
-    WebApplication.GoToURL(ROTA_SELECIONA_ENDERECOS);
+  WebApplication.GoToURL(ROTA_SELECIONA_ENDERECOS);
 end;
 
 procedure TFrmPedidoFinalizar.IWOBSERVACAOAsyncChange(Sender: TObject;  EventParams: TStringList);
@@ -334,12 +334,22 @@ end;
 procedure TFrmPedidoFinalizar.OnFinalizarPedido(AParams: TStringList);
 var
   LEmFuncionamento: Boolean;
+  LConfiguracaoRPFOOD: TRPFoodEntityConfiguracaoRPFood;
 begin
+   LConfiguracaoRPFOOD                 := FController.DAO.ConfiguracaoRPFoodDAO.Get(FSessaoCliente.IdEmpresa);
+
+
  if (LConfiguracaoFOOD.pedidoMinimo > 0) and
      ((FPedido.valorTotal - FPedido.taxaEntrega) < LConfiguracaoFOOD.pedidoMinimo) then
   begin
     MensagemErro('Opa, houve um erro',  Format('Pedido mínimo não atingido. Valor mínimo: %f', [LConfiguracaoFOOD.pedidoMinimo]));
     Exit;
+  end;
+
+  if LConfiguracaoRPFOOD.IntegracaoMercadoPago and  FPedido.formaPagamento.UtilizaPIX then
+  begin
+    WebApplication.GoToURL(ROTA_PEDIDO_PAGAMENTO);
+    exit;
   end;
 
   LEmFuncionamento := FController.DAO.ConfiguracaoFuncionamento.EmHorarioDeFuncionamento;
