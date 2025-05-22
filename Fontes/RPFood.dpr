@@ -97,7 +97,14 @@ uses
   RPFood.View.BuscarEndereco in 'Source\View\RPFood.View.BuscarEndereco.pas' {FrmBuscarEndereco: TIWAppForm},
   RPFood.Migrations.Init in 'Migrations\RPFood.Migrations.Init.pas',
   RPFood.Migrations.M0000001.EmpresaCriarTabela in 'Migrations\RPFood.Migrations.M0000001.EmpresaCriarTabela.pas',
-  RPFood.Entity.Configuracao.PagamentoMercadoPago in 'Source\Model\Entity\RPFood.Entity.Configuracao.PagamentoMercadoPago.pas';
+  RPFood.Entity.Configuracao.PagamentoMercadoPago in 'Source\Model\Entity\RPFood.Entity.Configuracao.PagamentoMercadoPago.pas',
+  RPFood.Entity.PagamentoOnline in 'Source\Model\Entity\RPFood.Entity.PagamentoOnline.pas',
+  RPFood.DAO.Configuracao.PagamentoMercadoPago in 'Source\Model\DAO\RPFood.DAO.Configuracao.PagamentoMercadoPago.pas',
+  RPFood.DAO.PagamentoOnline in 'Source\Model\DAO\RPFood.DAO.PagamentoOnline.pas',
+  RPFood.Service.Pagamento in 'Source\Model\Service\Pagamento\RPFood.Service.Pagamento.pas',
+  RPFood.View.Pedido.Pagamento in 'Source\View\RPFood.View.Pedido.Pagamento.pas' {FrmPedidoPagamentoOnline: TIWAppForm},
+  RPFood.Migrations.M0000002.AddFormaPagamentoOnline in 'Migrations\RPFood.Migrations.M0000002.AddFormaPagamentoOnline.pas',
+  RPFood.Migrations.M0000003.PagamentoOnline in 'Migrations\RPFood.Migrations.M0000003.PagamentoOnline.pas';
 
 {$R *.RES}
 
@@ -107,5 +114,6 @@ exports
  TerminateExtension;
 
 begin
+
   IWRun;
 end.
