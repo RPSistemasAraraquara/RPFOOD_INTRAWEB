@@ -74,11 +74,9 @@ begin
   if not Assigned(FConfiguracaoMercadoPago) then
     raise Exception.Create('Mercado Pago não configurado') ;
 
-
   FComponenteMercadoPago:=TMercadoPago.Create(nil);
-
-  FComponenteMercadoPago.Configuracoes.AccessToken:= 'APP_USR-3460279939958444-041513-f8e8b9888b1ec5e03aa9a1c42008f18e-2389505207';            //FConfiguracaoMercadoPago.AcessToken;
-  FComponenteMercadoPago.Configuracoes.PublicKey  :=  'APP_USR-bc20506a-2859-4e8e-9ee6-a2a9721188a6';//FConfiguracaoMercadoPago.Key;
+  FComponenteMercadoPago.Configuracoes.AccessToken:= FConfiguracaoMercadoPago.AcessToken.Trim;
+  FComponenteMercadoPago.Configuracoes.PublicKey  := FConfiguracaoMercadoPago.Key.Trim;
   FComponenteMercadoPago.Configuracoes.URLPayment := 'https://api.mercadopago.com/v1/payments?access_token=';
   FComponenteMercadoPago.Configuracoes.URLToken   := 'https://api.mercadopago.com/v1/card_tokens?public_key=';
   FComponenteMercadoPago.PIX.ClienteNome          := ANome;
@@ -125,7 +123,7 @@ begin
     try
       LStream.LoadFromStream(FComponenteMercadoPago.PIX.Base64);
       LStream.Position := 0;
-      AImage.Picture.LoadFromStream(LStream);
+        AImage.Picture.LoadFromStream(LStream);
       AImage.Visible    := True;
       AImage.Width      := 200;
       AImage.Height     := 200;

@@ -25,6 +25,7 @@ type
     function ProdutosQuePermitemFracao(AIdEmpresa, AIdCategoria: Integer; ATamanho: string): TObjectList<TRPFoodEntityProduto>;
     function BuscarTodosProdutos(AIdEmpresa: Integer): TObjectList<TRPFoodEntityProduto>;
     function PesquisarProdutos(AIdEmpresa: Integer): TObjectList<TRPFoodEntityProduto>;
+
   end;
 
 implementation
@@ -114,8 +115,6 @@ begin
 
       if Result.restringirVenda then
        Result.restricao := TRPFoodDAOFactory(FactoryDAO).IdEmpresa(Result.idEmpresa).RestricaoVendaDAO.Buscar(result.codigo);
-
-
 
     except
       Result.Free;

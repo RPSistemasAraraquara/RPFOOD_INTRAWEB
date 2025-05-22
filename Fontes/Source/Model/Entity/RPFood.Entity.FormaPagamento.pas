@@ -5,14 +5,14 @@ interface
 type
   TRPFoodEntityFormaPagamento = class
   private
-    Fid             : Integer;
-    FidEmpresa      : Integer;
-    Fdescricao      : string;
-    FpermiteVendaWeb: Boolean;
-    FsfiCodigo      : Integer;
-    FPagamentoOnline: Boolean;
-    function GetPermiteTroco: Boolean;
-    function GetPIX:Boolean;
+    Fid                       : Integer;
+    FidEmpresa                : Integer;
+    Fdescricao                : string;
+    FpermiteVendaWeb          : Boolean;
+    FsfiCodigo                : Integer;
+    FPagamentoOnline          : Boolean;
+    function GetPermiteTroco  : Boolean;
+    function GetPIX           : Boolean;
   public
     constructor Create;
     procedure Assign(ASource: TRPFoodEntityFormaPagamento);
@@ -24,7 +24,7 @@ type
     property sfiCodigo          : Integer     read FsfiCodigo       write FsfiCodigo;
     property permiteTroco       : Boolean     read GetPermiteTroco;
     property PagamentoOnline    : Boolean     read FPagamentoOnline write FPagamentoOnline;
-    property UtilizaPIX: Boolean read GetPIX;
+    property UtilizaPIX         : Boolean     read GetPIX;
   end;
 
 implementation
@@ -53,7 +53,8 @@ end;
 
 function TRPFoodEntityFormaPagamento.GetPIX: Boolean;
 begin
-  Result:=FsfiCodigo=17;
+  if (FPagamentoOnline) and (FsfiCodigo=17) then
+    Result:=FsfiCodigo=17;
 end;
 
 end.

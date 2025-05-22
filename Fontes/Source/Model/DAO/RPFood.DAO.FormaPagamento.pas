@@ -58,7 +58,7 @@ begin
       Result.sfiCodigo       := ADataSet.FieldByName('sfi_codigo').AsInteger;
       Result.descricao       := ADataSet.FieldByName('descricao').AsString;
       Result.permiteVendaWeb := ADataSet.FieldByName('b_venda_web').AsBoolean;
-      Result.PagamentoOnline := ADataSet.FieldByName('utilizapagamentoonline').AsBoolean;
+      Result.PagamentoOnline := ADataSet.FieldByName('utiliza_integracao_pix').AsBoolean;
     except
       Result.Free;
       raise;
@@ -87,7 +87,7 @@ end;
 procedure TRPFoodDAOFormaPagamento.SelectFormaPagamento;
 begin
   Query.SQL('select id, id_empresa, descricao, id_situacao, ')
-    .SQL('b_venda_web, sfi_codigo,utilizapagamentoonline    ')
+    .SQL('b_venda_web, sfi_codigo,utiliza_integracao_pix    ')
     .SQL('from formapgto                                    ');
 end;
 
