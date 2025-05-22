@@ -106,8 +106,8 @@ end;
 
 destructor TRPFoodServicePagamento.Destroy;
 begin
-  FComponenteMercadoPago.Free;
-  FPagamentoOnline.Free;
+  FreeAndNil(FComponenteMercadoPago);
+  FreeAndNil(FPagamentoOnline);
   inherited;
 end;
 
@@ -122,18 +122,18 @@ begin
     LStream := TMemoryStream.Create;
     try
       LStream.LoadFromStream(FComponenteMercadoPago.PIX.Base64);
-      LStream.Position := 0;
-        AImage.Picture.LoadFromStream(LStream);
-      AImage.Visible    := True;
-      AImage.Width      := 200;
-      AImage.Height     := 200;
-      AImage.RenderSize := True;
-      AImage.AutoSize   := False;
-      QrCodeDigitavel   := FComponenteMercadoPago.PIX.QrCode;
-      QrCodeURL         := FComponenteMercadoPago.PIX.Url;
-      IdPIX             := FComponenteMercadoPago.PIX.ID;
+      LStream.Position            := 0;
+      AImage.Picture.LoadFromStream(LStream);
+      AImage.Visible              := True;
+      AImage.Width                := 200;
+      AImage.Height               := 200;
+      AImage.RenderSize           := True;
+      AImage.AutoSize             := False;
+      QrCodeDigitavel             := FComponenteMercadoPago.PIX.QrCode;
+      QrCodeURL                   := FComponenteMercadoPago.PIX.Url;
+      IdPIX                       := FComponenteMercadoPago.PIX.ID;
     finally
-      LStream.Free;
+      FreeAndNil(LStream);
     end;
   end;
 end;
@@ -141,7 +141,7 @@ end;
 procedure TRPFoodServicePagamento.LeQRCodeDigitavel(var AQrcode, QUrl: string);
 begin
   AQrcode := QrCodeDigitavel;
-  QUrl := QrCodeURL;
+  QUrl    := QrCodeURL;
 end;
 
 function TRPFoodServicePagamento.Pedido(AValue: TRPFoodEntityPedido): TRPFoodServicePagamento;

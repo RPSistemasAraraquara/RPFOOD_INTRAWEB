@@ -3,6 +3,7 @@ unit RPFood.Service;
 interface
 
 uses
+  System.SysUtils,
   RPFood.Components,
   RPFood.DAO.Factory,
   RPFood.Service.Cliente,
@@ -66,13 +67,13 @@ end;
 
 destructor TRPFoodService.Destroy;
 begin
-  FClienteService.Free;
-  FEsqueciMinhaSenha.Free;
-  FImagemService.Free;
-  FLoginClienteService.Free;
-  FVendaService.Free;
-  FVendaCopiaService.Free;
-  FPagamentoService.Free;
+  FreeAndNil(FClienteService);
+  FreeAndNil(FEsqueciMinhaSenha);
+  FreeAndNil(FImagemService);
+  FreeAndNil(FLoginClienteService);
+  FreeAndNil(FVendaService);
+  FreeAndNil(FVendaCopiaService);
+  FreeAndNil(FPagamentoService);
   inherited;
 end;
 

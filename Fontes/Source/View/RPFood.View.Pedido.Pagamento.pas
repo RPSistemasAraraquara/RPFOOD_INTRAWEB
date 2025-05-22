@@ -54,6 +54,7 @@ type
     FStatus: TStatusPagamento;
 
     FQrCodeGerado: Boolean;
+    FValorUsadoParaGerarQRCode: Currency;
     FPedido: TRPFoodEntityPedido;
     FConfiguracaoRPFOOD: TRPFoodEntityConfiguracaoRPFood;
     FConfiguracaoPagamentoMercadoPago: TRPFoodEntityConfiguracaoPagamentoMercadoPago;
@@ -91,8 +92,8 @@ procedure TFrmPedidoPagamentoOnline.VerificaMercadoPago;
 var
   LQrCodeText, LUrlPagamento: string;
 begin
-  if FQrCodeGerado then
-    Exit;
+  if FQrCodeGerado and (FPedido.valorTotal = FValorUsadoParaGerarQRCode) then
+   Exit;
 
   if FConfiguracaoRPFOOD.IntegracaoMercadoPago and FPedido.formaPagamento.UtilizaPIX then
   begin
@@ -102,10 +103,11 @@ begin
         .CarregarConfiguracoesMercadoPago(FPedido.cliente.nome,FPedido.cliente.email)
         .GerarQRCode(IWQRCODE)
         .LeQRCOdeDigitavel(LQrCodeText, LUrlPagamento);
-        IWCODIGOQRCODE.Text:=LQrCodeText;
-        IWQRCODEURL.Text:=LUrlPagamento;
-      FQrCodeGerado := True;
-      TmrAguardaPagamento.Enabled := True;
+        IWCODIGOQRCODE.Text         :=LQrCodeText;
+        IWQRCODEURL.Text            :=LUrlPagamento;
+        FQrCodeGerado               := True;
+        FValorUsadoParaGerarQRCode  := FPedido.valorTotal;
+        TmrAguardaPagamento.Enabled := True;
     except
       on E:Exception do
       begin
