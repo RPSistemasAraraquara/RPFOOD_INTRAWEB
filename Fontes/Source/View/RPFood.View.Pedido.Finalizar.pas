@@ -338,7 +338,6 @@ var
 begin
    LConfiguracaoRPFOOD                 := FController.DAO.ConfiguracaoRPFoodDAO.Get(FSessaoCliente.IdEmpresa);
 
-
  if (LConfiguracaoFOOD.pedidoMinimo > 0) and
      ((FPedido.valorTotal - FPedido.taxaEntrega) < LConfiguracaoFOOD.pedidoMinimo) then
   begin
@@ -349,7 +348,7 @@ begin
   if LConfiguracaoRPFOOD.IntegracaoMercadoPago and  FPedido.formaPagamento.UtilizaPIX then
   begin
     WebApplication.GoToURL(ROTA_PEDIDO_PAGAMENTO);
-    exit;
+    Exit;
   end;
 
   LEmFuncionamento := FController.DAO.ConfiguracaoFuncionamento.EmHorarioDeFuncionamento;

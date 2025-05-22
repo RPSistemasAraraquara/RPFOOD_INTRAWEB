@@ -29,7 +29,10 @@ uses
   IWCompEdit,
   Vcl.Imaging.pngimage,
   IWCompLabel,
-  RPFood.View.Rotas, Vcl.ExtCtrls, IWBaseComponent, IWBaseHTMLComponent,
+  RPFood.View.Rotas,
+  Vcl.ExtCtrls,
+  IWBaseComponent,
+  IWBaseHTMLComponent,
   IWBaseHTML40Component;
 
 type
@@ -84,8 +87,6 @@ begin
   RegisterCallBack('OnAfterFinalizarPedido', OnAfterFinalizarPedido);
 end;
 
-
-
 procedure TFrmPedidoPagamentoOnline.VerificaMercadoPago;
 var
   LQrCodeText, LUrlPagamento: string;
@@ -93,10 +94,9 @@ begin
   if FQrCodeGerado then
     Exit;
 
-  if FConfiguracaoRPFOOD.IntegracaoMercadoPago then
+  if FConfiguracaoRPFOOD.IntegracaoMercadoPago and FPedido.formaPagamento.UtilizaPIX then
   begin
-    if FPedido.formaPagamento.UtilizaPIX then
-    begin
+    try
       FController.Service.PagamentoService
         .ValorPedido(FPedido.valorTotal)
         .CarregarConfiguracoesMercadoPago(FPedido.cliente.nome,FPedido.cliente.email)
@@ -106,6 +106,11 @@ begin
         IWQRCODEURL.Text:=LUrlPagamento;
       FQrCodeGerado := True;
       TmrAguardaPagamento.Enabled := True;
+    except
+      on E:Exception do
+      begin
+        raise Exception.Create('Error Message'+e.Message);
+      end;
     end;
   end;
 end;

@@ -48,6 +48,7 @@ type
     FPedido: TRPFoodEntityPedido;
     FProdutosFiltrados: TObjectList<TRPFoodEntityProduto>;
     FProdutos: TObjectList<TRPFoodEntityProduto>;
+    LConfiguracaoFOOD    : TRPFoodEntityConfiguracaoRPFood;
     procedure PreencheCategorias;
     procedure PreencheItens;
     procedure PreencheProdutosDestaque;
@@ -112,6 +113,7 @@ procedure TFrmIndex.IWAppFormCreate(Sender: TObject);
 begin
   inherited;
   FPedido := FSessaoCliente.PedidoSessao.Pedido;
+  LConfiguracaoFOOD     :=FController.DAO.ConfiguracaoRPFoodDAO.Get(FSessaoCliente.IdEmpresa);
   RegisterCallBack('OnClickCategoria', OnClickCategoria);
   RegisterCallBack('OnClickDestaque', OnClickDestaque);
   RegisterCallBack('OnEditarItemPedido', OnEditarItemPedido);
@@ -128,6 +130,7 @@ procedure TFrmIndex.IWAppFormDestroy(Sender: TObject);
 begin
   FreeAndNil(FProdutos);
   FreeAndNil(FProdutosFiltrados);
+  FreeAndNil(LConfiguracaoFOOD);
   inherited;
 end;
 
@@ -324,6 +327,8 @@ begin
     LJSONCategorias.Free;
   end;
 end;
+
+
 
 procedure TFrmIndex.PreencheProdutosDestaque;
 var
