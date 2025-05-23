@@ -92,14 +92,11 @@ begin
     Result := (FhoraFinal >= LHora) and
       (FhoraInicial <= LHora);
   end;
-
 end;
 
 function TRPFoodEntityHappy_Hour.ValorHappyHour: Currency;
 begin
   Result:= valor;
-
-
 end;
 
 end.

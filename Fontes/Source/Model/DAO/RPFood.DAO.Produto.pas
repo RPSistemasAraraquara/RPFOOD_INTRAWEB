@@ -109,7 +109,7 @@ begin
       begin
        Result.happyHour := TRPFoodDAOFactory(FactoryDAO).HappyHourDAO.Buscar(Result.codigo, Result.idEmpresa);
 
-       if Result.happyHour.HoraDeHappyHour then
+       if (Assigned(Result.happyHour)) and (Result.happyHour.HoraDeHappyHour) then
         Result.valFinal := TRPFoodDAOFactory(FactoryDAO).HappyHourDAO.ValorHappyHour(Result.happyHour);
       end;
 

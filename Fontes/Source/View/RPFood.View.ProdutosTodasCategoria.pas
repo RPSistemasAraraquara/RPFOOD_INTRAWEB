@@ -87,7 +87,8 @@ procedure TFrmProdutostodascategoria.CarregarProdutos;
 var
   LProduto: TRPFoodEntityProduto;
 begin
- if not Assigned(FProdutos) then
+
+  FreeAndNil(FProdutos);
   FProdutos := FController.DAO.ProdutoDAO.BuscarTodosProdutos(FSessaoCliente.IdEmpresa);
 
   for LProduto in FProdutos do

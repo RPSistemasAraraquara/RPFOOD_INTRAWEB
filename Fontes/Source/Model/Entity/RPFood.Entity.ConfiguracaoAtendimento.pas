@@ -126,7 +126,6 @@ begin
   Result.HoraFechamento2  := AFechamento2;
 end;
 
-
 { TRPFoodEntityConfiguracaAtendimento }
 
 destructor TRPFoodEntityConfiguracaAtendimento.Destroy;

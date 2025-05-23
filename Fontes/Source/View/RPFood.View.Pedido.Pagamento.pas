@@ -39,26 +39,25 @@ type
   TStatusPagamento = (spAguardando, spAprovado, spExpirado, spCancelado);
 
   TFrmPedidoPagamentoOnline = class(TFrmPadrao)
-    IWBTN_CONFIRMAR_TROCO: TIWButton;
-    IWBTN_CANCELAR: TIWButton;
-    IWCODIGOQRCODE: TIWEdit;
-    IWQRCODEURL: TIWEdit;
-    IWQRCODE: TIWImage;
-    TmrAguardaPagamento: TIWTimer;
+    IWBTN_CONFIRMAR_TROCO : TIWButton;
+    IWBTN_CANCELAR        : TIWButton;
+    IWCODIGOQRCODE        : TIWEdit;
+    IWQRCODEURL           : TIWEdit;
+    IWQRCODE              : TIWImage;
+    TmrAguardaPagamento   : TIWTimer;
     procedure IWAppFormCreate(Sender: TObject);
     procedure IWTemplateUnknownTag(const AName: string; var AValue: string);
     procedure IWAppFormShow(Sender: TObject);
     procedure TmrAguardaPagamentoAsyncTimer(Sender: TObject;
       EventParams: TStringList);
   private
-    FStatus: TStatusPagamento;
-
-    FQrCodeGerado: Boolean;
-    FValorUsadoParaGerarQRCode: Currency;
-    FPedido: TRPFoodEntityPedido;
-    FConfiguracaoRPFOOD: TRPFoodEntityConfiguracaoRPFood;
-    FConfiguracaoPagamentoMercadoPago: TRPFoodEntityConfiguracaoPagamentoMercadoPago;
-    LConfiguracaoFOOD: TRPFoodEntityConfiguracaoRPFood;
+    FStatus                           : TStatusPagamento;
+    FQrCodeGerado                     : Boolean;
+    FValorUsadoParaGerarQRCode        : Currency;
+    FPedido                           : TRPFoodEntityPedido;
+    FConfiguracaoRPFOOD               : TRPFoodEntityConfiguracaoRPFood;
+    FConfiguracaoPagamentoMercadoPago : TRPFoodEntityConfiguracaoPagamentoMercadoPago;
+    LConfiguracaoFOOD                 : TRPFoodEntityConfiguracaoRPFood;
     procedure OnFinalizarPedido(AParams: TStringList);
     procedure OnAfterFinalizarPedido(AParams: TStringList);
     procedure VerificaMercadoPago;
@@ -121,7 +120,7 @@ procedure TFrmPedidoPagamentoOnline.IWAppFormShow(Sender: TObject);
 begin
   inherited;
   IWQRCODE.RenderSize := True;
-  IWQRCODE.AutoSize := False;
+  IWQRCODE.AutoSize   := False;
   VerificaMercadoPago;
 end;
 

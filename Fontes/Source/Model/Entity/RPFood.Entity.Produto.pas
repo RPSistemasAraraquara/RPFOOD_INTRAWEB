@@ -92,7 +92,6 @@ type
     property restringirVenda    : boolean                      read Frestricaovenda      write Frestricaovenda;
     property restricao          : TRPFoodEntityRestricaoVenda  read Frestricao           write SetRestricao;
 
-
   end;
 
   TRPFoodEntityPromocao =class
@@ -237,7 +236,6 @@ begin
     Self.permiteFrac             := ASource.permiteFrac;
     Self.utiliza_carrossel       := ASource.utiliza_carrossel;
     Self.happyHourAtivar         := ASource.happyHourAtivar;
-
     Self.OpcionalMinimo          := ASource.OpcionalMinimo;
     Self.OpcionalMaximo          := ASource.OpcionalMaximo;
     Self.restricao.Assign(ASource.restricao);
@@ -270,8 +268,9 @@ end;
 
 destructor TRPFoodEntityProduto.destroy;
 begin
-  FhappyHour.Free;
-   Frestricao.free;
+  FreeAndNil(FhappyHour);
+  FreeAndNil(Frestricao);
+
   inherited ;
 end;
 
@@ -311,9 +310,10 @@ end;
 
 procedure TRPFoodEntityProduto.SetHappyHour(const AValue: TRPFoodEntityHappy_Hour);
 begin
-  FreeAndNil( FhappyHour);
+ FreeAndNil( FhappyHour);
   FhappyHour:=AValue;
 end;
+
 
 procedure TRPFoodEntityProduto.SetPromocao(const AValue: TRPFoodEntityPromocao);
 begin

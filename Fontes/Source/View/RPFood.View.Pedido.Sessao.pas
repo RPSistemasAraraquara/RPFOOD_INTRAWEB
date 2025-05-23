@@ -126,11 +126,11 @@ end;
 
 destructor TRPFoodViewPedidoSessao.Destroy;
 begin
-  FCategorias.Free;
-  FController.Free;
-  FDestaques.Free;
-  FFormasDePagamento.Free;
-  FPedido.Free;
+  FreeAndNil(FCategorias);
+  FreeAndNil(FController);
+  FreeAndNil(FDestaques);
+  FreeAndNil(FFormasDePagamento);
+  FreeAndNil(FPedido);
   inherited;
 end;
 

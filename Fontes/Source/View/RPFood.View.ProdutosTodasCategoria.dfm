@@ -1,17 +1,25 @@
 inherited FrmProdutostodascategoria: TFrmProdutostodascategoria
-  PixelsPerInch = 144
+  Width = 1999
+  Height = 1223
+  Margins.Left = 6
+  Margins.Top = 6
+  Margins.Right = 6
+  Margins.Bottom = 6
+  ExplicitWidth = 1999
+  ExplicitHeight = 1223
+  PixelsPerInch = 168
   DesignLeft = 2
   DesignTop = 2
   object IWBTN_VOLTAR: TIWButton [0]
     AlignWithMargins = False
-    Left = 352
-    Top = 50
-    Width = 120
-    Height = 30
-    Margins.Left = 5
-    Margins.Top = 5
-    Margins.Right = 5
-    Margins.Bottom = 5
+    Left = 411
+    Top = 58
+    Width = 140
+    Height = 35
+    Margins.Left = 6
+    Margins.Top = 6
+    Margins.Right = 6
+    Margins.Bottom = 6
     Css = 'btn btn-primary'
     Caption = 'Voltar'
     Color = clBtnFace
@@ -20,14 +28,14 @@ inherited FrmProdutostodascategoria: TFrmProdutostodascategoria
   end
   object IWEDT_FILTRO: TIWEdit [1]
     AlignWithMargins = False
-    Left = 64
-    Top = 104
-    Width = 200
-    Height = 32
-    Margins.Left = 5
-    Margins.Top = 5
-    Margins.Right = 5
-    Margins.Bottom = 5
+    Left = 75
+    Top = 121
+    Width = 233
+    Height = 38
+    Margins.Left = 6
+    Margins.Top = 6
+    Margins.Right = 6
+    Margins.Bottom = 6
     ExtraTagParams.Strings = (
       'placeholder="O que voc'#234' quer comer hoje..."')
     Css = 'form-control p-0'
