@@ -184,7 +184,7 @@ end;
 
 procedure TIWServerController.IWServerControllerBaseNewSession(ASession: TIWApplication);
 begin
- // WebApplication.GoToURL(ROTA_INDEX);
+   WebApplication.GoToURL(ROTA_INDEX);
   ASession.Data := TIWUserSession.Create(nil, ASession);
 end;
 
