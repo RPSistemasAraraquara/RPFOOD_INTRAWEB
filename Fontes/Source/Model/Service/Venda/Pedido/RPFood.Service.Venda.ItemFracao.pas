@@ -14,11 +14,12 @@ type
   private
     FDAO                  : TRPFoodDAOFactory;
     FDAOVendaItem         : TRPFoodDAOVendaItem;
+    FDAOVendaItem1         : TRPFoodDAOVendaItem;
     FDAOVendaItemOpcional : TRPFoodDAOVendaItemOpcional;
     FPedido               : TRPFoodEntityPedido;
     FPedidoItem           : TRPFoodEntityPedidoItem;
     FVenda                : TRPFoodEntityVenda;
-
+    LUltimoItemFracionado : Integer;
     procedure SalvarOutrasFracoes(AItemPrincipal: TRPFoodEntityVendaItem);
     procedure SalvarOpcionais(AItemPrincipal: TRPFoodEntityVendaItem);
   public
@@ -38,6 +39,7 @@ begin
   Result                := Self;
   FDAO                  := AValue;
   FDAOVendaItem         := FDAO.VendaItemDAO;
+  FDAOVendaItem1         := FDAO.VendaItemDAO;
   FDAOVendaItemOpcional := FDAO.VendaItemOpcionalDAO;
   FDAOVendaItem.ManagerTransaction(False);
   FDAOVendaItemOpcional.ManagerTransaction(False);
@@ -59,7 +61,10 @@ procedure TRPFoodServiceVendaItemFracao.Salvar;
 var
   I: Integer;
   LItemVenda: TRPFoodEntityVendaItem;
+
 begin
+  LUltimoItemFracionado:=FDAOVendaItem1.BuscarUltimoItemfracionado(FVenda.id);
+
   for I := 1 to FPedidoItem.quantidade do
   begin
     LItemVenda := TRPFoodEntityVendaItem.Create;
@@ -76,7 +81,7 @@ begin
         LItemVenda.tamanho := 'M';
 
 
-    LItemVenda.numeroItemFracionado := LItemVenda.numeroItem;
+    LItemVenda.numeroItemFracionado := LUltimoItemFracionado;
     LItemVenda.quantidade        := 1 / (FPedidoItem.fracoes.Count + 1);
     LItemVenda.valorUnitario     := FPedidoItem.valorUnitario;
     LItemVenda.valorTotalProduto := FPedidoItem.valorUnitario * LItemVenda.quantidade;
@@ -91,6 +96,7 @@ procedure TRPFoodServiceVendaItemFracao.SalvarOpcionais(AItemPrincipal: TRPFoodE
 var
   I: Integer;
   LOpcional: TRPFoodEntityVendaItemOpcional;
+
 begin
   for I := 0 to Pred(FPedidoItem.opcionais.Count) do
   begin
@@ -127,14 +133,13 @@ begin
     LItem.valorUnitario        := AItemPrincipal.valorUnitario;
     LItem.valorTotalProduto    := LItem.quantidade * LItem.valorUnitario;
     LItem.tamanho              := AItemPrincipal.tamanho;
-    LItem.numeroItemFracionado := AItemPrincipal.numeroItem;
+    LItem.numeroItemFracionado := LUltimoItemFracionado; //AItemPrincipal.numeroItem;
     LItem.vendaPorTamanho      := FPedidoItem.produto.vendaPorTamanho;
     if LItem.tamanho = EmptyStr then
     begin
       LItem.vendaPorTamanho := False;
       LItem.tamanho := 'M';
     end;
-
     FDAOVendaItem.Insert(LItem);
   end;
 end;

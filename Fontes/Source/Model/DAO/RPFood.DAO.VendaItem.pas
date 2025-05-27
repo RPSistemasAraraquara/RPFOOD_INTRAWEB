@@ -19,7 +19,7 @@ type
   public
     procedure Insert(AValue: TRPFoodEntityVendaItem);
     function Listar(AIdVenda: Integer; AListaOpcionais: Boolean = False): TObjectList<TRPFoodEntityVendaItem>;
-
+    function BuscarUltimoItemfracionado(AidVenda:Integer):Integer;
   end;
 
 implementation
@@ -29,12 +29,35 @@ implementation
 uses
   RPFood.DAO.Factory;
 
+function TRPFoodDAOVendaItem.BuscarUltimoItemfracionado(AidVenda:Integer):Integer;
+var
+  LDataSet: TDataSet;
+begin
+   Query.SQL('SELECT COALESCE(MAX(item_fracionado), 0) +1 AS item_fracionado   ')
+     .SQL(' FROM vendaitem where id_venda =:id_venda and id_empresa =:id_empresa')
+      .ParamAsInteger('id_venda', AIdVenda)
+      .ParamAsInteger('id_empresa', FIdEmpresa);
+
+  LDataSet := Query.OpenDataSet;
+  try
+    Result :=LDataSet.FieldByName('item_fracionado').AsInteger;
+  finally
+    LDataSet.Free;
+
+  end;
+end;
+
+
+
 procedure TRPFoodDAOVendaItem.CarregarOpcionais(AVendaItem: TRPFoodEntityVendaItem);
 begin
   if Assigned(AVendaItem) then
     AVendaItem.opcionais := TRPFoodDAOFactory(FactoryDAO).VendaItemOpcionalDAO
       .Listar(AVendaItem.idVenda, AVendaItem.numeroItem);
 end;
+
+
+
 
 function TRPFoodDAOVendaItem.DataSetToEntity(ADataSet: TDataSet): TRPFoodEntityVendaItem;
 begin
